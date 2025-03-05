@@ -6,6 +6,11 @@ ALTER TABLE seller AUTO_INCREMENT = 1;
 DELETE FROM product;
 ALTER TABLE product AUTO_INCREMENT = 1;
 
+# 테이블 확인
+SELECT * FROM consumer;
+SELECT * FROM seller;
+SELECT * FROM product;
+
 # seller 더미 데이터
 INSERT INTO seller (userId, PASSWORD, NAME, email, phone, address, detailAddress, createDate, bussinessNumber, farmName, STATUS)
 VALUES ('son', '5555', '손오공', 'son@gmail.com', '01055555555', '오공시 오공동 11-1', '505동 505호', NOW(), '1234567890', '오공농원', 0);
@@ -28,18 +33,18 @@ VALUES ('jimae', '4444', '일지매', 'jimae@gmail.com', '01044444444', '경상�
 
 # product 더미 데이터
 INSERT INTO product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate, farmName, STATUS) 
-VALUES ('1', 0, '제주감귤 1kg', 12000, '맛있는 귤', 10, '이미지1', NOW(),'오공농원', 0);
+VALUES ('1', 0, '제주감귤 1kg', 12000, '맛있는 귤', 10, 'D:\\kyr\\Class\\project1\\workspace\\gyulDamGil\\src\\main\\webapp\\upload\\이미지1.jpg', NOW(),'오공농원', 0);
 INSERT INTO product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate,farmName, STATUS) 
-VALUES ('1', 2, '한라봉 1kg', 20000, '맛있는 한라봉', 10, '이미지2', NOW(),'오공농원', 1);
+VALUES ('1', 2, '한라봉 1kg', 20000, '맛있는 한라봉', 10, 'D:\\kyr\\Class\\project1\\workspace\\gyulDamGil\\src\main\\webapp\\upload\\이미지2.jpg', NOW(),'오공농원', 1);
 INSERT INTO product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate,farmName, STATUS) 
-VALUES ('2', 4, '레드향 1kg', 10000, '맛있는 레드향', 10, '이미지3', NOW(),'오정농원', 1);
+VALUES ('2', 4, '레드향 1kg', 10000, '맛있는 레드향', 10, 'D:\\kyr\\Class\\project1\\workspace\\gyulDamGil\\src\\main\\webapp\\upload\\이미지3.jpg', NOW(),'오정농원', 1);
 INSERT INTO product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate,farmName, STATUS) 
-VALUES ('2', 3, '천혜향 1kg', 10000, '맛있는 천혜향', 10, '이미지4', NOW(),'오정농원', 1);
+VALUES ('2', 3, '천혜향 1kg', 10000, '맛있는 천혜향', 10, 'D:\\kyr\\Class\\project1\\workspace\\gyulDamGil\\src\\main\\webapp\\upload\\이미지4.jpg', NOW(),'오정농원', 1);
 INSERT INTO product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate,farmName, STATUS) 
-VALUES ('3', 1, '온주밀감 1kg', 10000, '맛있는 온주밀감', 10, '이미지5', NOW(), '팔계농원', 1);
+VALUES ('3', 1, '온주밀감 1kg', 10000, '맛있는 온주밀감', 10, 'D:\\kyr\\Class\\project1\\workspace\\gyulDamGil\\src\\main\\webapp\\upload\\이미지5.webp', NOW(), '팔계농원', 1);
 INSERT INTO product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate,farmName, STATUS) 
-VALUES ('3', 5, '청견 1kg', 10000, '맛있는 청견', 10, '이미지6', NOW(), '팔계농원', 0);
+VALUES ('3', 5, '청견 1kg', 10000, '맛있는 청견', 10, 'D:\\kyr\\Class\\project1\\workspace\\gyulDamGil\\src\\main\\webapp\\upload\\이미지6.png', NOW(), '팔계농원', 0);
 INSERT INTO product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate,farmName, STATUS) 
-VALUES ('4', 1, '온주밀감 1kg', 10000, '맛있는 온주밀감', 10, '이미지5', NOW(), '극락농원', 1);
+VALUES ('4', 1, '온주밀감 1kg', 10000, '맛있는 온주밀감', 10, 'D:\\kyr\\Class\\project1\\workspace\\gyulDamGil\\src\\main\\webapp\\upload\\이미지7.jpg', NOW(), '극락농원', 1);
 INSERT INTO product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate,farmName, STATUS) 
-VALUES ('4', 5, '청견 1kg', 10000, '맛있는 청견', 10, '이미지6', NOW(),'극락농원', 0);
+VALUES ('4', 5, '청견 1kg', 10000, '맛있는 청견', 10, 'D:\\kyr\\Class\\project1\\workspace\\gyulDamGil\\src\\main\\webapp\\upload\\이미지8.jpg', NOW(),'극락농원', 0);
