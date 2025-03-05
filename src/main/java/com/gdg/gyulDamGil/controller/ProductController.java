@@ -403,7 +403,9 @@ public class ProductController {
 		return "redirect:/sellerList";
 	}	
 	
-	
+//	이것은 git 업로드를 기원하며
+//	아무말이나 지껄이며 카드찍고 돌아오지않는 너를 기다려~~~~ 
+//	(규현목소리) 아무튼 제발제발 hunk야 나와라~~ 나와라요!~~~!!!
 	
 	
 	
