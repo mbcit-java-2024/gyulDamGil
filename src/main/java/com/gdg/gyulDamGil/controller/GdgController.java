@@ -15,6 +15,12 @@ public class GdgController {
 		return "/gdg/gdg";
 	}
 	
+	@RequestMapping("/info")
+	public String info() {
+		log.info("GdgController의 info메소드 실행");
+		return "/gdg/info";
+	}
+	
 	@RequestMapping("/myPage")
 	public String myPage() {
 		log.info("GdgController의 myPage메소드 실행");
