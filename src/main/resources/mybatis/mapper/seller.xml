@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gdg.gyulDamGil.dao.SellerDAO">
+
+    <!-- 판매자 1명 조회 -->
+    <select id="selectSellerById" parameterType="int" resultType="SellerVO">
+        select * from seller where id = #{id}
+    </select>
+
+    <!-- 모든 판매자 조회 -->
+    <select id="selectAllSellers" resultType="SellerVO">
+        select * from seller
+    </select>
+    
+    <select id="selectFarmDetail" resultType="SellerVO">
+		SELECT
+		s.id,
+		s.password,
+		s.name,
+		s.email,
+		s.phone,
+		s.address,
+		s.detailAddress,
+		s.createDate,
+		s.updateDate,
+		s.bussinessNumber,
+		s.farmName,
+		s.reviewCount,
+		s.status
+		FROM
+		seller s
+		WHERE s.id= #{id}
+	</select>
+
+	<!-- 예린 -->
+	<!-- select Count -->
+	<select id="selectCount" resultType="int">
+		select count(*) from seller
+	</select>
+	
+	<select id="selectCountByUserId" parameterType="String" resultType="int">
+		select count(userId) from seller where userId = '${userId}'
+	</select>
+	
+	<select id="selectCountByStatus" parameterType="map" resultType="int">
+		select count(*)	from seller where sellerId = #{sellerId} and status = #{status}
+	</select>
+	
+	<select id="selectCountByCategoryId" parameterType="int" resultType="int">
+		select count(*) from seller where categoryId = #{cid}
+	</select>
+	
+	<!-- select List -->
+	<select id="selectList" resultType="SellerVO">
+		select * from seller order by id desc
+	</select>
+	
+	<select id="selectListBySellerId" parameterType="int" resultType="SellerVO">
+		select * from seller where sellerId = '${sellerId}' order by id desc
+	</select>
+	
+	<select id="selectListByCategoryId" parameterType="java.util.HashMap" resultType="SellerVO">
+		select * from seller 
+		where categoryId = #{categoryId} 
+		order by id desc
+		limit #{startNo}, #{pageSize}
+	</select>
+	
+	<select id="getUserIds" resultType="String">
+		select userId from seller
+	</select>
+	
+	<select id="getFarmNames" resultType="String">
+		select farmName from seller
+	</select>
+	
+	<!-- select 1건 -->
+	<select id="selectById" parameterType="int" resultType="SellerVO">
+		select * from seller where id = #{id}
+	</select>
+	
+	<select id="selectByUserId" parameterType="String" resultType="SellerVO">
+		select * from seller where userId = #{id}
+	</select>
+	
+	<!-- insert, update, delete -->
+ 	<insert id="insert" parameterType="SellerVO">
+		insert into seller (userId, password, name, email, phone, address, detailAddress, createDate, bussinessNumber, farmName, status)
+			values (#{userId}, #{password}, #{name}, #{email}, #{phone}, #{address}, #{detailAddress}, now(), #{bussinessNumber}, #{farmName}, '0')
+	</insert>
+
+	<update id="update" parameterType="SellerVO">
+		update seller set userId = #{userId}, password = #{password}, address = #{address}, email= #{email},
+			phone = #{phone}, detailAddress = #{detailAddress}, updateDate = now(), farmName = #{farmName} where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from seller where id = #{id}
+	</delete>
+
+</mapper>

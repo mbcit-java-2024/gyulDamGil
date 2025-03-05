@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gdg.gyulDamGil.dao.OrderDAO">
+	
+	<!-- sellerId를 기준으로 OrderList를 가져옴 -->
+	<select id="selectOrderListForS" parameterType="java.util.HashMap" resultType="OrderVO">
+	  select * from `order` 
+	  where sellerId = #{id} 
+	  order by id desc
+      limit #{startNo}, #{pageSize}
+	</select>
+	
+	<!-- consumerId를 기준으로 OrderList를 가져옴 -->
+	<select id="selectOrderListForC" parameterType="java.util.HashMap" resultType="OrderVO">
+	  select * from `order` 
+	  where consumerId = #{id} 
+	  order by id desc
+      limit #{startNo}, #{pageSize}
+	</select>
+
+	<!-- 특정 주문 조회 -->
+	<select id="selectOrderById" parameterType="int" resultType="OrderVO">
+		select * from `order` where id = #{id}
+	</select>
+
+	<!-- 주문 상태 변경 -->
+	<update id="updateOrderStatus" parameterType="java.util.HashMap">
+		update `order` set status = #{status} where id = #{id}
+	</update>
+	
+	<!-- seller별 메인글 전체 개수를 얻어온다. -->
+	<select id="selectCountForS" resultType="int">
+		select count(*) from `order` where sellerId = ${id}
+	</select>
+	
+	<!-- consumer별 메인글 전체 개수를 얻어온다. -->
+	<select id="selectCountForC" resultType="int">
+		select count(*) from `order` where consumerId = ${id}
+	</select>
+	
+	<insert id="insertOrder" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="orderId">
+		INSERT INTO `order`
+		(consumerId, sellerId, productId, count, orderDate, totalPrice, price, status)
+		select a.consumerId, b.sellerId, a.productId, a.count, now() as orderDate, a.totalPrice, a.price, '0' status 
+		from cart a left join product b on a.productId = b.id 
+		where a.consumerId = 1
+		and a.id = #{id}
+	</insert>
+	
+	<!-- 결제 페이지에서 보여줄 값들 -->
+	<select id="selectOrderList" parameterType="OrderVO" resultType="OrderVO" >
+		SELECT a.consumerId, b.sellerId, a.productId, a.price, a.count, a.orderDate, a.totalPrice, a.status, b.title
+		FROM `order` a LEFT JOIN product b ON a.productId  = b.id
+		where a.id
+		IN
+		<foreach item="id" collection="orderIds" open="(" separator="," close=")">
+        	#{id}
+   	 	</foreach>
+	</select>
+	
+	<insert id="insertDetailOneToOrder" parameterType="java.util.HashMap"  useGeneratedKeys="true" keyProperty="orderId">
+		INSERT INTO `order`
+		(consumerId, sellerId, productId, count, orderDate, totalPrice, price, status)
+		VALUES(#{consumerId}, #{sellerId}, #{productId}, #{count}, now(), #{totalPrice}, #{price}, '0')
+	</insert>
+	
+</mapper>

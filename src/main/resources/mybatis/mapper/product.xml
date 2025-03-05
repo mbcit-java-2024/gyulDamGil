@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.gdg.gyulDamGil.dao.ProductDAO">
+
+	<select id="selectJejuGamgyulList" resultType="ProductVO">
+		SELECT * FROM product WHERE categoryId = #{categoryId}
+	</select>
+
+	<select id="selectGamgyulDetail" resultType="ProductVO">
+		select a.*
+		, (select count(1) 
+			from bookmark b 
+		   where b.productId = a.id and b.consumerId = #{consumerId}) as bookMarkCnt 
+		 from product a where id = #{id}
+	</select>
+
+	<select id="selectImg" resultType="ProductVO">
+		select * from product where mainImageUrl = #{mainImageUrl}
+	</select>
+
+<!--
+	체험예약 관련 코드 
+	<select id="selectgyulexperienceList" resultType="ProductVO">
+		select * from product where categoryId = 10
+	</select>
+ -->
+
+	<select id="selectById" parameterType="int" resultType="ProductVO">
+		select * from product where id = #{id}
+	</select>
+
+	<update id="minusStock" parameterType="java.util.HashMap">
+		update product set stock = stock - ${count} where id = #{productId}
+	</update>
+	
+	<!--
+	재성: 주석처리 stock 을 두번 처리함 / 위의 minusStock 메소드와 같은 일을 실행함
+	<update id="updateProduct" parameterType="java.util.HashMap">
+		UPDATE product a
+		  JOIN (SELECT productId, count as cnt 
+		          FROM cart  
+		          where id = #{id}
+		       ) b
+		    ON a.id = b.productId
+		SET a.stock = a.stock - b.cnt 
+	</update>	
+	 -->
+	
+	<select id="selectStockById" parameterType="int" resultType="int">
+		select stock from product where id = ${id}
+	</select>
+	
+	<update id="updateForSoldOut" parameterType="int">
+		update product set status = 2 where id = ${id}
+	</update>
+	
+	<update id="updateOneProduct" parameterType="java.util.HashMap">
+		UPDATE product a
+		SET a.stock = a.stock - #{count}
+		where id = #{productId} 
+	</update>
+	
+	<!-- 예린 -->	
+	<!-- select Count : 갯수(int)를 가져오는 명령문-->
+	
+	<!-- 전체 상품 개수 -->
+	<select id="selectCount" resultType="int">
+		select count(*) from product
+	</select>
+	
+	<!-- sellerId 1명이 등록한 상품 개수 -->
+	<select id="selectCountBySellerId" parameterType="int" resultType="int">
+		select count(sellerId) from product where sellerId = '${sellerId}'
+	</select>
+	
+	<!-- sellerId 1명이 등록한 상품 중 status 가 입력받은 값인 상품 개수 (0:임시저장, 1: 정상등록, 2: 품절)-->
+	<select id="selectCountByStatus" parameterType="map" resultType="int">
+		select count(*)	from product where sellerId = #{sellerId} and status = #{status}
+	</select>
+	
+	<!-- categoryId에 해당하는 상품 개수 -->
+	<select id="selectCountByCategoryId" parameterType="int" resultType="int">
+		select count(*) from product where categoryId = #{cid}
+	</select>
+	
+	<!-- select List : productVO List를 얻어오는 명령문-->
+	<!-- 전체 상품 목록 -->
+	<select id="selectList" resultType="ProductVO">
+		select * from product order by id desc
+	</select>
+	
+	<!-- sellerId 가 판매하는 상품 목록 -->
+	<select id="selectListBySellerId" parameterType="int" resultType="ProductVO">
+		select * from product where sellerId = '${sellerId}' order by id desc
+	</select>
+	
+	<!-- categoryId에 해당하는 상품 목록 pageSize 개 만큼 얻어오기 -->
+	<select id="selectListByCategoryId" parameterType="java.util.HashMap" resultType="ProductVO">
+		select * from product 
+		where categoryId = #{categoryId} 
+		order by id desc
+		limit #{startNo}, #{pageSize}
+	</select>
+		
+	<!-- insert, update, delete -->
+ 	<insert id="insert" parameterType="ProductVO">
+		insert into product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate, farmName, status)
+			values (#{sellerId}, #{categoryId}, #{title}, #{price}, #{description}, #{stock}, #{mainImageUrl}, now(), #{farmName},#{status})
+	</insert>
+
+	<update id="update" parameterType="ProductVO">
+		update product set title = #{title}, price = #{price}, description = #{description}, stock = #{stock},
+			mainImageUrl = #{mainImageUrl}, updateDate = now(), status = #{status} where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from product where id = #{id}
+	</delete>
+	
+
+</mapper>
