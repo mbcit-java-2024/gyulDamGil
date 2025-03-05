@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gdg.gyulDamGil.dao.QnaCSDAO">
+
+    <!-- QnaCS 목록 조회 -->
+    <select id="selectList" resultType="QnaCSVO">
+        SELECT * FROM qnacs ORDER BY id ASC;
+    </select>
+	
+	<insert id="insert" parameterType="QnaCSVO">
+	    INSERT INTO qnacs (consumerId, sellerId, title, comment, createDate)
+	    VALUES (#{consumerId}, #{sellerId}, #{title}, #{comment}, NOW())
+	</insert>
+	
+    <!-- 특정 QnaCS 조회 (id 기준) -->
+    <select id="selectQnaByid" resultMap="qnaResultMap">
+        SELECT 
+            qnacs.id, qnacs.sellerId, qnacs.consumerId, qnacs.title, qnacs.comment, qnacs.createDate,
+            qnacsreplies.id AS replyid, qnacsreplies.parentId, qnacsreplies.sellerId AS replySellerId, 
+            qnacsreplies.consumerId AS replyConsumerId, qnacsreplies.comment AS replyComment, 
+            qnacsreplies.createDate AS replyCreateDate
+        FROM qnacs
+        LEFT JOIN qnacsreplies ON qnacs.id = qnacsreplies.parentId
+        WHERE qnacs.id = #{id}
+        ORDER BY qnacsreplies.createDate ASC;
+    </select>
+	
+
+    <select id="selectQnaByconsumerId" resultMap="qnaResultMap">
+    SELECT 
+        qnacs.id, qnacs.sellerId, qnacs.consumerId, qnacs.title, qnacs.comment, qnacs.createDate,
+        qnacsreplies.id AS replyid, qnacsreplies.parentId, qnacsreplies.sellerId AS replySellerId, 
+        qnacsreplies.consumerId AS replyConsumerId, qnacsreplies.comment AS replyComment, 
+        qnacsreplies.createDate AS replyCreateDate
+    FROM qnacs
+    LEFT JOIN qnacsreplies ON qnacs.id = qnacsreplies.parentId
+    WHERE qnacs.consumerId = #{consumerId}
+    ORDER BY qnacs.id ASC;
+</select>
+    
+    <!-- 특정 sellerId에 해당하는 QnaCS 목록 조회 -->
+    <select id="selectQnaBysellerId" resultMap="qnaResultMap">
+        SELECT 
+            qnacs.id, qnacs.sellerId, qnacs.consumerId, qnacs.title, qnacs.comment, qnacs.createDate,
+            qnacsreplies.id AS replyid, qnacsreplies.parentId, qnacsreplies.sellerId AS replySellerId, 
+            qnacsreplies.consumerId AS replyConsumerId, qnacsreplies.comment AS replyComment, 
+            qnacsreplies.createDate AS replyCreateDate
+        FROM qnacs
+        LEFT JOIN qnacsreplies ON qnacs.id = qnacsreplies.parentId
+        WHERE qnacs.sellerId = #{sellerId}
+        ORDER BY qnacs.id ASC;
+    </select>
+
+    <!-- 특정 QnaCS에 달린 답글 조회 (parentId로 조회) -->
+    <select id="selectRepliesByQnaid" parameterType="int" resultType="QnaCSRepliesVO">
+        SELECT * 
+        FROM qnacsreplies
+        WHERE parentId = #{id}
+        ORDER BY createDate ASC; 
+    </select>
+
+    <!-- resultMap 정의 -->
+    <resultMap id="qnaResultMap" type="QnaCSVO">
+        <id property="id" column="id"/>
+        <result property="sellerId" column="sellerId"/>
+        <result property="consumerId" column="consumerId"/>
+        <result property="title" column="title"/>
+        <result property="comment" column="comment"/>
+        <result property="createDate" column="createDate"/>
+
+        <!-- QnaCSRepliesVO 리스트를 replies에 매핑 -->
+        <collection property="replies" ofType="QnaCSRepliesVO">
+            <id property="id" column="replyid"/>
+            <result property="parentId" column="parentId"/>
+            <result property="sellerId" column="replySellerId"/>
+            <result property="consumerId" column="replyConsumerId"/>
+            <result property="comment" column="replyComment"/>
+            <result property="createDate" column="replyCreateDate"/>
+        </collection>
+    </resultMap>
+    
+    <insert id="insertReply" parameterType="QnaCSRepliesVO">
+	    INSERT INTO qnacsreplies (parentId, comment, sellerId, consumerId, createDate)
+	    VALUES (#{parentId}, #{comment}, #{sellerId}, #{consumerId}, NOW());
+	</insert>
+    
+</mapper>

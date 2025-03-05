@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.gdg.gyulDamGil.dao.ConsumerDAO">
+
+	<select id="selectConsumerById" parameterType="int" resultType="ConsumerVO">
+		select * from consumer where id = #{id}
+	</select>
+	<!-- select Count -->
+	<select id="selectCount" resultType="int">
+		select count(*) from consumer
+	</select>
+	
+	<select id="selectCountByUserId" parameterType="String" resultType="int">
+		select count(userId) from consumer where userId = '${userId}'
+	</select>
+	
+	<select id="selectCountByStatus" parameterType="map" resultType="int">
+		select count(*)	from consumer where sellerId = #{sellerId} and status = #{status}
+	</select>
+	
+	<select id="selectCountByCategoryId" parameterType="int" resultType="int">
+		select count(*) from consumer where categoryId = #{cid}
+	</select>
+	
+	<!-- select List -->
+	<select id="selectList" resultType="ConsumerVO">
+		select * from consumer order by id desc
+	</select>
+	
+	<select id="selectListBySellerId" parameterType="int" resultType="ConsumerVO">
+		select * from consumer where sellerId = '${sellerId}' order by id desc
+	</select>
+	
+	<select id="selectListByCategoryId" parameterType="java.util.HashMap" resultType="ConsumerVO">
+		select * from consumer 
+		where categoryId = #{categoryId} 
+		order by id desc
+		limit #{startNo}, #{pageSize}
+	</select>
+	
+	<select id="getUserIds" resultType="String">
+		select userId from consumer
+	</select>
+	
+	<!-- select 1건 -->
+	<select id="selectById" parameterType="int" resultType="ConsumerVO">
+		select * from consumer where id = #{id}
+	</select>
+	
+	<select id="selectByUserId" parameterType="String" resultType="ConsumerVO">
+		select * from consumer where userId = #{id}
+	</select>
+	
+	<!-- insert, update, delete -->
+ 	<insert id="insert" parameterType="ConsumerVO">
+		insert into consumer (userId, password, name, email, phone, address, detailAddress, createDate)
+			values (#{userId}, #{password}, #{name}, #{email}, #{phone}, #{address}, #{detailAddress}, now())
+	</insert>
+
+	<update id="update" parameterType="ConsumerVO">
+		update consumer set userId = #{userId}, password = #{password}, address = #{address}, email= #{email},
+			phone = #{phone}, detailAddress = #{detailAddress}, updateDate = now() where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from consumer where id = #{id}
+	</delete>
+
+</mapper>

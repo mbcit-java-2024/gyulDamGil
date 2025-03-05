@@ -168,7 +168,7 @@ function deleteBookmarkProduct(button) {
 
 						<div class="product-container">
 							<div class="product-image">
-								<img src="images/${productDetail.mainImageUrl }" alt="상품 이미지">
+								<img src="${productDetail.mainImageUrl }" alt="상품 이미지">
 							</div>
 							<div class="product-details">
 								<div class="product-section" id="title">

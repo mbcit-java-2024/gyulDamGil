@@ -36,7 +36,7 @@
 						    <div class="bg-white rounded-lg shadow-md p-4">
 						        <div class="h-48 bg-gray-200 rounded-lg mb-4"
 						             onclick="location.href='/jejugamgyulDetail/${vo.id }'">
-						            <img src="images/${vo.mainImageUrl}" alt="상품 이미지">
+						            <img src="${vo.mainImageUrl}" alt="상품 이미지">
 						        </div>
 						        <input type="hidden" name="id" value="${vo.id}">
 						        <h4 class="font-semibold mb-2">

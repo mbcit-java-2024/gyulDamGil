@@ -33,6 +33,7 @@
 		<tr>
 			<th>이미지</th>
 			<td>
+			${mainImageUrl}
 				<img width="500" alt="메인 상품 이미지" src="${mainImageUrl}">
 			</td>
 		</tr>

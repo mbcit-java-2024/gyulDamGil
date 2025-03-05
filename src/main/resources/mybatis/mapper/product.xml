@@ -111,7 +111,7 @@
 	</insert>
 
 	<update id="update" parameterType="ProductVO">
-		update product set title = #{title}, price = #{price}, description = #{description}, stock = #{stock},
+		update product set categoryId = #{categoryId}, title = #{title}, price = #{price}, description = #{description}, stock = #{stock},
 			mainImageUrl = #{mainImageUrl}, updateDate = now(), status = #{status} where id = #{id}
 	</update>
 	

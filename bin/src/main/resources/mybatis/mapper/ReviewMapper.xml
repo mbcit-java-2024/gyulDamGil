@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--resultType="클래스이름"ㄴ-->
+<mapper namespace="com.gdg.gyulDamGil.dao.ReviewDAO">
+
+	<select id="selectList" resultType="ReviewVO">
+		SELECT * FROM review ORDER BY id ASC;
+	</select>
+	
+	<select id="selectReviewByid" resultType="ReviewVO">
+		 SELECT * FROM review WHERE id = #{id}
+	</select>
+	
+	<select id="selectReviewByProductId" resultType="ReviewVO">
+		 SELECT * FROM review WHERE productId = #{productId}
+	</select>
+	
+	<select id="selectReviewBySellerId" resultType="ReviewVO">
+		 SELECT * FROM review WHERE sellerId = #{sellerId}
+	</select>
+	
+	<insert id="insert" parameterType="ReviewVO">
+	    INSERT INTO review (userId, sellerId, productId, rate, comment, createDate, updateDate)
+	    VALUES (#{userId}, #{sellerId}, #{productId}, #{rate}, #{comment}, NOW(), NOW())
+	</insert>
+	
+	<update id="update" parameterType="ReviewVO">
+	    UPDATE review 
+	    SET rate = #{rate}, comment = #{comment}, updateDate = now()
+	    WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="ReviewVO">
+	    DELETE FROM review WHERE id = #{id}
+	</delete>
+	
+	<select id="selectAverageRatingBySellerId" resultType="float">
+	    SELECT AVG(rate) 
+	    FROM review 
+	    WHERE sellerId = #{sellerId}
+	</select>
+
+
+</mapper>
+
+
+
+
+

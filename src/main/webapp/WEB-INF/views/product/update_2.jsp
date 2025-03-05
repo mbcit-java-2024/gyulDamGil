@@ -20,7 +20,7 @@
 				<%
 				String[] category = {"제주감귤", "온주밀감", "한라봉", "천혜향", "레드향", "청견", "황금향", "카라향", "진지향","세토카"};
 				int cid = (int) request.getAttribute("cid");
-				for (int i=0; i<10; i++){
+				for (int i=0; i<category.length; i++){
 					out.print(category[i]);
 					if (i == cid){
 				%>
@@ -30,8 +30,8 @@
 				%>		
 					<input type="radio" name="categoryId" value="<%=i%>"> 
 				<%
-					out.print("/");
 					}
+					out.print("/");
 				}
 				%>
 	

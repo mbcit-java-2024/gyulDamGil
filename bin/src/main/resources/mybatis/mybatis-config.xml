@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+	<!--
+ 		<typeAlias alias="sellerVo" type="com.gdg.gyulDamGil.vo.SellerVO"/>
+		<typeAlias alias="orderVo" type="com.gdg.gyulDamGil.vo.OrderVO"/>
+	-->
+	
+	<!-- 수빈 -->
+		<typeAlias alias="productVO" type="com.gdg.gyulDamGil.vo.ProductVO"/>
+		<typeAlias alias="cartVO" type="com.gdg.gyulDamGil.vo.CartVO"/>
+		<typeAlias alias="orderVO" type="com.gdg.gyulDamGil.vo.OrderVO"/>
+		<typeAlias alias="consumerVO" type="com.gdg.gyulDamGil.vo.ConsumerVO"/>
+		<typeAlias alias="selllerVO" type="com.gdg.gyulDamGil.vo.SellerVO"/>
+		<typeAlias alias="bookmarkVO" type="com.gdg.gyulDamGil.vo.BookmarkVO"/>
+		
+		<typeAlias alias="reviewVo" type="com.gdg.gyulDamGil.vo.ReviewVO"/>
+		<typeAlias alias="qnaCSVo" type="com.gdg.gyulDamGil.vo.QnaCSVO"/> 
+		<typeAlias alias="qnaCSRepliesVo" type="com.gdg.gyulDamGil.vo.QnaCSRepliesVO"/>
+		<typeAlias alias="qnaCMVo" type="com.gdg.gyulDamGil.vo.QnaCMVO"/> 
+		<typeAlias alias="qnaCMRepliesVo" type="com.gdg.gyulDamGil.vo.QnaCMRepliesVO"/>
+	</typeAliases>
+</configuration>

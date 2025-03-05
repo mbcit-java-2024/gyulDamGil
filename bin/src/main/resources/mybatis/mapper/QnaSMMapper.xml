@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gdg.gyulDamGil.dao.QnaSMDAO">
+
+    <!-- QnaSM 목록 조회 -->
+    <select id="selectList" resultMap="qnaResultMap">
+        SELECT qnaSM.id, qnaSM.sellerId, qnaSM.title, qnaSM.comment, qnaSM.createDate,
+               qnaSMreplies.id AS replyid, qnaSMreplies.parentId, qnaSMreplies.sellerId AS replySellerId, 
+               qnaSMreplies.comment AS replyComment, qnaSMreplies.createDate AS replyCreateDate
+        FROM qnaSM
+        LEFT JOIN qnaSMreplies ON qnaSM.id = qnaSMreplies.parentId
+        ORDER BY qnaSM.id ASC, qnaSMreplies.createDate ASC;
+    </select>
+    
+    <!-- QnaSM 작성 -->
+    <insert id="insert" parameterType="QnaSMVO">
+        INSERT INTO qnaSM (sellerId, title, comment, createDate)
+        VALUES (#{sellerId}, #{title}, #{comment}, NOW());
+    </insert>
+    
+    <!-- 특정 QnaSM 조회 (id 기준) -->
+    <select id="selectQnaByid" resultMap="qnaResultMap">
+        SELECT 
+            qnaSM.id, qnaSM.sellerId, qnaSM.title, qnaSM.comment, qnaSM.createDate,
+            qnaSMreplies.id AS replyid, qnaSMreplies.parentId, qnaSMreplies.sellerId AS replySellerId, 
+            qnaSMreplies.comment AS replyComment, qnaSMreplies.createDate AS replyCreateDate
+        FROM qnaSM
+        LEFT JOIN qnaSMreplies ON qnaSM.id = qnaSMreplies.parentId
+        WHERE qnaSM.id = #{id}
+        ORDER BY qnaSMreplies.createDate ASC;
+    </select>
+
+    <!-- 특정 sellerId에 해당하는 QnaSM 목록 조회 -->
+    <select id="selectQnaBySellerId" resultMap="qnaResultMap">
+        SELECT 
+            qnaSM.id, qnaSM.sellerId, qnaSM.title, qnaSM.comment, qnaSM.createDate,
+            qnaSMreplies.id AS replyid, qnaSMreplies.parentId, qnaSMreplies.sellerId AS replySellerId, 
+            qnaSMreplies.comment AS replyComment, qnaSMreplies.createDate AS replyCreateDate
+        FROM qnaSM
+        LEFT JOIN qnaSMreplies ON qnaSM.id = qnaSMreplies.parentId
+        WHERE qnaSM.sellerId = #{sellerId}
+        ORDER BY qnaSM.id ASC;
+    </select>
+
+    <!-- 특정 QnaSM에 달린 답글 조회 -->
+    <select id="selectRepliesByQnaid" parameterType="int" resultType="QnaSMRepliesVO">
+        SELECT id, parentId, sellerId, comment, createDate
+        FROM qnaSMreplies
+        WHERE parentId = #{id}
+        ORDER BY createDate ASC; 
+    </select>
+
+    <!-- resultMap 정의 -->
+    <resultMap id="qnaResultMap" type="QnaSMVO">
+        <id property="id" column="id"/>
+        <result property="sellerId" column="sellerId"/>
+        <result property="title" column="title"/>
+        <result property="comment" column="comment"/>
+        <result property="createDate" column="createDate"/>
+
+        <!-- QnaSMRepliesVO 리스트를 replies에 매핑 -->
+        <collection property="replies" ofType="QnaSMRepliesVO">
+            <id property="id" column="replyid"/>
+            <result property="parentId" column="parentId"/>
+            <result property="sellerId" column="replySellerId"/>
+            <result property="comment" column="replyComment"/>
+            <result property="createDate" column="replyCreateDate"/>
+        </collection>
+    </resultMap>
+    
+    <!-- 답변 추가 -->
+    <insert id="insertReply" parameterType="QnaSMRepliesVO">
+        INSERT INTO qnaSMreplies (parentId, sellerId, comment, createDate)
+        VALUES (#{parentId}, #{sellerId}, #{comment}, NOW());
+    </insert>
+    
+</mapper>

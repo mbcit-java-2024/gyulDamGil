@@ -48,6 +48,18 @@ public class ProductController {
 	public String jejugamgyulList(Model model, @PathVariable("categoryId") int categoryId) {
 		System.out.println("ProductController의 jejugamgyul메소드 실행");
 		List<ProductVO> selectJejuGamgyulList = productDAO.selectJejuGamgyulList(categoryId);
+		
+		for (ProductVO vo : selectJejuGamgyulList) {
+			
+//			이미지 경로 변환
+			File file = new File(productDAO.selectById(vo.getId()).getMainImageUrl());
+			String fileName = file.getName(); // 파일명만 추출
+			String relativePath = "/upload/" + fileName;
+			log.info("이미지 상대 경로: "+ relativePath);
+			vo.setMainImageUrl(relativePath);
+		}
+		
+		
 		model.addAttribute("selectJejuGamgyulList", selectJejuGamgyulList);
 		System.out.println(selectJejuGamgyulList);
 		
@@ -58,6 +70,14 @@ public class ProductController {
 	public String jejugamgyulDetail(Model model, @PathVariable("id")  int id) {
 		System.out.println("ProductController의 jejugamgyulDetail메소드 실행");
 		ProductVO selectGamgyulDetail = productDAO.selectGamgyulDetail(id);
+		
+//		이미지 경로 변환
+		File file = new File(productDAO.selectById(id).getMainImageUrl());
+		String fileName = file.getName(); // 파일명만 추출
+		String relativePath = "/upload/" + fileName;
+		log.info("이미지 상대 경로: "+ relativePath);
+		selectGamgyulDetail.setMainImageUrl(relativePath);
+		
 		model.addAttribute("selectGamgyulDetail", selectGamgyulDetail); 
 		System.out.println(selectGamgyulDetail);
 		
@@ -358,6 +378,7 @@ public class ProductController {
 	public String updateOK(ProductVO productVO) {
 		log.info("ProductController 클래스의 updateOK() 메소드 실행");
 		ProductVO vo = productVO;
+		log.info("수정된 categoryId: "+ vo.getCategoryId());
 		productDAO.update(vo);
 		log.info("상품 1건 수정: "+ vo);
 		return "redirect:/show/"+ vo.getId();

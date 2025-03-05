@@ -11,6 +11,8 @@ VALUES ('gosegu', '5555', '고세구', 'gosegu@gmail.com', '01055555555', '세�
 INSERT INTO seller (userId, PASSWORD, NAME, email, phone, address, detailAddress, createDate, bussinessNumber, farmName, STATUS)
 VALUES ('vichan', '6666', '비찬', 'vichan@gmail.com', '01066666666', '라니시 라니동 66-6', '606동 606호', NOW(), '1234567890', '라니농원', 0);
 
+
+
 SELECT * FROM seller;
 SELECT * FROM seller WHERE PASSWORD = '1111';
 SELECT userId FROM seller;
