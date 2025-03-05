@@ -42,13 +42,13 @@ public class OrderController5 {
 	@RequestMapping("/orderList")
 	public String orderList(Model model, HttpServletRequest request) {
 		log.info("OrderController5 클래스의 orderList() 메소드 실행");
-		if ((int) request.getSession().getAttribute("userType") == 1) {
-			return "redirect:/myOrder";
-		}
 		int pageSize = 10;
 		int sellerId;
 		int currentPage;
 		try {
+			if ((int) request.getSession().getAttribute("userType") == 1) {
+				return "redirect:/myOrder";
+			}
 			sellerId = (int) request.getSession().getAttribute("id");
 		} catch (NullPointerException e) {
 			return "/seller/login_2";

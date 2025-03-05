@@ -42,13 +42,13 @@ public class ConsumerController {
 	@RequestMapping("/myOrder")
 	public String myOrder(Model model, HttpServletRequest request) {
 		log.info("ConsumerController 클래스의 myOrder() 메소드 실행");
-		if ((int) request.getSession().getAttribute("userType") == 2) {
-			return "redirect:/orderList";
-		}
 		int pageSize = 10;
 		int consumerId;
 		int currentPage;
 		try {
+			if ((int) request.getSession().getAttribute("userType") == 2) {
+				return "redirect:/orderList";
+			}
 			consumerId = (int) request.getSession().getAttribute("id");
 		} catch (NullPointerException e) {
 			return "/consumer/login_2";
