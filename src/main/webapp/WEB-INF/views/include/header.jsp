@@ -113,7 +113,7 @@
 						홈</button>
 				</li>
 				<li>
-					<button id="tab-about" onclick="showSection('section-about')"
+					<button id="tab-about" onclick="location.href='/info'"
 						class="px-4 py-2 font-medium border-b-2 border-transparent  hover:text-orange-500">
 						귤담길 소개</button>
 				</li>
@@ -123,22 +123,21 @@
 						쇼핑</button>
 				</li>
 				<li>
-					<button id="tab-farms"
-						onclick="showSection(&#39;section-farms&#39;)"
-						class="px-4 py-2 font-medium border-b-2 border-transparent text-gray-500 hover:text-orange-500">
+					<button id="tab-farms" onclick="showSection('section-farms')"
+						class="px-4 py-2 font-medium border-b-2 border-transparent hover:text-orange-500">
 						입점 농가</button>
 				</li>
 				<c:if test="${sessionScope.userType == 1}">
 					<li><a onclick="location.href='/myOrder'"
-						class="block hover:text-orange-500">주문 목록</a></li>
+						class="block hover:text-orange-500" style="cursor: pointer;">주문 목록</a></li>
 				</c:if>
 				<c:if test="${sessionScope.userType == 2}">
 					<li><a onclick="location.href='/sellerList'"
-						class="block hover:text-orange-500">내 상품보기</a></li>
+						class="block hover:text-orange-500" style="cursor: pointer;">내 상품보기</a></li>
 					<li><a onclick="location.href='/insert'"
-						class="block hover:text-orange-500">상품 등록</a></li>
+						class="block hover:text-orange-500" style="cursor: pointer;">상품 등록</a></li>
 					<li><a onclick="location.href='/orderList'"
-						class="block hover:text-orange-500">주문 목록</a></li>
+						class="block hover:text-orange-500" style="cursor: pointer;">주문 목록</a></li>
 				</c:if>
 			</ul>
 		</nav>
