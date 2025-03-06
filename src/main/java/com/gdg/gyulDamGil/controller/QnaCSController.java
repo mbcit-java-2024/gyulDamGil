@@ -2,9 +2,13 @@ package com.gdg.gyulDamGil.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,6 +26,33 @@ public class QnaCSController {
 
 	@Autowired
 	private QnaCSDAO dao;
+	
+	
+	
+	@RequestMapping("/qna")
+	public String login( HttpServletRequest request) {
+	    log.info("LoginController 컨트롤러의 login() 메소드 실행");
+
+	    HttpSession session = request.getSession(false);
+	    String viewpage = "";
+
+	    if (session != null && session.getAttribute("userType") != null) {
+	        int userType = (int) session.getAttribute("userType");
+	   
+	        if (userType == 1) {
+	            viewpage = "/QnaCM/faqC";
+	            
+	        } else if (userType == 2) {
+	            viewpage = "/QnaSM/faqS";
+	        }
+	        
+	    } else {
+	    	
+	        viewpage = "/consumer/login_2"; 
+	    }
+
+	    return viewpage;
+	}
 
 	@RequestMapping("/QnaCSList1")
 	public String selectQnaBysellerId(@RequestParam("sellerId") int sellerId, Model model) {
