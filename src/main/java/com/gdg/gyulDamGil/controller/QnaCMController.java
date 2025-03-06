@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class QnaCMController {
-
+ 
     @Autowired
     private QnaCMDAO dao;
 
@@ -30,9 +30,11 @@ public class QnaCMController {
         
         model.addAttribute("qnaList", qnaList);
         log.info("qnaList: {}", qnaList);
+        log.info("dfa;d");
         return "/QnaCM/QnaCMList";
+        
     }
-
+    
     // QnA 작성 페이지 이동
     @RequestMapping("/QnaCMInsert")
     public String QnaInsert() {
@@ -53,9 +55,9 @@ public class QnaCMController {
 
     // QnA 상세 조회
     @RequestMapping("/QnaCMDetail")
-    public String selectQnaByIdx(@RequestParam("idx") int idx, Model model) {
-        QnaCMVO qnaCMVO = dao.selectQnaByIdx(idx);
-        List<QnaCMRepliesVO> replies = dao.selectRepliesByQnaIdx(idx);
+    public String selectQnaByIdx(@RequestParam("id") int id, Model model) {
+        QnaCMVO qnaCMVO = dao.selectQnaByIdx(id);
+        List<QnaCMRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
 
         log.info("QnaCMController - selectQnaByIdx() 실행");
 
@@ -71,7 +73,7 @@ public class QnaCMController {
         log.info("QnaCMController - QnaReplyInsert() 실행");
         dao.insertReply(qnaCMRepliesVO);
 
-        redirectAttributes.addAttribute("idx", qnaCMRepliesVO.getParentId());
-        return "redirect:/QnaCMDetail?idx=" + qnaCMRepliesVO.getParentId();   
+        redirectAttributes.addAttribute("id", qnaCMRepliesVO.getParentId());
+        return "redirect:/QnaCMDetail?id=" + qnaCMRepliesVO.getParentId();   
         }
 }

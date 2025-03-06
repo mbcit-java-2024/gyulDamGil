@@ -84,8 +84,8 @@ public class ReviewController {
     }
     
     @RequestMapping("/ReviewUpdate")
-    public String updateReview(@RequestParam("idx") int idx,ReviewVO reviewVO , Model model) {
-        ReviewVO review = dao.selectReviewByIdx(idx);
+    public String updateReview(@RequestParam("id") int id,ReviewVO reviewVO , Model model) {
+        ReviewVO review = dao.selectReviewByIdx(id);
         
                 
         log.info("rate:{}",reviewVO.getRate());
@@ -112,10 +112,10 @@ public class ReviewController {
 
 	// 리뷰 삭제 처리
     @RequestMapping("/ReviewDelete")
-    public String deleteReview(@RequestParam("idx") int idx, Model model, RedirectAttributes redirectAttributes) {
-    	ReviewVO review = dao.selectReviewByIdx(idx);
+    public String deleteReview(@RequestParam("id") int id, Model model, RedirectAttributes redirectAttributes) {
+    	ReviewVO review = dao.selectReviewByIdx(id);
     	int productId = review.getProductId();
-        dao.delete(idx);
+        dao.delete(id);
         
         redirectAttributes.addFlashAttribute("message", "리뷰가 삭제되었습니다.");
         

@@ -9,7 +9,7 @@
 		SELECT * FROM review ORDER BY id ASC;
 	</select>
 	
-	<select id="selectReviewByid" resultType="ReviewVO">
+	<select id="selectReviewByIdx" resultType="ReviewVO">
 		 SELECT * FROM review WHERE id = #{id}
 	</select>
 	

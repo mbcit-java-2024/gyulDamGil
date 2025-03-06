@@ -59,7 +59,7 @@
 	</c:if>
 
 	<form action="ReviewUpdateOK" method="post">
-		<input type="hidden" name="idx" value="${review.idx}" />
+		<input type="hidden" name="id" value="${review.id}" />
 
 		<table width="800" border="1" align="center" cellpadding="5"
 			cellspacing="0">

@@ -65,10 +65,10 @@ public class QnaCSController {
 	}
 	
     @RequestMapping("/QnaCSDetail")
-    public String selectQnaByIdx(@RequestParam("idx") int idx, Model model) {
-        QnaCSVO qnaCSVO = dao.selectQnaByIdx(idx);
+    public String selectQnaByIdx(@RequestParam("id") int id, Model model) {
+        QnaCSVO qnaCSVO = dao.selectQnaByIdx(id);
 
-        List<QnaCSRepliesVO> replies = dao.selectRepliesByQnaIdx(idx);
+        List<QnaCSRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
 
         log.info("QnaCSController의 selectQnaByIdx() 메소드 실행");
 
@@ -85,7 +85,7 @@ public class QnaCSController {
         log.info("QnaCSController의 QnaReplyInsert() 메소드 실행");
         dao.insertReply(qnaCSRepliesVO);
 
-        redirectAttributes.addAttribute("idx", qnaCSRepliesVO.getParentId());
+        redirectAttributes.addAttribute("id", qnaCSRepliesVO.getParentId());
         return "redirect:/QnaCSDetail"; 
     }
 	

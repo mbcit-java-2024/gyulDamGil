@@ -40,37 +40,37 @@
 	        <p>별점:
 	            <c:choose>
 	                <c:when test="${review.rate == 5}">
-	                    <img src="images/5.jpg" width="90" >
+	                    <img src="images/rating/5.jpg" width="90" >
 	                </c:when>
 	                <c:when test="${review.rate == 4.5}">
-	                    <img src="images/4.5.jpg" width="90" >
+	                    <img src="images/rating/4.5.jpg" width="90" >
 	                </c:when>
 	                <c:when test="${review.rate == 4}">
-	                    <img src="images/4.jpg" width="90" >
+	                    <img src="images/rating/4.jpg" width="90" >
 	                </c:when>
 	                <c:when test="${review.rate == 3.5}">
-	                    <img src="images/3.5.jpg" width="90" >
+	                    <img src="images/rating/3.5.jpg" width="90" >
 	                </c:when>
 	                <c:when test="${review.rate == 3}">
-	                    <img src="images/3.jpg" width="90" >
+	                    <img src="images/rating/3.jpg" width="90" >
 	                </c:when>
 	                <c:when test="${review.rate == 2.5}">
-	                    <img src="images/2.5.jpg" width="90" >
+	                    <img src="images/rating/2.5.jpg" width="90" >
 	                </c:when>
 	                <c:when test="${review.rate == 2}">
-	                    <img src="images/2.jpg" width="90" >
+	                    <img src="images/rating/2.jpg" width="90" >
 	                </c:when>
 	                <c:when test="${review.rate == 1.5}">
-	                    <img src="images/1.5.jpg" width="90" >
+	                    <img src="images/rating/1.5.jpg" width="90" >
 	                </c:when>
 	                <c:when test="${review.rate == 1}">
-	                    <img src="images/1.jpg" width="90" >
+	                    <img src="images/rating/1.jpg" width="90" >
 	                </c:when>
 	                <c:when test="${review.rate == 0.5}">
-	                    <img src="images/0.5.jpg" width="90" >
+	                    <img src="images/rating/0.5.jpg" width="90" >
 	                </c:when>
 	                <c:when test="${review.rate == 0.0}">
-	                    <img src="images/0.0.jpg" width="90" >
+	                    <img src="images/rating/0.0.jpg" width="90" >
 	                </c:when>
 				</c:choose>
 	        </p>
@@ -79,14 +79,14 @@
 			    
              <div class="button-container">
 	                <form action="ReviewUpdate" method="get" style="display:inline;">
-	                    <input type="hidden" name="idx" value="${review.idx}">
+	                    <input type="hidden" name="id" value="${review.id}">
 	                    <input type="hidden" name="productId" value="${review.productId}">
 	                    <input type="hidden" name="sellerId" value="${review.sellerId}">
 	                    
 	                    <button type="submit">수정</button>
 	                </form>
 	                <form action="ReviewDelete" method="post" style="display:inline;">
-	                    <input type="hidden" name="idx" value="${review.idx}">
+	                    <input type="hidden" name="id" value="${review.id}">
 	                    <input type="hidden" name="productId" value="${review.productId}">
 	                    <button type="submit">삭제</button>
 	                </form>

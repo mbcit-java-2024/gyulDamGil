@@ -54,7 +54,7 @@
                         <td>
                             <div style="display: flex; align-items: center;">
                                 <textarea name="comment" style="width: 805px; height: 80px; margin-right: 10px;"></textarea>
-                                <input type="hidden" name="parentId" value="${qnaSMVO.idx}" />
+                                <input type="hidden" name="parentId" value="${qnaSMVO.id}" />
                                 <input type="submit" value="답변 달기" style="height: 80px;" />
                             </div>
                         </td>
@@ -79,7 +79,7 @@
                                 <textarea name="comment" style="width: 805px; height: 80px; margin-right: 10px;"></textarea>
                                 
                                 <input type="hidden" name="sellerId" value="${qnaSMVO.sellerId}" /> <!-- 로그인후 session에서 정보꺼내오기 consumerId -> sessionScope.id -->
-                                <input type="hidden" name="parentId" value="${qnaSMVO.idx}" />
+                                <input type="hidden" name="parentId" value="${qnaSMVO.id}" />
                                 <input type="hidden" name="replies" value="${qnaSMVO.replies }">
                                 <input type="submit" value="답변 달기" style="height: 80px;" />
                             </div>

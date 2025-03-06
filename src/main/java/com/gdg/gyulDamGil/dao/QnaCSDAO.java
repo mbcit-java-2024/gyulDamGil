@@ -37,9 +37,9 @@ public class QnaCSDAO {
 		session.update(QnaMapper + ".insert", qnaCSVO);
 	}
 
-	public QnaCSVO selectQnaByIdx(int idx) {
+	public QnaCSVO selectQnaByIdx(int id) {
 		 log.info("QnaCSDAO의 selectQnaByIdx() 메소드 실행");
-	     return session.selectOne(QnaMapper + ".selectQnaByIdx", idx);
+	     return session.selectOne(QnaMapper + ".selectQnaByIdx", id);
 	}
 
 	public void insertReply(QnaCSRepliesVO qnaCSRepliesVO) {
@@ -48,9 +48,9 @@ public class QnaCSDAO {
 		
 	}
 
-	public List<QnaCSRepliesVO> selectRepliesByQnaIdx(int idx) {
+	public List<QnaCSRepliesVO> selectRepliesByQnaIdx(int id) {
 		log.info("QnaCSDAO의 selectRepliesByQnaIdx() 메소드 실행");
-        return session.selectList(QnaMapper + ".selectRepliesByQnaIdx", idx);
+        return session.selectList(QnaMapper + ".selectRepliesByQnaIdx", id);
 	}
 
 	public List<QnaCSVO> selectQnaByconsumerId(int consumerId) {

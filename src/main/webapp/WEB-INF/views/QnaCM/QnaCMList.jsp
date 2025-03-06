@@ -69,12 +69,12 @@
 	            	<input type="hidden" name="title" value="${qna.title}">
 	            	<input type="hidden" name="comment" value="${qna.comment}">
 	                <tr>
-	                    <td>${qna.idx}</td> 
+	                    <td>${qna.id}</td> 
 	                    <td>
 	                        ${qna.consumerId}
 	                    </td>
 	                    <td>
-	                        <a href="QnaCMDetail?idx=${qna.idx}">
+	                        <a href="QnaCMDetail?id=${qna.id}">
 		                    ${qna.title}
 	                        </a>
 	                    </td>

@@ -18,37 +18,37 @@
    <p> 판매자 전체 평점 :
 		<c:choose>
     <c:when test="${averageRating >= 4.7}">
-	        <img src="images/5.jpg" width="90" >
+	        <img src="images/rating/5.jpg" width="90" >
 	    </c:when>
 	    <c:when test="${averageRating >= 4.3 && averageRating < 4.7}">
-	        <img src="images/4.5.jpg" width="90" >
+	        <img src="images/rating/4.5.jpg" width="90" >
 	    </c:when>
 	    <c:when test="${averageRating >= 3.9 && averageRating < 4.3}">
-	        <img src="images/4.jpg" width="90" >
+	        <img src="images/rating/4.jpg" width="90" >
 	    </c:when>
 	    <c:when test="${averageRating >= 3.5 && averageRating < 3.9}">
-	        <img src="images/3.5.jpg" width="90" >
+	        <img src="images/rating/3.5.jpg" width="90" >
 	    </c:when>
 	    <c:when test="${averageRating >= 3.0 && averageRating < 3.5}">
-	        <img src="images/3.jpg" width="90" >
+	        <img src="images/rating/3.jpg" width="90" >
 	    </c:when>
 	    <c:when test="${averageRating >= 2.5 && averageRating < 3.0}">
-	        <img src="images/2.5.jpg" width="90" >
+	        <img src="images/rating/2.5.jpg" width="90" >
 	    </c:when>
 	    <c:when test="${averageRating >= 2.0 && averageRating < 2.5}">
-	        <img src="images/2.jpg" width="90" >
+	        <img src="images/rating/2.jpg" width="90" >
 	    </c:when>
 	    <c:when test="${averageRating >= 1.5 && averageRating < 2.0}">
-	        <img src="images/1.5.jpg" width="90" >
+	        <img src="images/rating/1.5.jpg" width="90" >
 	    </c:when>
 	    <c:when test="${averageRating >= 1.0 && averageRating < 1.5}">
-	        <img src="images/1.jpg" width="90" >
+	        <img src="images/rating/1.jpg" width="90" >
 	    </c:when>
 	    <c:when test="${averageRating >= 0.5 && averageRating < 1.0}">
-	        <img src="images/0.5.jpg" width="90" >
+	        <img src="images/rating/0.5.jpg" width="90" >
 	    </c:when>
 	    <c:when test="${averageRating >= 0.0 && averageRating < 0.5}">
-	        <img src="images/0.0.jpg" width="90" >
+	        <img src="images/rating/0.0.jpg" width="90" >
 	    </c:when>
 	</c:choose>
    		 ${averageRating}

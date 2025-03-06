@@ -20,7 +20,7 @@
 	</insert>
 	
     <!-- 특정 QnaCM 조회 (id 기준) -->
-    <select id="selectQnaByid" resultMap="qnaResultMap">
+    <select id="selectQnaByIdx" resultMap="qnaResultMap">
         SELECT 
             qnaCM.id, qnaCM.consumerId, qnaCM.title, qnaCM.comment, qnaCM.createDate,
             qnaCMreplies.id AS replyId, qnaCMreplies.parentId, qnaCMreplies.consumerId AS replyConsumerId, 
@@ -35,7 +35,7 @@
     <select id="selectQnaByConsumerId" resultMap="qnaResultMap">
         SELECT 
             qnaCM.id, qnaCM.consumerId, qnaCM.title, qnaCM.comment, qnaCM.createDate,
-            qnaCMreplies.id AS replyid, qnaCMreplies.parentId, qnaCMreplies.consumerId AS replyConsumerId, 
+            qnaCMreplies.id AS replyId, qnaCMreplies.parentId, qnaCMreplies.consumerId AS replyConsumerId, 
             qnaCMreplies.comment AS replyComment, qnaCMreplies.createDate AS replyCreateDate
         FROM qnaCM
         LEFT JOIN qnaCMreplies ON qnaCM.id = qnaCMreplies.parentId
@@ -44,7 +44,7 @@
     </select>
 
     <!-- 특정 QnaCM에 달린 답글 조회 -->
-    <select id="selectRepliesByQnaid" parameterType="int" resultType="QnaCMRepliesVO">
+    <select id="selectRepliesByQnaIdx" parameterType="int" resultType="QnaCMRepliesVO">
         SELECT id, parentId, consumerId, comment, createDate
         FROM qnaCMreplies
         WHERE parentId = #{id}
@@ -61,7 +61,7 @@
 
         <!-- QnaCMRepliesVO 리스트를 replies에 매핑 -->
         <collection property="replies" ofType="QnaCMRepliesVO">
-            <id property="id" column="replyid"/>
+            <id property="id" column="replyId"/>
             <result property="parentId" column="parentId"/>
             <result property="consumerId" column="replyConsumerId"/>
             <result property="comment" column="replyComment"/>

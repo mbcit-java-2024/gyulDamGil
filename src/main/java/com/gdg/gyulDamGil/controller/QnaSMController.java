@@ -53,9 +53,9 @@ public class QnaSMController {
 
     // QnA 상세 조회
     @RequestMapping("/QnaSMDetail")
-    public String selectQnaByIdx(@RequestParam("idx") int idx, Model model) {
-        QnaSMVO qnaSMVO = dao.selectQnaByIdx(idx);
-        List<QnaSMRepliesVO> replies = dao.selectRepliesByQnaIdx(idx);
+    public String selectQnaByIdx(@RequestParam("id") int id, Model model) {
+        QnaSMVO qnaSMVO = dao.selectQnaByIdx(id);
+        List<QnaSMRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
 
         log.info("QnaSMController - selectQnaByIdx() 실행");
 
@@ -71,7 +71,7 @@ public class QnaSMController {
         log.info("QnaSMController - QnaReplyInsert() 실행");
         dao.insertReply(qnaSMRepliesVO);
 
-        redirectAttributes.addAttribute("idx", qnaSMRepliesVO.getParentId());
-        return "redirect:/QnaSMDetail?idx=" + qnaSMRepliesVO.getParentId();   
+        redirectAttributes.addAttribute("id", qnaSMRepliesVO.getParentId());
+        return "redirect:/QnaSMDetail?id=" + qnaSMRepliesVO.getParentId();   
         }
 }

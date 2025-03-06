@@ -36,9 +36,9 @@ public class ReviewDAO {
         return session.selectList(ReviewMapper +  ".selectList");
     }
 
-	public ReviewVO selectReviewByIdx(int idx) {
-        log.info("ReviewDAO 클래스의 selectReviewByIdx() 매소드 실행, idx: {}", idx);
-        return session.selectOne(ReviewMapper +  ".selectReviewByIdx", idx);
+	public ReviewVO selectReviewByIdx(int id) {
+        log.info("ReviewDAO 클래스의 selectReviewByIdx() 매소드 실행, id: {}", id);
+        return session.selectOne(ReviewMapper +  ".selectReviewByIdx", id);
     }
 	
 	public List<ReviewVO> selectReviewByProductId(int productId) {
@@ -52,9 +52,9 @@ public class ReviewDAO {
         session.update(ReviewMapper +  ".update", reviewVO);
     }
 
-	public void delete(int idx) {
-        log.info("ReviewDAO 클래스의 delete() 매소드 실행, idx: {}", idx);
-        session.delete(ReviewMapper + ".delete", idx);
+	public void delete(int id) {
+        log.info("ReviewDAO 클래스의 delete() 매소드 실행, idx: {}", id);
+        session.delete(ReviewMapper + ".delete", id);
     }
 
 	public List<ReviewVO> selectReviewBySellerId(int sellerId) {
