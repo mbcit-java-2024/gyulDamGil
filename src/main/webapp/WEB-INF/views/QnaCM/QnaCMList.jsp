@@ -3,6 +3,8 @@
 
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<jsp:include page="../include/header.jsp"/>
 <head>
     <meta charset="UTF-8">
     <title>QnA 목록</title>
@@ -86,7 +88,6 @@
 	                    	<c:if test="${not empty qna.replies}">
 	                    		답변 완료
 	                    	</c:if>
-	               
 	                    </td>
 	                </tr>
 	            </c:forEach>
@@ -95,4 +96,5 @@
    	</c:if>
 
 </body>
+<jsp:include page="../include/footer.jsp"/>
 </html>

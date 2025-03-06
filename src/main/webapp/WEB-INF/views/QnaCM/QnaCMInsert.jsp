@@ -4,6 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <title>리뷰 작성</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<jsp:include page="../include/header.jsp"/>
 <body>
 
 	<form action="QnaCMInsertOK" method="post">
@@ -30,4 +32,5 @@
 	</form>
 
 </body>
+<jsp:include page="../include/footer.jsp"/>
 </html>

@@ -4,6 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <title>문의 작성</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<jsp:include page="../include/header.jsp"/>
+</head>
 <body>
 
 	<form action="QnaSMInsertOK" method="post">
@@ -30,4 +33,5 @@
 	</form>
 
 </body>
+<jsp:include page="../include/footer.jsp"/>
 </html>

@@ -50,8 +50,8 @@
 }
 </style>
 
-
-
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<jsp:include page="../include/header.jsp"/>
 </head>
 <body>
 
@@ -116,6 +116,6 @@
 			</tr>
 		</table>
 	</form>
-
+<jsp:include page="../include/footer.jsp"/>
 </body>
 </html>

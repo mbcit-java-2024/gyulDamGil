@@ -94,10 +94,10 @@
                     		취소된 주문입니다.
                     	</option>
                     	</c:if>
-                        </select>
-                        <c:if test="${order.status < 3}">
-                        <button type="submit">(으)로 변경</button>
-                        </c:if>
+                    </select>
+                    <c:if test="${order.status < 3}">
+                    <button type="submit">(으)로 변경</button>
+                    </c:if>
                 </form>
             </td>
         </tr>

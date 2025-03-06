@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Qna 답글달기</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<jsp:include page="../include/header.jsp"/>
 </head>
 <body>
     <c:if test="${not empty message}">
@@ -90,4 +92,5 @@
         </c:if>
     </table>
 </body>
+<jsp:include page="../include/footer.jsp"/>
 </html>
