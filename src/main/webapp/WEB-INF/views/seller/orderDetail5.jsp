@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>귤담길 - 주문 상세 정보</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-<%@ include file="../include/header.jsp" %>
+<jsp:include page="../include/header.jsp"/>
 </head>
 <body>
 	<a type="button" href="/orderList?currentPage=${currentPage}">
@@ -121,5 +121,5 @@
     	</tr>
     </table>
 </body>
-<%@ include file="../include/footer.jsp" %>
+<jsp:include page="../include/footer.jsp"/>
 </html>

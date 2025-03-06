@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
 <title>귤담길 - 소개</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-<%@ include file="../include/header.jsp" %>
+<jsp:include page="../include/header.jsp"/>
 </head>
 <body>
 	<div id="section-about" class="container mx-auto px-4 py-8">
@@ -30,5 +30,5 @@
 		</div>
 	</div>
 </body>
-<%@ include file="../include/footer.jsp" %>
+<jsp:include page="../include/footer.jsp"/>
 </html>

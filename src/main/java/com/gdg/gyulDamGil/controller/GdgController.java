@@ -21,24 +21,10 @@ public class GdgController {
 		return "/gdg/info";
 	}
 	
-	@RequestMapping("/myPage")
-	public String myPage() {
-		log.info("GdgController의 myPage메소드 실행");
-		
-//		여기서 session.getUserType을 받아서 consumer, seller 구분해야함
-		
-		/*
-//		session으로 받는 값이 String이였는지 기억이 안나요...
-
-		int userType = request.getSession().getAttribute("userType");
-		if (userType == 1) {
-			return "/consumer/mypage";
-		} else if (userType == 2) {
-			return "/seller/mypage";
-		}
-		*/
-		
-		return "/gdg/needLogin";
+	@RequestMapping("/farms")
+	public String farms() {
+		log.info("GdgController의 farms메소드 실행");
+		return "/gdg/farms";
 	}
 	
 }
