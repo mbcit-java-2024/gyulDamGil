@@ -34,8 +34,8 @@ public class QnaCSController {
 	    log.info("LoginController 컨트롤러의 login() 메소드 실행");
 
 	    HttpSession session = request.getSession(false);
-	    String viewpage = "";
-
+	    String viewpage = "/QnaCM/faqC";
+/* 재성: 이거 주석 해제 할때 위에 뷰페이지 "";으로 바꾸기
 	    if (session != null && session.getAttribute("userType") != null) {
 	        int userType = (int) session.getAttribute("userType");
 	   
@@ -50,7 +50,7 @@ public class QnaCSController {
 	    	
 	        viewpage = "/consumer/login_2"; 
 	    }
-
+*/
 	    return viewpage;
 	}
 

@@ -28,7 +28,7 @@
 							<option>인기순</option>
 							<option>가격 낮은순</option>
 							<option>가격 높은순</option>
-						</select> 
+						</select>
 					</div>
 					<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
