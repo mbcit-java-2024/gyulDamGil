@@ -29,13 +29,15 @@ public class QnaCSController {
 	
 	
 	
-	@RequestMapping("/qna")
+	@RequestMapping("/faq")
 	public String login( HttpServletRequest request) {
 	    log.info("LoginController 컨트롤러의 login() 메소드 실행");
-
-	    HttpSession session = request.getSession(false);
-	    String viewpage = "/QnaCM/faqC";
-/* 재성: 이거 주석 해제 할때 위에 뷰페이지 "";으로 바꾸기
+	    return "/gdg/faq";
+	}
+	
+	/* 용훈이의 편한 코딩을 위한 주석 남겨놓기
+	HttpSession session = request.getSession(false);
+	String viewpage = "";
 	    if (session != null && session.getAttribute("userType") != null) {
 	        int userType = (int) session.getAttribute("userType");
 	   
@@ -50,9 +52,8 @@ public class QnaCSController {
 	    	
 	        viewpage = "/consumer/login_2"; 
 	    }
-*/
-	    return viewpage;
-	}
+	return viewpage;
+	*/
 
 	@RequestMapping("/QnaCSList1")
 	public String selectQnaBysellerId(@RequestParam("sellerId") int sellerId, Model model) {

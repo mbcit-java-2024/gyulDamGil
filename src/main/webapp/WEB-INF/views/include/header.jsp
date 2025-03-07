@@ -139,6 +139,11 @@
 					<li><a onclick="location.href='/orderList'"
 						class="block hover:text-orange-500" style="cursor: pointer;">주문 목록</a></li>
 				</c:if>
+				<li>
+					<button id="tab-qna" onclick="location.href='/faq'"
+						class="px-4 py-2 font-medium border-b-2 border-orange-500 hover:text-orange-500">
+						고객센터</button>
+				</li>
 			</ul>
 		</nav>
 	</div>
