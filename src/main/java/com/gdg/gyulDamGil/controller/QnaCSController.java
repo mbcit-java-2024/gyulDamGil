@@ -54,19 +54,33 @@ public class QnaCSController {
 	    }
 	return viewpage;
 	*/
-
-	@RequestMapping("/QnaCSList1")
-	public String selectQnaBysellerId(@RequestParam("sellerId") int sellerId, Model model) {
-		List<QnaCSVO> qnaList = dao.selectQnaBysellerId(sellerId);
-		log.info("HomeController 클래스의 seletQnaBysellerId() 메소드 실행");
-		
+	
+	@RequestMapping("/QnaCSList")
+	public String QnaCSList(Model model, HttpServletRequest request) {
+		log.info("HomeController 클래스의 QnaCSList() 메소드 실행");
+		HttpSession session = request.getSession(false);
+		List<QnaCSVO> qnaList = null;
+		String viewpage = "";
+	    if (session != null && session.getAttribute("userType") != null) {
+	        int userType = (int) session.getAttribute("userType");
+	        if (userType == 1) {
+	        	qnaList = dao.selectQnaByconsumerId((int) session.getAttribute("id"));
+	        } else if (userType == 2) {
+	        	qnaList = dao.selectQnaBysellerId((int) session.getAttribute("id"));
+	        }
+	        viewpage = "/QnaCS/QnaCSList";
+	    } else {
+	    	return viewpage = "/consumer/login_2";
+	    }
 		
 		model.addAttribute("qnaList", qnaList);
-        log.info("qnaList: {}", qnaList);
-
-		return "/QnaCS/QnaCSList";
+//		log.info("qnaList: {}", qnaList);
+		
+		return viewpage;
 	}
-	@RequestMapping("/QnaCSList2")
+	
+/* 아래 두 요청을 QnaCSList 한 요청으로 통합
+	@RequestMapping("/QnaCSList1")
 	public String selectQnaByconsumerId(@RequestParam("consumerId") int consumerId, Model model) {
 		List<QnaCSVO> qnaList = dao.selectQnaByconsumerId(consumerId);
 		log.info("HomeController 클래스의 selectQnaByconsumerId() 메소드 실행");
@@ -77,6 +91,18 @@ public class QnaCSController {
 		
 		return "/QnaCS/QnaCSList";
 	}
+	
+	@RequestMapping("/QnaCSList2")
+	public String selectQnaBysellerId(@RequestParam("sellerId") int sellerId, Model model) {
+		log.info("HomeController 클래스의 seletQnaBysellerId() 메소드 실행");
+		
+		
+		model.addAttribute("qnaList", qnaList);
+        log.info("qnaList: {}", qnaList);
+
+		return "/QnaCS/QnaCSList";
+	}
+*/
 	
 	@RequestMapping("/QnaCSInsert")
 	public String QnaInsert() {
@@ -109,8 +135,7 @@ public class QnaCSController {
 
         return "/QnaCS/QnaCSDetail"; 
     }
-
-
+    
     @RequestMapping("/QnaCSReplyInsert")
     public String QnaReplyInsert(QnaCSRepliesVO qnaCSRepliesVO, RedirectAttributes redirectAttributes) {
     	
