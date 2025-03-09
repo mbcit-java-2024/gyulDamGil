@@ -30,8 +30,11 @@ public class QnaCSController {
 	
 	
 	@RequestMapping("/faq")
-	public String login( HttpServletRequest request) {
+	public String login(HttpServletRequest request, Model model) {
 	    log.info("LoginController 컨트롤러의 login() 메소드 실행");
+	    
+	    model.addAttribute("faq", "faq");
+	    
 	    return "/gdg/faq";
 	}
 	
