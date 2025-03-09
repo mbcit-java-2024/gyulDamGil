@@ -13,6 +13,7 @@ public interface SellerDAO {
 //	재성
 	List<SellerVO> selectAllSellers(); // 모든 판매자 조회
 	SellerVO selectSellerById(int id); // 특정 판매자 정보 조회
+	int getReviewCount(int id);
 
 //	수빈
 	SellerVO selectFarmDetail(int sellerId);
