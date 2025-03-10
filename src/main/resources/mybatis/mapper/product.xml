@@ -8,17 +8,18 @@
 		SELECT * FROM product WHERE categoryId = #{categoryId}
 	</select>
 
-	<select id="selectGamgyulDetail" resultType="ProductVO">
+	<select id="selectGamgyulDetail" parameterType="java.util.HashMap" resultType="ProductVO">
 		select a.*
 		, (select count(1) 
 			from bookmark b 
-		   where b.productId = a.id and b.consumerId = #{consumerId}) as bookMarkCnt 
+		   where b.productId is not null  and b.productId = a.id and b.consumerId = #{consumerId}) as bookMarkCnt 
 		 from product a where id = #{id}
 	</select>
 
 	<select id="selectImg" resultType="ProductVO">
 		select * from product where mainImageUrl = #{mainImageUrl}
 	</select>
+
 
 <!--
 	체험예약 관련 코드 

@@ -21,5 +21,5 @@ public class SellerVO {
 	private String farmName;
 	private int reviewCount;
 	private int status;
-	
+	private int bookMarkCnt;
 }

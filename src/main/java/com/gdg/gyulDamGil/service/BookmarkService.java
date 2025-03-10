@@ -32,4 +32,18 @@ public class BookmarkService {
 		return resultCnt;
 	}
 
+	public int insertFarm(BookmarkVO bookmarkVO) {
+		int resultCnt = 0;	
+		
+		resultCnt = bookmarkDAO.insertFarm(bookmarkVO);
+		return resultCnt;
+	}
+
+	public int deleteFarm(BookmarkVO bookmarkVO) {
+		int resultCnt = 0;	
+		
+		resultCnt = bookmarkDAO.deleteFarm(bookmarkVO);
+		return resultCnt;
+	}
+
 }

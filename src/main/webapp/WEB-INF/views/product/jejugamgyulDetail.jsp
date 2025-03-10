@@ -37,9 +37,15 @@ function addToBookmarkProduct(button) {
             console.log('success::::::::::::' + JSON.stringify(data));
             
             if (data.code === '0') {
-                alert('상품이 즐겨찾기에 추가되었습니다.');
+            	if (!confirm('상품이 즐겨찾기에 추가되었습니다. \n즐겨찾기 상세보기 페이지로 이동하시겠습니까?')) {
+	                location.reload();
+            		
+            	} 
+            	else {
+                    location.href = '/bookmark';
+                }
+            	//alert('상품이 즐겨찾기에 추가되었습니다.');
                 $(button).toggleClass('liked'); // 색칠 처리 
-                // 온클릭 이벤트 변경 추가 
             } else {
                 alert(data.message ? data.message : '알 수 없는 오류');
             }
@@ -70,6 +76,7 @@ function deleteBookmarkProduct(button) {
             if (data.code === '0') {
                 alert('상품이 즐겨찾기에서 해제되었습니다.');
                 $(button).toggleClass('liked'); // 색칠 처리 
+                location.reload();
                 // 온클릭 이벤트 변경 추가 
             } else {
                 alert(data.message ? data.message : '알 수 없는 오류');
@@ -231,11 +238,11 @@ function deleteBookmarkProduct(button) {
 										<div class="buttons">
 										<c:choose>
 										<c:when test="${productDetail.bookMarkCnt == 0}">
-									<button type="button" class="favorite-btn" onclick="addToBookmarkProduct(this)">♡ 좋아요 ${productDetail.bookMarkCnt}</button>
+									<button type="button" class="favorite-btn" onclick="addToBookmarkProduct(this)">❤️ 좋아요${productDetail.bookMarkCnt}</button>
 										</c:when>
 										<c:when test="${productDetail.bookMarkCnt != 0}">
 										<%-- <c:otherwise test="${productDetail.bookMarkCnt != 0}"> --%>
-									<button type="button" class="favorite-btn liked" onclick="deleteBookmarkProduct(this)">❤️ 좋아요 ${productDetail.bookMarkCnt}</button>
+									<button type="button" class="favorite-btn liked" onclick="deleteBookmarkProduct(this)">❤️ 좋아요</button>
 										<%-- </c:otherwise> --%>
 										</c:when>
 										</c:choose>

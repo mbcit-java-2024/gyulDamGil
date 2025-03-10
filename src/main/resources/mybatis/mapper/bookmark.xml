@@ -12,6 +12,52 @@
 		VALUES(#{id}, #{sellerId},
 		#{productId}, #{consumerId})
 	</insert>
+	
+	
+	<insert id="insertFarm" parameterType="bookmarkVO">
+		INSERT INTO bookmark
+		(sellerId, consumerId) VALUES(#{sellerId}, #{consumerId})
+	</insert>
+	
+	<select id="selectBookMarkList" parameterType="BookmarkVO"
+		resultType="BookmarkVO">
+		SELECT
+		b.id,
+		b.sellerId,
+		b.productId,
+		b.consumerId,
+
+		
+		s.userId,
+		s.name,
+		s.email,
+		s.phone,
+		s.address,
+		s.detailAddress,
+		s.createDate,
+		s.updateDate,
+		s.bussinessNumber,
+		s.farmName,
+		s.reviewCount,
+
+		
+		p.title,
+		p.price,
+		p.description,
+		p.stock,
+		p.mainImageUrl,
+		p.createDate,
+		p.updateDate,
+		p.farmName,
+		p.detailImageUrl
+
+		FROM bookmark b
+		LEFT JOIN seller s ON b.sellerId = s.id
+		LEFT JOIN product p ON b.productId = p.id
+		WHERE b.consumerId = #{consumerId};
+
+	</select>
+	
 	<!-- 상품상세에서 담을때 -->
 	<!-- <update id="updateDetail" parameterType="CartVO"> UPDATE cart SET count 
 		= count + #{count} , totalPrice = totalPrice + #{totalPrice} WHERE id = #{id} 
@@ -31,8 +77,23 @@
 		b.mainImageUrl from cart a left join product b on a.productId = b.id WHERE 
 		a.id in (${cartIds}) </select> -->
 
-	<delete id="deleteProduct" parameterType="bookmarkVO"> 
-		delete from bookmark where productId = #{productId} </delete>
+	<delete id="deleteProduct" parameterType="bookmarkVO">
+		DELETE FROM bookmark
+		WHERE productId = #{productId}
+		AND consumerId = #{consumerId};
+	</delete>
+	<delete id="deleteFarm" parameterType="bookmarkVO">
+		delete from bookmark where
+		sellerId = #{sellerId}
+		AND consumerId = #{consumerId};
+	</delete>
+
+	<delete id="bookMarkProductDelete" parameterType="bookmarkVO">
+		delete from bookmark where id = #{id}
+	</delete>
+	<delete id="bookMarkFarmDelete" parameterType="bookmarkVO">
+		delete from bookmark where sellerId = #{sellerId}
+	</delete>
 
 	<!-- <delete id="deleteCartItems" parameterType="java.util.HashMap"> delete 
 		from cart where id = #{id} </delete> -->

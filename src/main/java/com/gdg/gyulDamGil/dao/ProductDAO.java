@@ -21,7 +21,7 @@ public interface ProductDAO {
 
 //	수빈
 	List<ProductVO> selectJejuGamgyulList(int categoryId);
-	ProductVO selectGamgyulDetail(int id);
+	ProductVO selectGamgyulDetail(Map<String, Object> param);
 //	List<ProductVO> selectgyulexperienceList(); // 체험예약 관련코드 - 우선 주석처리
 	ProductVO selectImg(int id);
 //	void updateProduct(Map<String, Object> param); // 재성: 주석처리 stock 을 두번 처리함

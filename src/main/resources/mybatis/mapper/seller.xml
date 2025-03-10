@@ -22,6 +22,7 @@
     <select id="selectFarmDetail" resultType="SellerVO">
 		SELECT
 		s.id,
+		s.userId,
 		s.password,
 		s.name,
 		s.email,
@@ -33,10 +34,16 @@
 		s.bussinessNumber,
 		s.farmName,
 		s.reviewCount,
-		s.status
+		s.status,
+		(SELECT COUNT(1)
+		FROM bookmark
+		WHERE sellerId = #{sellerId}
+		AND productId IS NULL) AS bookMarkCnt
 		FROM
 		seller s
-		WHERE s.id= #{id}
+		WHERE
+		s.id = #{id}
+
 	</select>
 
 	<!-- 예린 -->

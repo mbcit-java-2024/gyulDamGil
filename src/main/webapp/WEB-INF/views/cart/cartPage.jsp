@@ -386,7 +386,7 @@
         </div>
 
 <form name="form1" action="/orderPage"  method="post">
-<input type="text" name="cartIds" value=""/>
+<input type="hidden" name="cartIds" value=""/>
 </form>
         <%@ include file="../include/footer.jsp" %>
     </div>

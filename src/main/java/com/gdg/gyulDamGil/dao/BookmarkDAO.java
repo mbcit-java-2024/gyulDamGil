@@ -11,6 +11,18 @@ import com.gdg.gyulDamGil.vo.BookmarkVO;
 public interface BookmarkDAO {
 
 	int insertProduct(BookmarkVO bookmarkVO);
+
 	int deleteProduct(BookmarkVO bookmarkVO);
+
+	int insertFarm(BookmarkVO bookmarkVO);
+
+	int deleteFarm(BookmarkVO bookmarkVO);
+
+	List<BookmarkVO> selectBookMarkList(BookmarkVO bookmarkVO);
+
+	int bookMarkProductDelete(int id);
+
+	int bookMarkFarmDelete(int sellerId);
+
 
 }

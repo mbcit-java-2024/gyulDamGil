@@ -1,19 +1,17 @@
 package com.gdg.gyulDamGil.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gdg.gyulDamGil.dao.CartDAO;
 import com.gdg.gyulDamGil.dao.OrderDAO;
 import com.gdg.gyulDamGil.dao.ProductDAO;
-import com.gdg.gyulDamGil.vo.CartVO;
 import com.gdg.gyulDamGil.vo.OrderVO;
-import com.gdg.gyulDamGil.vo.ProductVO;
 
 @Service
 public class OrderService {
@@ -27,58 +25,60 @@ public class OrderService {
 	@Autowired
 	private ProductDAO productDAO;
 
-	
-	
+	@Transactional
 	public Map<String, Object> orders(Map<String, Object> param) {
-//		System.out.println("OrderService클래스의 orders메소드 실행");
-		
-		param.put("id", param.get("cartIds")); 
-//		System.out.println("param: " + param); // id=2,3 id=4
-		
-		String cartIds = (String) param.get("cartIds");
-//		System.out.println("cartIds: " + cartIds); // cartIds: 3, 4
-		
-		String[] arr = cartIds.split(",");
-		
-//		List<Map<String, Integer>> paramList = new ArrayList<>();
+			System.out.println("OrderService클래스의 orders메소드 실행");
+			
+			param.put("id", param.get("cartIds")); 
+			System.out.println("param: " + param); // id=2,3 id=4
+			
+			String cartIds = (String) param.get("cartIds");
+			System.out.println("cartIds: " + cartIds); // cartIds: 3, 4
+			
+			String[] arr = cartIds.split(",");
+			System.out.println("arr: " + arr); // cartIds: 3, 4
+			
+//			List<Map<String, Integer>> paramList = new ArrayList<>();
 
-		
-		
-		int cnt1 = 0;
-		int resultCnt = 0;
-//		ProductVO updateProduct = new ProductVO();
-		String orderIds = "";
-		Map<String, Object> resultMap1 = new HashMap<String, Object>();
-		Map<String, Object> updateProduct = new HashMap<String, Object>();
-        for (String id : arr) {
-        	param.put("id", Integer.parseInt(id.trim())); 
-//        	System.out.println("cartId: " + param.get("id") ); // 카트아이디 // 3     // 4
-        	cnt1 = orderDAO.insertOrder(param); // 카트 1건 읽어서 오더에 인서트, 오더아이디 리턴받음
-        	if (cnt1 != 1) { // 정상 작동 x
-        		cnt1 = orderDAO.insertOrder(param); // 카트 1건 읽어서 오더에 인서트, 오더아이디 리턴받음
-        		continue;
-        	} else { // 정상 작동 시 실행해야하는 실행문들
-        		resultCnt++;
-        		if (orderIds.equals("")) {
-        			orderIds = orderIds + param.get("orderId");
-        			System.out.println("param.get(\"orderId\")" + param.get("orderId"));
-        		}
-        		else {
-        			orderIds = orderIds + ',' + param.get("orderId");
-        		} 
-//        		productDAO.updateProduct(param); // 카트의 정보를 주고 프로덕트 수정 - 재성: 주석처리 stock 을 두번 처리함
-        		cartDAO.deleteCartItems(param);
-        		
-        	}
-//        	System.out.println("orderId: " + param.get("orderId")); 
-        } // 
-        
-        
-    	resultMap1.put("orderIds", orderIds) ; 
-    	resultMap1.put("resultCnt", resultCnt) ; 
-    	
-		return resultMap1; 
-	}//
+			
+			
+			int cnt1 = 0;
+			int resultCnt = 0;
+//			ProductVO updateProduct = new ProductVO();
+			String orderIds = "";
+			Map<String, Object> resultMap1 = new HashMap<String, Object>();
+			Map<String, Object> updateProduct = new HashMap<String, Object>();
+	        for (String id : arr) {
+	        	param.put("id", Integer.parseInt(id.trim())); 
+//	        	System.out.println("cartId: " + param.get("id") ); // 카트아이디 // 3     // 4
+	        	cnt1 = orderDAO.insertOrder(param); // 카트 1건 읽어서 오더에 인서트, 오더아이디 리턴받음
+	        	if (cnt1 != 1) { // 정상 작동 x
+	        		cnt1 = orderDAO.insertOrder(param); // 카트 1건 읽어서 오더에 인서트, 오더아이디 리턴받음
+	        		continue;
+	        	} else { // 정상 작동 시 실행해야하는 실행문들
+	        		resultCnt++;
+	        		System.out.println("orderIds" + param.get("orderId"));
+	        		if (orderIds.equals("")) {
+	        			orderIds = orderIds + param.get("id");
+	        			System.out.println("orderIds" + param.get("orderId"));
+	        			System.out.println("orderIds" + param.get("orderIds"));
+	        		}
+	        		else {
+	        			orderIds = orderIds + ',' + param.get("id");
+	        		} 
+	        		cartDAO.deleteCartItems(param);
+	        		
+	        	}
+//	        	System.out.println("orderId: " + param.get("orderId")); 
+	        } // 
+	        
+	        
+	    	resultMap1.put("orderIds", orderIds) ; 
+	    	resultMap1.put("resultCnt", resultCnt) ; 
+	    	
+			return resultMap1; 
+		}//
+
 	
 	public List<OrderVO> selectOrderList(String orderIds) {
 		return orderDAO.selectOrderList(orderIds);
