@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -142,6 +145,19 @@ public class CartController {
 	}
 	
 
+	// 1. 여기에 장바구니 개수 가져오는 메소드 추가 
+//	@GetMapping("/selectcartcount")
+//	public int selectcartcount(Model model, HttpServletRequest req) {
+//		// 장바구니 건수 조회 쿼리 
+//		int cnt = 0; // 로그인안했을땐 0
+//		
+//
+//		if (null != session   && null != session.getAttribute("id")) {
+//			cnt = dao.selectcartcount(컨슈머아이디); // 디비 조회 
+//		}
+//		
+//		return cnt;
+//	}
 	
 	
 	

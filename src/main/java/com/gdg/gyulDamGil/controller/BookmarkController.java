@@ -46,7 +46,7 @@ public class BookmarkController {
 		// TODO 세션에서 추출할것!!
 
 		HttpSession session = req.getSession(false);
-		if (session != null && (int) session.getAttribute("userType") == 1) { // 구매자
+		if (null != session   && null != session.getAttribute("id")) { 
 			int consumerId = (int) session.getAttribute("id"); // 구매자의 아이디
 			bookmarkVO.setConsumerId(consumerId);
 			resultMap.put("code", "0");// 성공여부 0:성공, 그외:실패
@@ -64,6 +64,11 @@ public class BookmarkController {
 				resultMap.put("message", e.getMessage());// 에러메세지
 				resultMap.put("resultCnt", resultCnt);
 			}
+		} else { 
+			resultMap.put("code", "-1");// 성공여부 0:성공, 그외:실패
+			resultMap.put("message", "로그인하십시오.");// 에러메세지
+//			resultMap.put("resultCnt", resultCnt);
+			
 		}
 
 		return resultMap;
@@ -87,7 +92,7 @@ public class BookmarkController {
 
 		// TODO 세션에서 추출할것!!
 		HttpSession session = req.getSession(false);
-		if (session != null && (int) session.getAttribute("userType") == 1) { // 구매자
+		if (null != session   && null != session.getAttribute("id")) { // 구매자
 			int consumerId = (int) session.getAttribute("id"); // 구매자의 아이디
 			bookmarkVO.setConsumerId(consumerId);
 			resultMap.put("code", "0");// 성공여부 0:성공, 그외:실패
@@ -125,7 +130,7 @@ public class BookmarkController {
 		// TODO 세션에서 추출할것!!
 
 		HttpSession session = req.getSession(false);
-		if (session != null && (int) session.getAttribute("userType") == 1) { // 구매자
+		if (null != session   && null != session.getAttribute("id")) { // 구매자
 			int consumerId = (int) session.getAttribute("id"); // 구매자의 아이디
 			bookmarkVO.setConsumerId(consumerId);
 
@@ -170,7 +175,7 @@ public class BookmarkController {
 
 		// TODO 세션에서 추출할것!!
 		HttpSession session = req.getSession(false);
-		if (session != null && (int) session.getAttribute("userType") == 1) { // 구매자
+		if (null != session   && null != session.getAttribute("id")) { // 구매자
 			int consumerId = (int) session.getAttribute("id"); // 구매자의 아이디
 			bookmarkVO.setConsumerId(consumerId);
 

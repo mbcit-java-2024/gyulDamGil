@@ -76,29 +76,23 @@ public class ProductController {
 		System.out.println("ProductController의 jejugamgyulDetail메소드 실행");
 		
 		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		HttpSession session = req.getSession(false);
+		// System.out.println("ProductController의 jejugamgyulDetail메소드 실행::::::" + session);
+		if (null != session   && null != session.getAttribute("id")) { 
+			int consumerId = (int) session.getAttribute("id"); // 구매자의 아이디
+			param.put("consumerId", consumerId);
+		}
 		ProductVO selectGamgyulDetail = productDAO.selectGamgyulDetail(param);
+		//		이미지 경로 변환
 		File file = new File(productDAO.selectById(id).getMainImageUrl());
 		String fileName = file.getName(); // 파일명만 추출
 		String relativePath = "/upload/" + fileName;
 		log.info("이미지 상대 경로: "+ relativePath);
 		selectGamgyulDetail.setMainImageUrl(relativePath);
 		
-		
-		param.put("id", id);
-		
-		HttpSession session = req.getSession(false);
-		if (session != null && (int) session.getAttribute("userType") == 1) { // 구매자
-			int consumerId = (int) session.getAttribute("id"); // 구매자의 아이디
-			
-			param.put("consumerId", consumerId);
-			
-	//		이미지 경로 변환
-			
-			model.addAttribute("selectGamgyulDetail", selectGamgyulDetail);
-			System.out.println(selectGamgyulDetail);
-		}
+		model.addAttribute("selectGamgyulDetail", selectGamgyulDetail); 
 
-		
 		
 		return "product/jejugamgyulDetail";
 	}
@@ -111,13 +105,12 @@ public class ProductController {
 
 		// sellerVO 안에 consumerId가 없음
 		HttpSession session = req.getSession(false);
-		if (session != null && (int) session.getAttribute("userType") == 1) { // 구매자
+		if (null != session   && null != session.getAttribute("id")) { // 구매자
 			int consumerId = (int) session.getAttribute("id"); // 구매자의 아이디
 			bookmarkVO.setConsumerId(consumerId);
-			SellerVO selectFarmDetail = sellerDAO.selectFarmDetail(sellerId);
-			System.out.println("selectFarmDetail" + selectFarmDetail);
-			model.addAttribute("selectFarmDetail", selectFarmDetail);
 		}
+		SellerVO selectFarmDetail = sellerDAO.selectFarmDetail(sellerId);
+		model.addAttribute("selectFarmDetail", selectFarmDetail);
 
 		return "product/farmDetail";
 	}
@@ -131,13 +124,13 @@ public class ProductController {
 		// TODO 세션에서 추출할것!!
 
 		HttpSession session = req.getSession(false);
-		if (session != null && (int) session.getAttribute("userType") == 1) {
+		if (null != session   && null != session.getAttribute("id")) {
 			int consumerId = (int) session.getAttribute("id");
 			bookmarkVO.setConsumerId(consumerId);
 
-			List<BookmarkVO> selectBookMarkList = bookmarkDAO.selectBookMarkList(bookmarkVO);
-			model.addAttribute("selectBookMarkList", selectBookMarkList);
 		}
+		List<BookmarkVO> selectBookMarkList = bookmarkDAO.selectBookMarkList(bookmarkVO);
+		model.addAttribute("selectBookMarkList", selectBookMarkList);
 
 		return "bookmark/bookmark";
 	}
@@ -170,9 +163,9 @@ public class ProductController {
 		if (session != null && (int) session.getAttribute("userType") == 1) {
 			int consumerId = (int) session.getAttribute("id");
 			param.setConsumerId(consumerId);
-			List<CartVO> selectcartList = cartService.selectcartList(param);
-			model.addAttribute("selectcartList", selectcartList);
 		}
+		List<CartVO> selectcartList = cartService.selectcartList(param);
+		model.addAttribute("selectcartList", selectcartList);
 
 		return "cart/cartPage";
 	}
