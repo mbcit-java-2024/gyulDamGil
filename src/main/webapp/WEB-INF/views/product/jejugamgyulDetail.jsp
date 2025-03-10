@@ -238,7 +238,7 @@ function deleteBookmarkProduct(button) {
 										<div class="buttons">
 										<c:choose>
 										<c:when test="${productDetail.bookMarkCnt == 0}">
-									<button type="button" class="favorite-btn" onclick="addToBookmarkProduct(this)">❤️ 좋아요${productDetail.bookMarkCnt}</button>
+									<button type="button" class="favorite-btn" onclick="addToBookmarkProduct(this)">❤️ 좋아요</button>
 										</c:when>
 										<c:when test="${productDetail.bookMarkCnt != 0}">
 										<%-- <c:otherwise test="${productDetail.bookMarkCnt != 0}"> --%>

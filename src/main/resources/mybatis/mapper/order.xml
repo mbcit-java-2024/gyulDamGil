@@ -39,7 +39,7 @@
 		select count(*) from `order` where consumerId = ${id}
 	</select>
 	
-	<insert id="insertOrder" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insertOrder" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="orderId">
 		INSERT INTO `order`
 		(consumerId, sellerId, productId, count, orderDate, totalPrice, price, status)
 		select a.consumerId, b.sellerId, a.productId, a.count, now() as orderDate, a.totalPrice, a.price, '0' status 

@@ -53,18 +53,18 @@ public class OrderService {
 //	        	System.out.println("cartId: " + param.get("id") ); // 카트아이디 // 3     // 4
 	        	cnt1 = orderDAO.insertOrder(param); // 카트 1건 읽어서 오더에 인서트, 오더아이디 리턴받음
 	        	if (cnt1 != 1) { // 정상 작동 x
-	        		cnt1 = orderDAO.insertOrder(param); // 카트 1건 읽어서 오더에 인서트, 오더아이디 리턴받음
+//	        		cnt1 = orderDAO.insertOrder(param); // 카트 1건 읽어서 오더에 인서트, 오더아이디 리턴받음
 	        		continue;
 	        	} else { // 정상 작동 시 실행해야하는 실행문들
 	        		resultCnt++;
 	        		System.out.println("orderIds" + param.get("orderId"));
 	        		if (orderIds.equals("")) {
-	        			orderIds = orderIds + param.get("id");
+	        			orderIds = orderIds + param.get("orderId");
 	        			System.out.println("orderIds" + param.get("orderId"));
 	        			System.out.println("orderIds" + param.get("orderIds"));
 	        		}
 	        		else {
-	        			orderIds = orderIds + ',' + param.get("id");
+	        			orderIds = orderIds + ',' + param.get("orderId");
 	        		} 
 	        		cartDAO.deleteCartItems(param);
 	        		

@@ -46,23 +46,23 @@ public class CartController {
 		if (session != null && (int) session.getAttribute("userType") == 1) {
 			int consumerId = (int) session.getAttribute("id");
 			cartVo.setConsumerId(consumerId);
-		}
-		
-		resultMap.put("code", "0");// 성공여부 0:성공, 그외:실패 
-		resultMap.put("message", "");// 에러메세지
-		
-		try {
-			resultCnt = cartService.insert(cartVo); 
-			resultMap.put("resultCnt", resultCnt); 	
-			if (0 == resultCnt) {			
+			resultMap.put("code", "0");// 성공여부 0:성공, 그외:실패 
+			resultMap.put("message", "");// 에러메세지
+			
+			try {
+				resultCnt = cartService.insert(cartVo); 
+				resultMap.put("resultCnt", resultCnt); 	
+				if (0 == resultCnt) {			
+					resultMap.put("code", "-1");// 성공여부 0:성공, 그외:실패 
+					resultMap.put("message", "등록된 자료가 없습니다.");// 에러메세지
+				}
+			} catch(Exception e) {			 
 				resultMap.put("code", "-1");// 성공여부 0:성공, 그외:실패 
-				resultMap.put("message", "등록된 자료가 없습니다.");// 에러메세지
+				resultMap.put("message", e.getMessage());// 에러메세지 
+				resultMap.put("resultCnt", resultCnt);
 			}
-		} catch(Exception e) {			 
-			resultMap.put("code", "-1");// 성공여부 0:성공, 그외:실패 
-			resultMap.put("message", e.getMessage());// 에러메세지 
-			resultMap.put("resultCnt", resultCnt);
 		}
+		
 
 		return resultMap;
 	}
