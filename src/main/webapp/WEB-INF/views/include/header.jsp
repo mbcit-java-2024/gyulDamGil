@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     function showSection(sectionId) {
         // 모든 섹션 숨기기
@@ -69,10 +69,10 @@ $.ajax({
     beforeSend:function(){
         console.log('selectCartCount:::::::::beforeSend::::::::::::::::::::');
     },
-    success : function(data){ // data = cnt 야 
+    success : function(data){
         console.log('success:::::::::::111::::::::JSON.stringify(data)::::' + JSON.stringify(data));
-        console.log('success:::::::::::111::::::::data.cnt::::' + data.cnt); // 이건 안찍힐거야 undefined 이해됏어??   테스트로 컨트롤러에서 100 내려보자 
-        console.log('success:::::::::::111::::::::cnt::::' + cnt); // 돌려보자 여기서 찍히겠지?? 테스트로 컨트롤러에서 100 내려보자 
+        console.log('success:::::::::::111::::::::data.cnt::::' + data.cnt); 
+        console.log('success:::::::::::111::::::::cnt::::' + cnt); 
         		
         // 2. 디비에서 받아온 값을 cnt 에 담음 
         cnt = data;
