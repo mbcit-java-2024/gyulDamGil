@@ -118,17 +118,17 @@ public class ProductController {
 	@GetMapping("/bookmark")
 	public String favorites(Model model, HttpServletRequest req) {
 		System.out.println("ProductController의 favorites메소드 실행");
-
-		BookmarkVO bookmarkVO = new BookmarkVO();
+		BookmarkVO bookmarkVO = null;
+		int consumerId = 0;
+		try {
+			bookmarkVO = new BookmarkVO();
+			consumerId = (int) req.getSession().getAttribute("id");
+			bookmarkVO.setConsumerId(consumerId);
+		} catch (Exception e) {
+			return "/consumer/login_2";
+		}
 
 		// TODO 세션에서 추출할것!!
-
-		HttpSession session = req.getSession(false);
-		if (null != session   && null != session.getAttribute("id")) {
-			int consumerId = (int) session.getAttribute("id");
-			bookmarkVO.setConsumerId(consumerId);
-
-		}
 		List<BookmarkVO> selectBookMarkList = bookmarkDAO.selectBookMarkList(bookmarkVO);
 		model.addAttribute("selectBookMarkList", selectBookMarkList);
 
@@ -157,17 +157,30 @@ public class ProductController {
 	@GetMapping("/cartPage")
 	public String cartList(Model model, HttpServletRequest req) {
 		System.out.println("ProductController의 cartList메소드 실행");
-		CartVO param = new CartVO();
-		HttpSession session = req.getSession(false);
-		if (null != session   && null != session.getAttribute("id")) {
-			int consumerId = (int) session.getAttribute("id");
-			param.setConsumerId(consumerId);
-		} 
-		List<CartVO> selectcartList = cartService.selectcartList(param);
+		
+		CartVO cartVO = null;
+		int consumerId = 0;
+		
+		try {
+			cartVO = new CartVO();
+			consumerId = (int) req.getSession().getAttribute("id");
+			cartVO.setConsumerId(consumerId);
+		} catch (Exception e) {
+			return "/consumer/login_2";
+		}
+		
+		List<CartVO> selectcartList = cartService.selectcartList(cartVO);
 		model.addAttribute("selectcartList", selectcartList);
 
 		return "cart/cartPage";
 	}
+	
+//	CartVO param = new CartVO();
+//	HttpSession session = req.getSession(false);
+//	if (null != session   && null != session.getAttribute("id")) {
+//		int consumerId = (int) session.getAttribute("id");
+//		param.setConsumerId(consumerId);
+//	} 
 
 	@PostMapping("/orderPage")
 	public String orderPage(@RequestParam String cartIds, Model model, HttpServletRequest request) {

@@ -21,7 +21,7 @@
 	        <tr style="background-color:orange">
 	            <th style="width:100px">주문 ID</th>
 	            <th style="width:70px">상품 ID</th>
-	            <th style="width:70px">판매자</th>
+	            <th style="width:100px">판매자</th>
 	            <th style="width:50px">수량</th>
 	            <th align="right" style="width:100px">총 가격</th>
 	            <th style="width:250px">주문 날짜</th>
@@ -35,7 +35,7 @@
             <tr>
                 <td>${order.id}</td>
                 <td>${order.productId}</td>
-                <td>${order.sellerId}</td>
+                <td>${order.farmName}</td>
                 <td>${order.count}</td>
                 <td>${order.totalPrice}원</td>
                 <td>

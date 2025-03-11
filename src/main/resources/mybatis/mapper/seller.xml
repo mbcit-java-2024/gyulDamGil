@@ -18,6 +18,10 @@
     	select count(*) from review where sellerId = ${id}
     </select>
     
+    <select id="selectFarmName" parameterType="int" resultType="String">
+    	select farmName from seller where id = ${id}
+    </select>
+    
     <!-- 수빈 -->
     <select id="selectFarmDetail" resultType="SellerVO">
 		SELECT

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.origin.SystemEnvironmentOrigin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,6 +69,10 @@ public class ConsumerController {
 		hmap.put("id", consumerId);
 		System.out.println((ArrayList<OrderVO>) orderDAO.selectOrderListForC(hmap));
 		orderList.setOrderList((ArrayList<OrderVO>) orderDAO.selectOrderListForC(hmap));
+		for (int i = 0; i < orderList.getOrderList().size(); i++) {
+			orderList.getOrderList().get(i).setFarmName(sellerDAO.selectFarmName(orderList.getOrderList().get(i).getSellerId()));
+//			System.out.println("테스트용 프린트 !!! : " + orderList.getOrderList().get(i));
+		}
 		model.addAttribute("orderList", orderList);
 		model.addAttribute("currentPage", currentPage);
 		return "/consumer/myOrder5";
