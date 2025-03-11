@@ -10,7 +10,7 @@
 <%@ include file="../include/header.jsp" %>
 </head>
 <body>
-<%
+<%        
 	session.setAttribute("sellerId", 1);
 //	out.println(request.getSession().getAttribute("sellerId"));
 %>
