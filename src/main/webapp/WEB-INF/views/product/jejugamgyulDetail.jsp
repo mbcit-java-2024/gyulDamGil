@@ -42,7 +42,8 @@ function addToBookmarkProduct(button) {
             		
                 $(button).toggleClass('liked'); // 색칠 처리 
             } else {
-                alert(data.message ? data.message : '알 수 없는 오류');
+                //alert(data.message ? data.message : '알 수 없는 오류');
+                location.href='/login/1';
             }
         },
         error: function(request, status, error) {
@@ -74,7 +75,7 @@ function deleteBookmarkProduct(button) {
                 location.reload();
                 // 온클릭 이벤트 변경 추가 
             } else {
-                alert(data.message ? data.message : '알 수 없는 오류');
+            	location.href='/login/1';
             }
         },
         error: function(request, status, error) {
