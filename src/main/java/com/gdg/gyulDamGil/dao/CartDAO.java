@@ -21,4 +21,5 @@ public interface CartDAO {
 	public ConsumerVO selectConsumerList(int consumerId);
 	public CartVO selectById(int id);
 	public void deleteCartItems(Map<String, Object> param);
+	public int selectCartCount(int consumerId);
 }

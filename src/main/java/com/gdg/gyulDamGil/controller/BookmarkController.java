@@ -156,7 +156,13 @@ public class BookmarkController {
 
 //			}
 
+		}	else { 
+			resultMap.put("code", "-1");// 성공여부 0:성공, 그외:실패
+			resultMap.put("message", "로그인하십시오.");// 에러메세지
+//			resultMap.put("resultCnt", resultCnt);
+			
 		}
+
 
 		return resultMap;
 	}

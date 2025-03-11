@@ -51,6 +51,60 @@
     function toggleUserMenu() {
         document.getElementById('user-menu').classList.toggle('hidden');
     }
+    function getCartCount() {
+    	
+    	// 1. 여기에 장바구니 개수 셀렉해오는 레스트컨트롤러 메소드 콜하는 부분 추가
+    	// 로그인안하면 0
+let cnt = 0; // 1. 0으로 초기화 -> .text() 하면 숫자 가져옴 
+let param = {};
+
+console.log('getCartCount:::::::::::::cnt::1:' + cnt); 
+
+$.ajax({
+    url : '/selectCartCount',
+    type : 'POST', 
+    dataType : "json",
+    contentType:"application/json",
+    data : JSON.stringify(param),
+    beforeSend:function(){
+        console.log('selectCartCount:::::::::beforeSend::::::::::::::::::::');
+    },
+    success : function(data){ // data = cnt 야 
+        console.log('success:::::::::::111::::::::JSON.stringify(data)::::' + JSON.stringify(data));
+        console.log('success:::::::::::111::::::::data.cnt::::' + data.cnt); // 이건 안찍힐거야 undefined 이해됏어??   테스트로 컨트롤러에서 100 내려보자 
+        console.log('success:::::::::::111::::::::cnt::::' + cnt); // 돌려보자 여기서 찍히겠지?? 테스트로 컨트롤러에서 100 내려보자 
+        		
+        // 2. 디비에서 받아온 값을 cnt 에 담음 
+        cnt = data;
+        /* if ('0' == data.code) {
+        	getCartCount();
+            if (!confirm($('input[name="title"]').val() + '상품이' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
+            else {
+                location.href = '/cartPage';
+            }
+        } else {
+        	if (null != data.message) {
+                alert(data.message);
+            }
+            else {
+                alert('알 수 없는 에러');
+            }
+        } */
+    },
+    error : function(request, status, error){
+        console.log('responseText::::::::::::::::::::::::'+request.responseText);
+    },
+    complete:function(){
+
+		console.log('getCartCount:::::::::::::cnt:2::' + cnt);
+    	$('#spanCartCount').text(cnt);//  
+    	// cnt = Number(cnt) + 1; // 51
+    	
+    	 
+    }
+});
+}
+
    </script>
 
 <!-- Top Banner -->
@@ -98,7 +152,8 @@
 						<svg onclick="location.href='/cartPage'" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
-						<span class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+						<span id="spanCartCount"
+						class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
 					</button>
 				</div>
 			</div>
@@ -225,5 +280,7 @@
 			class="block px-4 py-2 hover:bg-orange-50">로그아웃</a>
 	</c:if>
 </div>
-
+<script>
+        getCartCount(); // 헤더 포함된 페이지들이 로드될때 이 메소드 실행 그러고 나서 버튼 누르는 부분에 이걸 넣으면 숫자가 바뀜
+        </script>
 </head>

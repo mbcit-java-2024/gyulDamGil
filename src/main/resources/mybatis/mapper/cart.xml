@@ -57,6 +57,12 @@
 	<delete id="deleteCartItems" parameterType="java.util.HashMap">
 		delete from cart where id = #{id} 
 	</delete>
+	<select id="selectCartCount" resultType="int">  
+		SELECT COUNT(*) 
+		FROM cart
+		WHERE consumerId = #{consumerId}
+
+	</select>
 	
 	
 <!--

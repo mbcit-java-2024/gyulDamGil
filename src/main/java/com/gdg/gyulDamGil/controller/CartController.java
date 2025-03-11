@@ -43,7 +43,7 @@ public class CartController {
 
 		// TODO 세션에서 추출할것!!
 		HttpSession session = req.getSession(false);
-		if (session != null && (int) session.getAttribute("userType") == 1) {
+		if (null != session   && null != session.getAttribute("id")) {
 			int consumerId = (int) session.getAttribute("id");
 			cartVo.setConsumerId(consumerId);
 			resultMap.put("code", "0");// 성공여부 0:성공, 그외:실패 
@@ -61,7 +61,13 @@ public class CartController {
 				resultMap.put("message", e.getMessage());// 에러메세지 
 				resultMap.put("resultCnt", resultCnt);
 			}
+		}  else { 
+			resultMap.put("code", "-1");// 성공여부 0:성공, 그외:실패
+			resultMap.put("message", "로그인하십시오.");// 에러메세지
+//			resultMap.put("resultCnt", resultCnt);
+			
 		}
+		
 		
 
 		return resultMap;
@@ -145,19 +151,23 @@ public class CartController {
 	}
 	
 
-	// 1. 여기에 장바구니 개수 가져오는 메소드 추가 
-//	@GetMapping("/selectcartcount")
-//	public int selectcartcount(Model model, HttpServletRequest req) {
-//		// 장바구니 건수 조회 쿼리 
-//		int cnt = 0; // 로그인안했을땐 0
-//		
-//
-//		if (null != session   && null != session.getAttribute("id")) {
-//			cnt = dao.selectcartcount(컨슈머아이디); // 디비 조회 
-//		}
-//		
-//		return cnt;
-//	}
+	@RequestMapping(value="/selectCartCount", method=RequestMethod.POST) //, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public int selectCartCount(Model model, HttpServletRequest req) {
+		System.out.println("CartController클래스의 selectCartCount메소드 실행");
+		// 장바구니 건수 조회 쿼리 
+		int cnt = 0; // 로그인안했을땐 0
+		
+		HttpSession session = req.getSession(false);
+		if (null != session   && null != session.getAttribute("id")) {
+			int consumerId = (int) session.getAttribute("id");
+			cnt = cartService.selectCartCount(consumerId); 
+			System.out.println("CartController클래스의 selectCartCount메소드 실행::::1::::cnt="+cnt);
+		}
+		System.out.println("CartController클래스의 selectCartCount메소드 실행::::2::::cnt="+cnt);
+		
+		return cnt;
+	}
+
 	
 	
 	

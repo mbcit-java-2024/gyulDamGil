@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>귤담길 - 입점농가</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <jsp:include page="../include/header.jsp"/>
 </head>
 <body>

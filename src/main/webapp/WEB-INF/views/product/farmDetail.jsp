@@ -113,16 +113,9 @@ function addToBookmarkFarm(button) {
             console.log('success::::::::::::' + JSON.stringify(data));
             
             if (data.code === '0') {
-            	if (!confirm('농장이 즐겨찾기에 추가되었습니다. \n즐겨찾기 상세보기 페이지로 이동하시겠습니까?')) {
+            	alert('상품이 즐겨찾기에 추가되었습니다')
 	                location.reload();
-            		
-            	} 
-            	else {
-                    location.href = '/bookmark';
-                }
-                //alert('상품이 즐겨찾기에 추가되었습니다.');
                 $(button).toggleClass('liked'); // 색칠 처리 
-                // 온클릭 이벤트 변경 추가 
             } else {
                 alert(data.message ? data.message : '알 수 없는 오류');
             }

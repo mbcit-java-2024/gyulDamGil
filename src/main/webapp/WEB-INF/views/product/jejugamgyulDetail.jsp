@@ -37,14 +37,9 @@ function addToBookmarkProduct(button) {
             console.log('success::::::::::::' + JSON.stringify(data));
             
             if (data.code === '0') {
-            	if (!confirm('상품이 즐겨찾기에 추가되었습니다. \n즐겨찾기 상세보기 페이지로 이동하시겠습니까?')) {
+            	alert('상품이 즐겨찾기에 추가되었습니다')
 	                location.reload();
             		
-            	} 
-            	else {
-                    location.href = '/bookmark';
-                }
-            	//alert('상품이 즐겨찾기에 추가되었습니다.');
                 $(button).toggleClass('liked'); // 색칠 처리 
             } else {
                 alert(data.message ? data.message : '알 수 없는 오류');
@@ -137,6 +132,7 @@ function deleteBookmarkProduct(button) {
             success : function(data){
                 console.log('success:::::::::::111::::::::::::' + JSON.stringify(data));
                 if ('0' == data.code) {
+                	getCartCount();
                     if (!confirm($('input[name="title"]').val() + '상품이' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
                     else {
                         location.href = '/cartPage';
