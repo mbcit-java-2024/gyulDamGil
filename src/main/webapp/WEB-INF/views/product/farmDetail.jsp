@@ -236,17 +236,6 @@ function deleteBookmarkFarm(button) {
 								<strong>리뷰 수:</strong> ${farmDetail.reviewCount}
 							</div>
 
-							<div class="product-section">
-								<strong>상태:</strong>
-								<c:choose>
-									<c:when test="${farmDetail.status == 1}">
-										<span class="status-active">활성</span>
-									</c:when>
-									<c:otherwise>
-										<span class="status-inactive">비활성</span>
-									</c:otherwise>
-								</c:choose>
-							</div>
 
 							<div class="product-section">
 								<strong>가입일:</strong>

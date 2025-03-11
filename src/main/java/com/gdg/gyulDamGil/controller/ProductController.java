@@ -158,12 +158,11 @@ public class ProductController {
 	public String cartList(Model model, HttpServletRequest req) {
 		System.out.println("ProductController의 cartList메소드 실행");
 		CartVO param = new CartVO();
-
 		HttpSession session = req.getSession(false);
-		if (session != null && (int) session.getAttribute("userType") == 1) {
+		if (null != session   && null != session.getAttribute("id")) {
 			int consumerId = (int) session.getAttribute("id");
 			param.setConsumerId(consumerId);
-		}
+		} 
 		List<CartVO> selectcartList = cartService.selectcartList(param);
 		model.addAttribute("selectcartList", selectcartList);
 

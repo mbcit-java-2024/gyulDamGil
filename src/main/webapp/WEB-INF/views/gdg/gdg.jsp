@@ -5,7 +5,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
 <title>귤담길 - 홈</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <jsp:include page="../include/header.jsp"/>  
 </head>
