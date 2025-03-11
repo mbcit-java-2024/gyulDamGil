@@ -32,7 +32,7 @@
     <div>
     <form action="searchOK" method="get">
         <input type="text" name="title" placeholder="상품명 검색">
-        <input type="hidden" name="categoryId" value="0"> <!-- 기본 값은 0으로 설정 -->
+        <input type="hidden" name="categoryId" value="0">
         <button type="submit">검색</button>
     </form>
 	</div>

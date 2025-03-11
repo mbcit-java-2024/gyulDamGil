@@ -8,7 +8,6 @@
     <meta charset="UTF-8">
     <title>검색 결과</title>
     <style>
-        /* 스타일을 ul과 li로 변환 */
         .product-list {
             list-style-type: none;
             padding: 0;

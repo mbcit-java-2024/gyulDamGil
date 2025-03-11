@@ -109,7 +109,6 @@
 		limit #{startNo}, #{pageSize}
 	</select>
 		
-	<!-- insert, update, delete -->
  	<insert id="insert" parameterType="ProductVO">
 		insert into product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate, farmName, status)
 			values (#{sellerId}, #{categoryId}, #{title}, #{price}, #{description}, #{stock}, #{mainImageUrl}, now(), #{farmName},#{status})

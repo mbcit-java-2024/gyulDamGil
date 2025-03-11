@@ -42,6 +42,6 @@ public class SearchController {
 		// 검색 결과를 모델에 추가하여 JSP로 전달
 		model.addAttribute("searchResults", searchResults);
 
-		return "/search/searchResult";  // 검색 결과 페이지로 이동
+		return "/search/searchResult";  
 	}
 }
