@@ -173,7 +173,7 @@ $.ajax({
 						귤담길 소개</button>
 				</li>
 				<li>
-					<button id="tab-shop" onclick="location.href='/jejugamgyulList/1'"
+					<button id="tab-shop" onclick="location.href='/jejugamgyulList/0'"
 						class="px-4 py-2 font-medium border-b-2 border-orange-500 hover:text-orange-500">
 						쇼핑</button>
 				</li>
