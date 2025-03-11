@@ -30,7 +30,7 @@
 }
 </style>
 
-<body class="bg-gray-50">
+<body class="bg-white">
 	<div class="min-h-screen">
 		<%@include file="../include/header.jsp"%>
 
@@ -49,7 +49,7 @@
 
 						<c:forEach var="vo" items="${selectJejuGamgyulList}">
 						    <div class="bg-white rounded-lg shadow-md p-4">
-						        <div class="h-48 bg-gray-200 rounded-lg mb-4 flex justify-center items-center overflow-hidden"
+						        <div class="h-48 bg-white rounded-lg mb-4 flex justify-center items-center overflow-hidden"
 						             onclick="location.href='/jejugamgyulDetail/${vo.id }'">
 						            <img class="product-image" src="${vo.mainImageUrl}" alt="상품 이미지">
 						        </div>
