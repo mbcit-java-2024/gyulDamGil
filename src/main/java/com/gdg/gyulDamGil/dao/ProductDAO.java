@@ -39,5 +39,8 @@ public interface ProductDAO {
 	void delete(int id);
 	int selectCountByCategoryId(int cid);
 	
+// 용훈
+	List<ProductVO> searchByTitle(String title);
+	
 	
 }

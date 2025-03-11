@@ -36,6 +36,10 @@
 		update product set stock = stock - ${count} where id = #{productId}
 	</update>
 	
+	<select id="searchByTitle" parameterType="string" resultType="com.gdg.gyulDamGil.vo.ProductVO">
+    	select * from product where title like concat('%', #{title}, '%')
+	</select>
+	
 	<!--
 	재성: 주석처리 stock 을 두번 처리함 / 위의 minusStock 메소드와 같은 일을 실행함
 	<update id="updateProduct" parameterType="java.util.HashMap">
