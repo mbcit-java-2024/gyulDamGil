@@ -114,12 +114,14 @@
 		</dependency>
 		
 		<!-- 자동 재실행 devtools 의존성 -->
+		<!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		-->
 		
 	</dependencies>
 
