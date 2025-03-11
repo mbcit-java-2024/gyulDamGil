@@ -199,7 +199,6 @@ function deleteBookmarkFarm(button) {
 		<!-- Shop Section -->
 		<div id="section-shop" class="container mx-auto px-4 py-8">
 			<div class="flex flex-col md:flex-row gap-8">
-				<%@include file="../include/menu.jsp"%>
 
 				<!-- Products Grid -->
 				<div class="flex-1">
