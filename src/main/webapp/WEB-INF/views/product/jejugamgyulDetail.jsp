@@ -139,12 +139,7 @@ function deleteBookmarkProduct(button) {
                         location.href = '/cartPage';
                     }
                 } else {
-                    if (null != data.message) {
-                        alert(data.message);
-                    }
-                    else {
-                        alert('알 수 없는 에러');
-                    }
+                	location.href='/login/1';
                 }
             },
             error : function(request, status, error){
@@ -235,11 +230,11 @@ function deleteBookmarkProduct(button) {
 										<div class="buttons">
 										<c:choose>
 										<c:when test="${productDetail.bookMarkCnt == 0}">
-									<button type="button" class="favorite-btn" onclick="addToBookmarkProduct(this)">❤️ 좋아요</button>
+									<button type="button" class="favorite-btn" onclick="addToBookmarkProduct(this)">❤️ 즐겨찾기</button>
 										</c:when>
 										<c:when test="${productDetail.bookMarkCnt != 0}">
 										<%-- <c:otherwise test="${productDetail.bookMarkCnt != 0}"> --%>
-									<button type="button" class="favorite-btn liked" onclick="deleteBookmarkProduct(this)">❤️ 좋아요</button>
+									<button type="button" class="favorite-btn liked" onclick="deleteBookmarkProduct(this)">❤️ 즐겨찾기</button>
 										<%-- </c:otherwise> --%>
 										</c:when>
 										</c:choose>
