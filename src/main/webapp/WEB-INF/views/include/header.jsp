@@ -135,13 +135,16 @@ $.ajax({
 
 			<div class="flex items-center space-x-4">
 				<div class="relative hidden md:block">
-					<input type="text" placeholder="상품 또는 농가를 검색하세요"
+				 <form action="searchOK" method="get" class="center">
+			        <input type="hidden" name="categoryId" value="0">
+					<input type="text" name="title" placeholder="상품 또는 농가를 검색하세요"
 						class="w-64 px-4 py-1 border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
-					<button class="absolute right-3 top-1/2 transform -translate-y-1/2">
+					<button type="submit" class="absolute right-3 top-1/2 transform -translate-y-1/2">
 						<svg class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
 					</button>
+			    </form>
 				</div>
 				<div class="flex items-center space-x-3">
 					<button onclick="toggleUserMenu()"
@@ -183,7 +186,7 @@ $.ajax({
 				<li>
 					<button id="tab-farms" onclick="location.href='/farms'"
 						class="px-4 py-2 font-medium border-b-2 border-transparent hover:text-orange-500">
-						입점 농가</button>
+						귤농가들</button>
 				</li>
 				<c:if test="${sessionScope.userType == 1}">
 					<li><a onclick="location.href='/myOrder'"
@@ -220,11 +223,7 @@ $.ajax({
 			<li><a
 				href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
 				onclick="location.href='/jejugamgyulList/1'"
-				class="block hover:text-orange-500">쇼핑</a></li>
-			<li><a
-				href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
-				onclick="showSection(&#39;section-reservation&#39;)"
-				class="block hover:text-orange-500">체험예약</a></li>
+				class="block hover:text-orange-500">귤담기</a></li>
 			<li><a
 				href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
 				href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"

@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>검색 결과</title>
+<meta charset="UTF-8">
+<title>검색 결과</title>
     <style>
         table {
             width: 100%;
@@ -20,14 +20,15 @@
             text-decoration: none;
             color: black;
         }
-        
+      	.center {
+    		display: flex;
+    		justify-content: center;
+    	}
     </style>
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-    <jsp:include page="../include/header.jsp"/>
 </head>
 <body>
 
-    <h2>상품 검색</h2>
+    <h2 class="center">상품 검색</h2>
 
     <div>
     <form action="searchOK" method="get">
@@ -38,5 +39,4 @@
 	</div>
 
 </body>
-<jsp:include page="../include/footer.jsp"/>
 </html>

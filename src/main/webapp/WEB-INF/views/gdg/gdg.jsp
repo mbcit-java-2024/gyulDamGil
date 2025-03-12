@@ -5,70 +5,111 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
 <title>귤담길</title>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <jsp:include page="../include/header.jsp"/>
 <style type="text/css">
+
 	body {
-	  background-image: url('https://i.imgur.com/YCMge5r.png'); /* 배경 이미지 URL */
-	  background-size: cover; /* 배경 이미지를 화면 크기에 맞게 조정 */
-	  background-position: center; /* 배경 이미지를 중앙에 배치 */
-	  background-attachment: fixed; /* 스크롤 시 배경 이미지가 고정되도록 설정 (선택사항) */
-	  height: 100%; /* body의 높이를 화면 높이로 설정 */
-	}
-	    .content {
+      margin: 0;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      min-height: 100%; /* 최소 높이를 100%로 설정 */
-    }
+      background-image: url('https://i.imgur.com/YCMge5r.png');
+      background-size: cover;
+      background-position: center;
 
-    .main-content {
-      flex: 1; /* main-content가 남은 공간을 차지하게 설정 */
+	}
+	
+	body::before {
+	  content: "";
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background-image: url('https://i.imgur.com/YCMge5r.png'); /* 배경 이미지 */
+	  background-size: cover;
+	  background-position: center;
+	  filter: blur(3px); /* 블러 효과 */
+	  z-index: -1; /* 컨텐츠 뒤로 보내기 */
+	}
+	
+	.image-container {
+      position: relative;
+      height: 650px; /* header와 footer 높이를 제외한 전체 영역 */
     }
-
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
+    
+   	.center {
+  		display: flex;
+  		justify-content: center;
+  	}
+  	
+  	  .search-bar {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #F66F0A; 
+      padding: 10px 20px;
+      border-radius: 30px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      width: 50%;
+    }
+    
+  	  .search-bar-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white; 
+      border-color: #F66F0A;
+      border-width: 30px;
+      border-style: solid;
       padding: 10px;
+      border-radius: 80px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      width: 45%;
     }
+
+    .search-bar-inner input {
+      border-radius: 80px;
+      width: 90%;
+      padding: 10px;
+      border: none;
+      font-size: 24px;
+    }
+  	
+  	.search-bar-inner input:focus {
+    outline: none;  /* 기본 브라우저 아웃라인 제거 */
+    border: none;   /* 테두리 제거 */
+	}
+	
+	footer {
+	  margin-top: auto; /* footer를 아래로 밀어줍니다. */
+	}
 	
 </style>
   
 </head>
 <body>
-	<!-- <div id="section-home" class="container mx-auto px-4 py-8"> -->
-<!-- 		<section class="bg-orange-100 rounded-xl p-8 mb-8">
-			<h2 class="text-4xl font-bold mb-4">
-				제주 농가와 함께하는<br>신선한 귤 직거래
-			</h2>
-			<p class="text-lg mb-8">맛있는 제주 귤을 직접 만나보세요</p>
-			<button
-				class="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors">
-				지금 구매하기
-			</button>
-		</section>
-		
-		<section class="mb-12">
-			<h3 class="text-2xl font-bold mb-6">인기 상품</h3>
-			<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-				<div class="bg-white rounded-lg shadow-md p-4">
-					<div class="h-48 bg-gray-200 rounded-lg mb-4"></div>
-					<h4 class="font-semibold mb-2">제주 노지 감귤</h4>
-					<p class="text-orange-500 font-bold">15,000원</p>
-				</div>
-			</div>
-		</section> -->
-		
-	<!-- 	<img alt="background_image" src="https://i.imgur.com/YCMge5r.png"> -->
-<!-- 	</div> -->
 
-	<div>
-	
-	
-	
-	</div>
+  <div class="image-container">
+	<%-- <jsp:include page="../search/search.jsp"></jsp:include> --%>
+    <!-- <h2 class="center">상품 검색</h2> -->
+
+    <form action="searchOK" method="get" class="center">
+    <div class="search-bar-inner center">
+        <input type="hidden" name="categoryId" value="0">
+        <input type="text" name="title" placeholder="찾으시는 상품이 있나요?">
+        <button type="submit" style="width: 30px;"><img alt="상품검색" src="/images/gdg/search.png"> </button>
+    </div>
+    </form>
+  </div>
+
 	
 </body>
-<jsp:include page="../include/footer.jsp"/>
+<footer>
+	<jsp:include page="../include/footer.jsp"/>
+</footer>
 </html>

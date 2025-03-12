@@ -1,6 +1,6 @@
 # 테이블 초기화 
-DELETE FROM cosnumer;
-ALTER TABLE cosnumer AUTO_INCREMENT = 1;
+DELETE FROM consumer;
+ALTER TABLE consumer AUTO_INCREMENT = 1;
 DELETE FROM seller;
 ALTER TABLE seller AUTO_INCREMENT = 1;
 DELETE FROM product;
@@ -25,7 +25,7 @@ VALUES ('samjang', '8888', '삼장법사', 'samjang@gmail.com', '01088888888', '
 INSERT INTO consumer (userId, PASSWORD, NAME, email, phone, address, detailAddress, createDate)
 VALUES ('gildong', '1111', '홍길동', 'gildong@gmail.com', '01011111111', '서울시 어딘가 11-1', '101동 101호', NOW());
 INSERT INTO consumer (userId, PASSWORD, NAME, email, phone, address, detailAddress, createDate)
-VALUES ('jilsan', '2222', '장길산', 'jilsan@gmail.com', '01022222222', '경기도 어딘가 22-2', '202동 202호', NOW());
+VALUES ('gilsan', '2222', '장길산', 'jilsan@gmail.com', '01022222222', '경기도 어딘가 22-2', '202동 202호', NOW());
 INSERT INTO consumer (userId, PASSWORD, NAME, email, phone, address, detailAddress, createDate)
 VALUES ('lim', '3333', '임꺽정', 'lim@gmail.com', '01033333333', '강원도 어딘가 33-3', '303동 303호', NOW());
 INSERT INTO consumer (userId, PASSWORD, NAME, email, phone, address, detailAddress, createDate)

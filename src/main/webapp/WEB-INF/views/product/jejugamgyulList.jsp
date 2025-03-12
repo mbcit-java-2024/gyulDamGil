@@ -45,7 +45,7 @@
 					<div class="flex justify-between items-center mb-6">
 						<h2 class="text-2xl font-bold">
 						<%
-							String[] category = {"제주감귤","온주밀감","한라봉", "천혜향","레드향",	"청견", "황금향", "카라향", "진지향", "세토카"};
+							String[] category = {"제주감귤","온주밀감","한라봉", "천혜향","레드향",	"청견", "황금향", "카라향", "진지향", "세토카","주스", "잼/청", "기타"};
 						int cid = (int) request.getAttribute("categoryId");
 						%>
 						<%=category[cid]%>

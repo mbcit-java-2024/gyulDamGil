@@ -8,9 +8,14 @@
     <meta charset="UTF-8">
     <title>검색 결과</title>
     <style>
+    
+    	.center {
+    		display: flex;
+    		justify-content: center;
+    	}
         .product-list {
             list-style-type: none;
-            padding: 0;
+            display: inline-block;
         }
         .product-item {
             display: flex;
@@ -42,7 +47,8 @@
 </head>
 <body>
 
-    <h2>검색 결과</h2>
+    <h2 class="center">검색 결과</h2>
+	<div class="center">
 
     <c:if test="${not empty message}">
         <script>
@@ -58,12 +64,13 @@
     </div>
 
     <br /><br />
+    </div>
 
+	<div class="center">
     <c:if test="${empty searchResults}">
         <div style="text-align: center;">검색 결과가 없습니다.</div>
     </c:if>
     <c:if test="${not empty searchResults}">
-					
 	    <ul class="product-list">
 	            <c:forEach var="product" items="${searchResults}" >
 	                <li class="product-item">
@@ -125,6 +132,7 @@
 	        </ul>
 	    </c:if>
 
+		</div>				
 </body>
 <jsp:include page="../include/footer.jsp"/>
 </html>
