@@ -16,83 +16,80 @@
 </head>
 <body>
 	
-	<div class="body-align">
-	    <table id="seller-order-table">
-	        <tr style="background-color:orange">
-	            <th style="width:70px">주문ID</th>
-	            <th style="width:120px">상품</th>
-	            <th style="width:100px">판매자</th>
-	            <th style="width:50px">수량</th>
-	            <th align="right" style="width:100px">총 가격</th>
-	            <th style="width:240px">주문 날짜</th>
-	            <th style="width:100px">상태</th>
-	            <th style="width:220px">상태 변경</th>
-	            <th>상세 조회</th>
-	        </tr>
+	<div> <!-- class="body-align" -->
+	    <table style="border-radius: 100px; border: 0px; display: flex; justify-content: center;">
+
         	<c:set var="list" value="${orderList.orderList}"></c:set>
         	<c:if test="${fn:length(list) != 0}">
 	        <c:forEach var="order" items="${list}" varStatus="i">
+            <tr style="height: 200px;">
+                <td style="width: 200px; border-right: 0px; padding: 0px;">
+                	<img class="product-image" src="${order.mainImageUrl}" alt="상품 이미지" style="padding: 0px; height: 100%"/>
+                </td>
+                <td style="text-align: left; width: 500px;">
+                	<div>${order.farmName}</div>
+                	<div>${order.productTitle}</div>
+                	<div>${order.count}개</div>
+                	<div>${order.totalPrice}원</div>
+                	<div style="display: flex">
+                		<c:choose>
+	                        <c:when test="${order.status == 0}">
+	                        	<div style="color: red; font-weight: bold;">주문요청</div>
+	                        </c:when>
+	                        <c:when test="${order.status == 1}">상품준비중</c:when>
+	                        <c:when test="${order.status == 2}">배송중</c:when>
+	                        <c:when test="${order.status == 3}">배송완료</c:when>
+	                        <c:when test="${order.status == 4}">구매확정</c:when>
+	                        <c:when test="${order.status == 5}">주문취소</c:when>
+                   		</c:choose>&nbsp;&nbsp;&nbsp;&nbsp;
+                   		
+                   		<form action="/updateStatus" method="post">
+	                        <input type="hidden" name="id" value="${order.id}">
+	                        <input type="hidden" name="sellerId" value="${order.sellerId}">
+	                        <input type="hidden" name="productId" value="${order.productId}"/>
+	                        <input type="hidden" name="url" value="/myOrder?currentPage=${orderList.currentPage}"/>
+	                        <select name="status">
+		                    <c:if test="${order.status < 2 or order.status == 3}">
+	                            <option 
+	                            	value="4"
+	                            	<c:if test="${order.status == 3}">selected</c:if>
+	                            	<c:if test="${order.status != 3}">disabled="disabled"</c:if>>
+		                            구매확정
+	                            </option>
+	                            <option 
+	                            	value="5" 
+	                            	<c:if test="${order.status == 0 or order.status == 1}">selected</c:if>
+	                            	<c:if test="${order.status > 1}"> disabled="disabled"</c:if>>
+	                            	주문취소
+	                            </option>
+		                    </c:if>
+		                    <c:if test="${order.status == 2 or order.status == 4}">
+		                    	<option
+		                    		selected="selected">
+		                    		변경불가
+		                    	</option>
+		                    </c:if>
+		                    <c:if test="${order.status == 5}">
+		                    	<option
+		                    		selected="selected">
+		                    		취소된 주문입니다.
+		                    	</option>
+		                    </c:if>
+	                        </select>
+		                    <c:if test="${order.status < 2 or order.status == 3}">
+		                    	<button type="submit" >하기</button>
+		                    </c:if>
+                    	</form>
+                	</div>
+                	<div>
+		                <a href="/myOrderDetail/${order.id}/${orderList.currentPage}">주문 상세보기</a>
+		            </div>
+                </td>
+            </tr>
             <tr>
-                <td>${order.id}</td>
-                <td>${order.productTitle}</td>
-                <td>${order.farmName}</td>
-                <td>${order.count}</td>
-                <td>${order.totalPrice}원</td>
-                <td>
-                	<fmt:formatDate value="${order.orderDate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/>
-				</td>
-                <td>
-                    <c:choose>
-                        <c:when test="${order.status == 0}">
-                        	<div style="color: red; font-weight: bold;">주문요청</div>
-                        </c:when>
-                        <c:when test="${order.status == 1}">상품준비중</c:when>
-                        <c:when test="${order.status == 2}">배송중</c:when>
-                        <c:when test="${order.status == 3}">배송완료</c:when>
-                        <c:when test="${order.status == 4}">구매확정</c:when>
-                        <c:when test="${order.status == 5}">주문취소</c:when>
-                    </c:choose>
-                </td>
-                <td>
-                    <form action="/updateStatus" method="post">
-                        <input type="hidden" name="id" value="${order.id}">
-                        <input type="hidden" name="sellerId" value="${order.sellerId}">
-                        <input type="hidden" name="productId" value="${order.productId}"/>
-                        <input type="hidden" name="url" value="/myOrder?currentPage=${orderList.currentPage}"/>
-                        <select name="status">
-	                    <c:if test="${order.status < 2 or order.status == 3}">
-                            <option 
-                            	value="4"
-                            	<c:if test="${order.status == 3}">selected</c:if>
-                            	<c:if test="${order.status != 3}">disabled="disabled"</c:if>>
-	                            구매확정
-                            </option>
-                            <option 
-                            	value="5" 
-                            	<c:if test="${order.status == 0 or order.status == 1}">selected</c:if>
-                            	<c:if test="${order.status > 1}"> disabled="disabled"</c:if>>
-                            	주문취소
-                            </option>
-	                    </c:if>
-	                    <c:if test="${order.status == 2 or order.status == 4}">
-	                    	<option
-	                    		selected="selected">
-	                    		변경불가
-	                    	</option>
-	                    </c:if>
-	                    <c:if test="${order.status == 5}">
-	                    	<option
-	                    		selected="selected">
-	                    		취소된 주문입니다.
-	                    	</option>
-	                    </c:if>
-                        </select>
-                    <c:if test="${order.status < 2 or order.status == 3}">
-                    	<button type="submit" >하기</button>
-                    </c:if>
-                    </form>
-                </td>
-                <td><a href="/myOrderDetail/${order.id}/${orderList.currentPage}">상세 보기</a></td>
+            	<td colspan="2">
+            		<br/><br/>
+            	</td>
             </tr>
 	        </c:forEach>
 		    

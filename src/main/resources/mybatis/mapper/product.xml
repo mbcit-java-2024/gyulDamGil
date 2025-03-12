@@ -71,6 +71,9 @@
 		select title from product where id = ${id}
 	</select>
 	
+	<select id="selectImageById" parameterType="int" resultType="String">
+		select mainImageUrl from product where id = ${id}
+	</select>
 	
 	<!-- 예린 -->	
 	<!-- select Count : 갯수(int)를 가져오는 명령문-->

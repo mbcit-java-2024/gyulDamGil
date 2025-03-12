@@ -19,6 +19,7 @@ public interface ProductDAO {
 	int selectStockById(int id);
 	void updateForSoldOut(int id);
 	String selectTitleById(int id);
+	String selectImageById(int id);
 
 //	수빈
 	List<ProductVO> selectJejuGamgyulList(int categoryId);
