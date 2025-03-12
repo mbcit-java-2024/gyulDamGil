@@ -7,18 +7,17 @@
 
 	<insert id="insertProduct" parameterType="bookmarkVO">
 		INSERT INTO bookmark
-		(id,
+		(
 		sellerId, productId, consumerId)
-		VALUES(#{id}, #{sellerId},
+		VALUES( #{sellerId},
 		#{productId}, #{consumerId})
 	</insert>
-	
-	
+
 	<insert id="insertFarm" parameterType="bookmarkVO">
 		INSERT INTO bookmark
 		(sellerId, consumerId) VALUES(#{sellerId}, #{consumerId})
 	</insert>
-	
+
 	<select id="selectBookMarkList" parameterType="BookmarkVO"
 		resultType="BookmarkVO">
 		SELECT
@@ -27,7 +26,6 @@
 		b.productId,
 		b.consumerId,
 
-		
 		s.userId,
 		s.name,
 		s.email,
@@ -40,7 +38,6 @@
 		s.farmName,
 		s.reviewCount,
 
-		
 		p.title,
 		p.price,
 		p.description,
@@ -57,25 +54,6 @@
 		WHERE b.consumerId = #{consumerId};
 
 	</select>
-	
-	<!-- 상품상세에서 담을때 -->
-	<!-- <update id="updateDetail" parameterType="CartVO"> UPDATE cart SET count 
-		= count + #{count} , totalPrice = totalPrice + #{totalPrice} WHERE id = #{id} 
-		</update> -->
-	<!-- <update id="updateCart" parameterType="CartVO"> UPDATE cart SET count 
-		= #{count} , totalPrice = #{totalPrice} WHERE id = #{id} </update> -->
-	<!-- <select id="selectcartList" parameterType="CartVO" resultType="CartVO"> 
-		select a.id, a.consumerId, a.productId, a.price, a.count, a.totalPrice, b.title, 
-		b.stock, b.mainImageUrl from cart a left join product b on a.productId = 
-		b.id WHERE a.consumerId = #{consumerId} </select> -->
-
-	<!-- <select id="selectConsumerList" parameterType="int" resultType="ConsumerVO"> 
-		select * from consumer where id = #{consumerId} </select> --> 
-
-	<!-- <select id="selectCartListByIds" resultType="CartVO"> select a.id, 
-		a.consumerId, a.productId, a.price, a.count, a.totalPrice, b.title, b.stock, 
-		b.mainImageUrl from cart a left join product b on a.productId = b.id WHERE 
-		a.id in (${cartIds}) </select> -->
 
 	<delete id="deleteProduct" parameterType="bookmarkVO">
 		DELETE FROM bookmark
@@ -88,25 +66,13 @@
 		AND consumerId = #{consumerId};
 	</delete>
 
-	<delete id="bookMarkProductDelete" parameterType="bookmarkVO">
-		delete from bookmark where id = #{id}
+	<delete id="bookMarkProductDelete" parameterType="java.util.HashMap">
+		delete from bookmark where id = #{id} and consumerId = #{consumerId}
 	</delete>
-	<delete id="bookMarkFarmDelete" parameterType="bookmarkVO">
-		delete from bookmark where sellerId = #{sellerId}
+	<delete id="bookMarkFarmDelete" parameterType="java.util.HashMap">
+		delete from bookmark where sellerId = #{sellerId} and consumerId = #{consumerId} AND productId IS NULL;
 	</delete>
 
-	<!-- <delete id="deleteCartItems" parameterType="java.util.HashMap"> delete 
-		from cart where id = #{id} </delete> -->
-
-
-	<!-- <insert id="insert" parameterType="exampleVo"> insert into simplebbs 
-		(idx, name, title, content) values (simplebbs_idx_seq.nextval, #{name}, #{title}, 
-		#{content}) </insert> <select id="selectList" resultType="vo"> select * from 
-		simplebbs order by idx desc </select> <select id="selectByIdx" parameterType="int" 
-		resultType="vo"> select * from simplebbs where idx = #{idx} </select> <update 
-		id="update" parameterType="vo"> update simplebbs set title = #{title}, content 
-		= #{content} where idx = #{idx} </update> <delete id="delete" parameterType="int"> 
-		delete from simplebbs where idx = #{idx} </delete> -->
 
 </mapper>
 

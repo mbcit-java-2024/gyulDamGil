@@ -103,12 +103,21 @@ public class ProductController {
 
 		BookmarkVO bookmarkVO = new BookmarkVO();
 
-		// sellerVO 안에 consumerId가 없음
-		HttpSession session = req.getSession(false);
-		if (null != session   && null != session.getAttribute("id")) { // 구매자
-			int consumerId = (int) session.getAttribute("id"); // 구매자의 아이디
-			bookmarkVO.setConsumerId(consumerId);
-		}
+//		HttpSession session = req.getSession(false);
+//		if (session != null && (int) session.getAttribute("userType") == 1) { 
+//			int consumerId = (int) session.getAttribute("id"); // 구매자의 아이디
+//			bookmarkVO.setConsumerId(consumerId);
+//		}
+		
+//		int consumerId = 0;
+//		try {
+//			bookmarkVO = new BookmarkVO();
+//			consumerId = (int) req.getSession().getAttribute("id");
+//			bookmarkVO.setConsumerId(consumerId);
+//		} catch (Exception e) {
+//			return "/consumer/login_2";
+//		}
+		
 		SellerVO selectFarmDetail = sellerDAO.selectFarmDetail(sellerId);
 		model.addAttribute("selectFarmDetail", selectFarmDetail);
 
@@ -124,32 +133,54 @@ public class ProductController {
 			bookmarkVO = new BookmarkVO();
 			consumerId = (int) req.getSession().getAttribute("id");
 			bookmarkVO.setConsumerId(consumerId);
+			List<BookmarkVO> selectBookMarkList = bookmarkDAO.selectBookMarkList(bookmarkVO);
+			model.addAttribute("selectBookMarkList", selectBookMarkList);
 		} catch (Exception e) {
 			return "/consumer/login_2";
 		}
 
 		// TODO 세션에서 추출할것!!
-		List<BookmarkVO> selectBookMarkList = bookmarkDAO.selectBookMarkList(bookmarkVO);
-		model.addAttribute("selectBookMarkList", selectBookMarkList);
 
 		return "bookmark/bookmark";
 	}
 	
 	@GetMapping("/bookMarkProductDelete/{id}")
-	public String bookMarkProductDelete( @PathVariable("id") int id, Model model) {
+	public String bookMarkProductDelete( @PathVariable("id") int id, Model model, HttpServletRequest req) {
 		System.out.println("ProductController클래스의 bookMarkProductDelete메소드 실행:::::id::::" + id);
+		BookmarkVO bookmarkVO = null;
+		int consumerId = 0;
+		Map<String, Object> param = new HashMap<String, Object>();
+		try {
+			bookmarkVO = new BookmarkVO();
+			consumerId = (int) req.getSession().getAttribute("id");
+			param.put("consumerId", consumerId); 
+		} catch (Exception e) {
+			return "/consumer/login_2";
+		}
 		
-		bookmarkDAO.bookMarkProductDelete(id);
+		param.put("id", id);
+		bookmarkDAO.bookMarkProductDelete(param); 
+		
 		
 		return "redirect:/bookmark";
 	}
 	
 	
 	@GetMapping("/bookMarkFarmDelete/{sellerId}")
-	public String bookMarkFarmDelete( @PathVariable("sellerId") int sellerId, Model model) {
+	public String bookMarkFarmDelete( @PathVariable("sellerId") int sellerId, Model model, HttpServletRequest req) {
 		System.out.println("ProductController클래스의 bookMarkFarmDelete메소드 실행:::::sellerId::::" + sellerId);
-		
-		bookmarkDAO.bookMarkFarmDelete(sellerId);
+		BookmarkVO bookmarkVO = null;
+		int consumerId = 0;
+		Map<String, Object> param = new HashMap<String, Object>();
+		try {
+			bookmarkVO = new BookmarkVO();
+			consumerId = (int) req.getSession().getAttribute("id");
+			param.put("consumerId", consumerId);
+		} catch (Exception e) {
+			return "/consumer/login_2";
+		}
+		param.put("sellerId", sellerId);
+		bookmarkDAO.bookMarkFarmDelete(param); 
 		
 		return "redirect:/bookmark";
 	}
