@@ -333,7 +333,7 @@
                     
                     <c:choose>
                     <c:when test="${empty selectcartList}">
-                            <div class="empty-cart">장바구니가 비어 있습니다. 😢</div>
+                            <div class="empty-cart"><marquee>장바구니가 비어 있습니다. 😢</marquee></div>
                     </c:when>
                     
                     
