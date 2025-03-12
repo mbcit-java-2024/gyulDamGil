@@ -66,6 +66,7 @@ public class ProductController {
 		}
 
 		model.addAttribute("selectJejuGamgyulList", selectJejuGamgyulList);
+		model.addAttribute("categoryId", categoryId);
 		System.out.println(selectJejuGamgyulList);
 
 		return "product/jejugamgyulList";

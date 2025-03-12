@@ -43,7 +43,13 @@
 				<!-- Products Grid -->
 				<div class="flex-1">
 					<div class="flex justify-between items-center mb-6">
-						<h2 class="text-2xl font-bold">전체 상품</h2>
+						<h2 class="text-2xl font-bold">
+						<%
+							String[] category = {"제주감귤","온주밀감","한라봉", "천혜향","레드향",	"청견", "황금향", "카라향", "진지향", "세토카"};
+						int cid = (int) request.getAttribute("categoryId");
+						%>
+						<%=category[cid]%>
+						</h2>
 					</div>
 					<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 

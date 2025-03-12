@@ -4,14 +4,41 @@
 <html>    
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
-<title>귤담길 - 홈</title>
+<title>귤담길</title>
 
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-<jsp:include page="../include/header.jsp"/>  
+<jsp:include page="../include/header.jsp"/>
+<style type="text/css">
+	body {
+	  background-image: url('https://i.imgur.com/YCMge5r.png'); /* 배경 이미지 URL */
+	  background-size: cover; /* 배경 이미지를 화면 크기에 맞게 조정 */
+	  background-position: center; /* 배경 이미지를 중앙에 배치 */
+	  background-attachment: fixed; /* 스크롤 시 배경 이미지가 고정되도록 설정 (선택사항) */
+	  height: 100%; /* body의 높이를 화면 높이로 설정 */
+	}
+	    .content {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%; /* 최소 높이를 100%로 설정 */
+    }
+
+    .main-content {
+      flex: 1; /* main-content가 남은 공간을 차지하게 설정 */
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+	
+</style>
+  
 </head>
 <body>
-	<div id="section-home" class="container mx-auto px-4 py-8">
-		<section class="bg-orange-100 rounded-xl p-8 mb-8">
+	<!-- <div id="section-home" class="container mx-auto px-4 py-8"> -->
+<!-- 		<section class="bg-orange-100 rounded-xl p-8 mb-8">
 			<h2 class="text-4xl font-bold mb-4">
 				제주 농가와 함께하는<br>신선한 귤 직거래
 			</h2>
@@ -31,7 +58,15 @@
 					<p class="text-orange-500 font-bold">15,000원</p>
 				</div>
 			</div>
-		</section>
+		</section> -->
+		
+	<!-- 	<img alt="background_image" src="https://i.imgur.com/YCMge5r.png"> -->
+<!-- 	</div> -->
+
+	<div>
+	
+	
+	
 	</div>
 	
 </body>
