@@ -329,6 +329,15 @@
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-2xl font-bold">장바구니 목록</h2>
                     </div>
+                    
+                    
+                    <c:choose>
+                    <c:when test="${empty selectcartList}">
+                            <div class="empty-cart">장바구니가 비어 있습니다. 😢</div>
+                    </c:when>
+                    
+                    
+                    <c:otherwise>
                     <table>
                         <tr>
                             <th><input type="checkbox" id="checkAll"></th>
@@ -370,8 +379,6 @@
                             </tr>
                         </c:forEach>
                     </table>
-
-                    <!-- 총 결제 금액 표시 -->
                     <div class="total-container">
                         총 결제 금액: <span id="totalPayment">0 원</span>
                     </div>
@@ -381,6 +388,10 @@
                         <button type="button" id="selectOrder">선택 결제</button>
                         <button id="orderAll">전체 주문</button>
                     </div>
+                    </c:otherwise>
+                    </c:choose>
+
+                    <!-- 총 결제 금액 표시 -->
                 </div>
             </div>
         </div>
