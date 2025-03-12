@@ -28,6 +28,8 @@
 .newDate {
 	font-size: 20px;
 	font-weight: bold;
+	width: 800px;
+	margin: auto;
 }
 
 </style>
@@ -42,7 +44,7 @@
 				<fmt:formatDate value="${order.orderDate}" pattern="yyyy년 MM월 dd일" var="orderDate"/>
 				<c:if test="${orderDate != date}">
 					<c:set var="date" value="${orderDate}"/>
-					<div class="newDate p-4">
+					<div class="newDate">
 						${date} 주문<hr/>
 					</div>
 				</c:if> 
