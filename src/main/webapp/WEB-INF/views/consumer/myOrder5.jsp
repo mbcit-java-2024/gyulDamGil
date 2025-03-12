@@ -25,6 +25,11 @@
 	border-radius: 8px;
 }
 
+.newDate {
+	font-size: 20px;
+	font-weight: bold;
+}
+
 </style>
 </head>
 <body>
@@ -32,8 +37,17 @@
 	<div style="justify-content: center; padding-top: 60px;">
 		<c:set var="list" value="${orderList.orderList}"></c:set>
 		<c:if test="${fn:length(list) != 0}">
+		<c:set var="date" value="null"/>
 			<c:forEach var="order" items="${list}" varStatus="i">
-				<div class="bg-white rounded-lg shadow-md p-4" style="display: flex; width: 800px; margin: auto; margin-bottom: 30px;">
+				<fmt:formatDate value="${order.orderDate}" pattern="yyyy년 MM월 dd일" var="orderDate"/>
+				<c:if test="${orderDate != date}">
+					<c:set var="date" value="${orderDate}"/>
+					<div class="newDate p-4">
+						${date} 주문<hr/>
+					</div>
+				</c:if> 
+				<div class="bg-white rounded-lg shadow-md p-4" 
+					style="border-top: 1px solid orange; display: flex; width: 800px; margin: auto; margin-bottom: 30px;">
 					<img class="product-image" src="${order.mainImageUrl}" alt="상품 이미지" style="margin-right: 20px;"/>
 					<div style="width: 300px;">
 						${order.farmName}<br/>
@@ -84,7 +98,7 @@
 							</form>
 							<br />
 						</div>
-						<div style="justify-content: right;">
+						<div>
 							<a href="/myOrderDetail/${order.id}/${orderList.currentPage}">상세보기</a>
 						</div>
 					</div>
