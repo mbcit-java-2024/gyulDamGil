@@ -108,16 +108,17 @@ $.ajax({
    </script>
 
 <!-- Top Banner -->
-<c:if test="${sessionScope.userType != 2}">
 <div class="bg-orange-500 text-white text-sm py-1">
 	<div class="container mx-auto px-4 text-center">
-		<a href="/signIn/2" class="hover:underline">판매자 입점 신청하기 →</a>
+		<c:if test="${sessionScope.userType != 2}">
+			<a href="/signIn/2" class="hover:underline">판매자 입점 신청하기 →</a>
+		</c:if>
+		&nbsp;
 	</div>
 </div>
-</c:if>
 
 <!-- Header -->
-<header class="sticky top-0 z-50 bg-white border-b">
+<header class="top-0 z-50 bg-white border-b">
 	<div class="container mx-auto px-4">
 		<!-- Upper Header -->
 		<div class="flex items-center justify-between py-2 border-b">
@@ -128,7 +129,7 @@ $.ajax({
 					</svg>
 				</button>
 				<h1 class="text-2xl font-bold text-orange-500">
-					<a href="/">귤담길</a>
+					<img alt="귤담길" src="/images/gdg/gdgLogo.png" onclick="location.href='/'" style="width: 120px;">
 				</h1>
 			</div>
 
@@ -177,7 +178,7 @@ $.ajax({
 				<li>
 					<button id="tab-shop" onclick="location.href='/jejugamgyulList/0'"
 						class="px-4 py-2 font-medium border-b-2 border-orange-500 hover:text-orange-500">
-						쇼핑</button>
+						귤담기</button>
 				</li>
 				<li>
 					<button id="tab-farms" onclick="location.href='/farms'"
@@ -219,7 +220,7 @@ $.ajax({
 			<li><a
 				href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
 				onclick="location.href='/jejugamgyulList/1'"
-				class="block hover:text-orange-500">귤담기</a></li>
+				class="block hover:text-orange-500">쇼핑</a></li>
 			<li><a
 				href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
 				onclick="showSection(&#39;section-reservation&#39;)"
@@ -263,7 +264,7 @@ $.ajax({
 		<a
 			href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
 			onclick="location.href='/cartPage'"
-			class="block px-4 py-2 hover:bg-orange-50">장바구니</a>
+			class="block px-4 py-2 hover:bg-orange-50">귤바구니</a>
 		<a
 			href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
 			onclick="" class="block px-4 py-2 hover:bg-orange-50">주문/배송 조회</a>

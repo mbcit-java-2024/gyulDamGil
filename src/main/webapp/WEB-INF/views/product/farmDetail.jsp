@@ -252,11 +252,11 @@ function deleteBookmarkFarm(button) {
 							<c:choose>
 								<c:when test="${farmDetail.bookMarkCnt == 0}">
 									<button type="button" class="favorite-btn"
-										onclick="addToBookmarkFarm(this)">♡ 좋아요</button>
+										onclick="addToBookmarkFarm(this)">❤️ 즐겨찾기</button>
 								</c:when>
 								<c:when test="${farmDetail.bookMarkCnt != 0}">
 									<button type="button" class="favorite-btn liked"
-										onclick="deleteBookmarkFarm(this)">❤️ 좋아요</button>
+										onclick="deleteBookmarkFarm(this)">❤️ 즐겨찾기</button>
 								</c:when>
 							</c:choose>
 
