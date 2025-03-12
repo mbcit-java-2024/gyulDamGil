@@ -20,9 +20,9 @@ public interface BookmarkDAO {
 
 	List<BookmarkVO> selectBookMarkList(BookmarkVO bookmarkVO);
 
-	int bookMarkProductDelete(int id);
+	int bookMarkProductDelete(Map<String, Object> param);
 
-	int bookMarkFarmDelete(int sellerId);
+	int bookMarkFarmDelete(Map<String, Object> param);
 
 
 }

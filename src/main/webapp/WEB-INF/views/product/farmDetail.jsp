@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>귤담길 - 농가 상세보기</title>
+<title>제주귤마을</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../resources/css/style.css">
@@ -113,11 +113,11 @@ function addToBookmarkFarm(button) {
             console.log('success::::::::::::' + JSON.stringify(data));
             
             if (data.code === '0') {
-            	alert('상품이 즐겨찾기에 추가되었습니다')
-	                location.reload();
+                alert('상품이 즐겨찾기에 추가되었습니다.');
                 $(button).toggleClass('liked'); // 색칠 처리 
+	            location.reload();
+            		
             } else {
-                //alert(data.message ? data.message : '알 수 없는 오류');
             	location.href='/login/1';
             }
         },
@@ -151,6 +151,7 @@ function deleteBookmarkFarm(button) {
                 location.reload();
                 // 온클릭 이벤트 변경 추가 
             } else {
+            	 //alert(data.message ? data.message : '알 수 없는 오류');
             	location.href='/login/1';
             }
         },
@@ -200,6 +201,7 @@ function deleteBookmarkFarm(button) {
 		<!-- Shop Section -->
 		<div id="section-shop" class="container mx-auto px-4 py-8">
 			<div class="flex flex-col md:flex-row gap-8">
+				<%@include file="../include/menu.jsp"%>
 
 				<!-- Products Grid -->
 				<div class="flex-1">
@@ -211,7 +213,8 @@ function deleteBookmarkFarm(button) {
 							<h2>${farmDetail.farmName}</h2>
 
 							<div class="product-section">
-							<input type="hidden" name="userId" value="${item.userId}">
+							<input type="hidden" name="userId" value="${farmDetail.userId}">
+							<input type="hidden" name="id" value="${farmDetail.id}">
 								<strong>판매자:</strong> ${farmDetail.name}
 							</div>
 
@@ -243,22 +246,17 @@ function deleteBookmarkFarm(button) {
 									pattern="yyyy-MM-dd" />
 							</div>
 
-							<div class="product-section">
-								<strong>정보 수정일:</strong>
-								<fmt:formatDate value="${farmDetail.updateDate}"
-									pattern="yyyy-MM-dd" />
-							</div>
 
 
 
 							<c:choose>
 								<c:when test="${farmDetail.bookMarkCnt == 0}">
 									<button type="button" class="favorite-btn"
-										onclick="addToBookmarkFarm(this)">♡ 즐겨찾기</button>
+										onclick="addToBookmarkFarm(this)">♡ 좋아요</button>
 								</c:when>
 								<c:when test="${farmDetail.bookMarkCnt != 0}">
 									<button type="button" class="favorite-btn liked"
-										onclick="deleteBookmarkFarm(this)">❤️ 즐겨찾기</button>
+										onclick="deleteBookmarkFarm(this)">❤️ 좋아요</button>
 								</c:when>
 							</c:choose>
 
