@@ -238,10 +238,13 @@ function deleteBookmarkProduct(button) {
 										<%-- </c:otherwise> --%>
 										</c:when>
 										</c:choose>
-								</div>
 										<button type="button" class="farm-info-btn"
 											onclick="location.href='/farmDetail/${productDetail.sellerId}'">🏡
 											농장 정보</button> 
+										<button type="button" class="farm-info-btn"
+											onclick="location.href='/farmDetail/${productDetail.sellerId}'">⭐
+											 리뷰 보기</button> 
+								</div>
 									</div>
 								</div>
 							</div>
