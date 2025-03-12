@@ -26,8 +26,6 @@
     </style>
 </head>
 <body>
-
-    <h2>QnA 목록</h2>
     
     <c:if test="${not empty message}">
 	    <script>
@@ -88,10 +86,15 @@
 	                    	<c:if test="${not empty qna.replies}">
 	                    		답변 완료
 	                    	</c:if>
+	                    	
 	                    </td>
 	                </tr>
 	            </c:forEach>
+	            <div align="right">
+				    <button onclick="location.href='QnaCMInsert'">문의글 작성</button>
+				</div>
 	        </tbody>
+	        
 	    </table>
    	</c:if>
 

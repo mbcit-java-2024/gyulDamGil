@@ -2,6 +2,8 @@ package com.gdg.gyulDamGil.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,22 +26,25 @@ public class QnaCMController {
 
     // 전체 QnA 목록 출력
     @RequestMapping("/QnaCMList")
-    public String selectQnaList(Model model) {
-        List<QnaCMVO> qnaList = dao.selectList();
+    public String selectQnaList(Model model, HttpServletRequest request) {
+    	int consumerId = (int) request.getSession().getAttribute("id");
+        List<QnaCMVO> qnaList = dao.selectQnaByconsumerId(consumerId);
         log.info("QnaCMController - selectQnaList() 실행");
         
         model.addAttribute("qnaList", qnaList);
         log.info("qnaList: {}", qnaList);
-        log.info("dfa;d");
+        
         return "/QnaCM/QnaCMList";
         
     }
     
     // QnA 작성 페이지 이동
     @RequestMapping("/QnaCMInsert")
-    public String QnaInsert() {
+    public String QnaInsert(Model model, HttpServletRequest request ) {
+    	int consumerId =(int) request.getSession().getAttribute("id");
         log.info("QnaCMController - QnaInsert() 실행");
 
+    	model.addAttribute("consumerId",consumerId);
         return "/QnaCM/QnaCMInsert";
     }
 

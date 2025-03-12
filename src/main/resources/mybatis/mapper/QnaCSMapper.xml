@@ -28,16 +28,16 @@
 	
 
     <select id="selectQnaByconsumerId" resultMap="qnaResultMap">
-    SELECT 
-        qnacs.id, qnacs.sellerId, qnacs.consumerId, qnacs.title, qnacs.comment, qnacs.createDate,
-        qnacsreplies.id AS replyId, qnacsreplies.parentId, qnacsreplies.sellerId AS replySellerId, 
-        qnacsreplies.consumerId AS replyConsumerId, qnacsreplies.comment AS replyComment, 
-        qnacsreplies.createDate AS replyCreateDate
-    FROM qnacs
-    LEFT JOIN qnacsreplies ON qnacs.id = qnacsreplies.parentId
-    WHERE qnacs.consumerId = #{consumerId}
-    ORDER BY qnacs.id ASC;
-</select>
+	    SELECT 
+	        qnacs.id, qnacs.sellerId, qnacs.consumerId, qnacs.title, qnacs.comment, qnacs.createDate,
+	        qnacsreplies.id AS replyId, qnacsreplies.parentId, qnacsreplies.sellerId AS replySellerId, 
+	        qnacsreplies.consumerId AS replyConsumerId, qnacsreplies.comment AS replyComment, 
+	        qnacsreplies.createDate AS replyCreateDate
+	    FROM qnacs
+	    LEFT JOIN qnacsreplies ON qnacs.id = qnacsreplies.parentId
+	    WHERE qnacs.consumerId = #{consumerId}
+	    ORDER BY qnacs.id ASC;
+	</select>
     
     <!-- 특정 sellerId에 해당하는 QnaCS 목록 조회 -->
     <select id="selectQnaBysellerId" resultMap="qnaResultMap">

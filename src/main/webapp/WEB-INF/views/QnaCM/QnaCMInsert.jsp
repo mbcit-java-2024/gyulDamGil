@@ -13,7 +13,7 @@
 			cellspacing="0">
 			<tr>
 				<th width="100">작성자</th>
-				<td width="630"><input type="text" name="consumerId" /></td>
+				<td width="630">${consumerId}</td>
 			</tr>
 			<tr>
 				<th width="100">제목</th>

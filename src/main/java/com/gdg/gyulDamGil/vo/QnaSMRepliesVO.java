@@ -1,6 +1,7 @@
 package com.gdg.gyulDamGil.vo;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -10,5 +11,5 @@ public class QnaSMRepliesVO {
     private int parentId; 
     private int sellerId; 
     private String comment; 
-    private Timestamp createDate;  
+    private Date createDate;  
 }

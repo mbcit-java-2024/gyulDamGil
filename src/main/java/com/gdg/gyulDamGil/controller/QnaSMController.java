@@ -2,6 +2,8 @@ package com.gdg.gyulDamGil.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +26,9 @@ public class QnaSMController {
 
     // 전체 QnA 목록 출력
     @RequestMapping("/QnaSMList")
-    public String selectQnaList(Model model) {
-        List<QnaSMVO> qnaList = dao.selectList();
+    public String selectQnaList(Model model, HttpServletRequest request) {
+    	int sellerId = (int) request.getSession().getAttribute("id");
+        List<QnaSMVO> qnaList = dao.selectQnaBySellerId(sellerId);
         log.info("QnaSMController - selectQnaList() 실행");
         
         model.addAttribute("qnaList", qnaList);

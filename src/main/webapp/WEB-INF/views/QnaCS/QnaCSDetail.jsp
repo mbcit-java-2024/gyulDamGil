@@ -16,7 +16,7 @@
             alert("${message}");
         </script>
     </c:if>
-
+    
     <table width="900" border="1" align="center" cellpadding="3" cellspacing="2">
 	    <tr>
 	        <th width="80">작성자</th>
@@ -42,12 +42,12 @@
         <tr>
             <td style="text-align: right;">
             <!-- consumerId 와 sellerId 를 받게 되면 나눠서 할것 -->
-            	<%-- <c:if test="${not empty sellerId}"> --%>
-                <input type="button" value="목록으로" onclick="location.href='/QnaCSList1?sellerId=${qnaCSVO.sellerId}';" />
-                <%-- </c:if> --%>
-            	<%-- <c:if test="${not empty consumerId}">
-                <input type="button" value="목록으로" onclick="location.href='/QnaCSList2?sellerId=${qnaCSVO.consumerId}';" />
-                </c:if> --%>
+            	<c:if test="${sessionScope.userType == 1}">
+                	<input type="button" value="목록으로" onclick="location.href='/QnaCSListc';" />
+                </c:if>
+            	<c:if test="${sessionScope.userType == 2}">
+                	<input type="button" value="목록으로" onclick="location.href='/QnaCSLists';" />
+                </c:if>
             </td>
         </tr>
     </table>
@@ -78,7 +78,12 @@
         <c:if test="${not empty replies}">
             <c:forEach var="reply" items="${replies}">
 	            <tr>
-			        <th width="80">${reply.consumerId}</th>
+	            <c:if test="${sessionScope.userType == 1}">
+			        <th width="80">${consumerVO.name}</th>
+				</c:if>
+				<c:if test="${sessionScope.userType == 2}">
+			        <th width="80">${sellerVO.farmname}</th>
+				</c:if>
 			        <td width="750">${reply.comment}</td>
 			        <td width="170"><fmt:formatDate value="${qnaCSVO.createDate}" pattern="yyyy-MM-dd HH:mm" /></td>
 			    </tr>

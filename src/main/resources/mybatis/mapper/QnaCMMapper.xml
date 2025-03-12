@@ -32,14 +32,14 @@
     </select>
 
     <!-- 특정 consumerId에 해당하는 QnaCM 목록 조회 -->
-    <select id="selectQnaByConsumerId" resultMap="qnaResultMap">
+    <select id="selectQnaByconsumerId" resultMap="qnaResultMap">
         SELECT 
             qnaCM.id, qnaCM.consumerId, qnaCM.title, qnaCM.comment, qnaCM.createDate,
             qnaCMreplies.id AS replyId, qnaCMreplies.parentId, qnaCMreplies.consumerId AS replyConsumerId, 
             qnaCMreplies.comment AS replyComment, qnaCMreplies.createDate AS replyCreateDate
         FROM qnaCM
         LEFT JOIN qnaCMreplies ON qnaCM.id = qnaCMreplies.parentId
-        WHERE qnaCM.consumerId = #{consumerId}
+        WHERE qnaCM.consumerId = ${consumerId}
         ORDER BY qnaCM.id ASC;
     </select>
 

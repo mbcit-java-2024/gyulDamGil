@@ -32,6 +32,11 @@ public class QnaCMDAO {
 		
 		return session.selectList(QnaMapper + ".selectQnaBysellerId",sellerId);
 	}
+	public List<QnaCMVO> selectQnaByconsumerId(int consumerId) {
+		log.info("ReviewDAO 클래스의 seletQnaBysellerId() 매소드 실행");
+		
+		return session.selectList(QnaMapper + ".selectQnaByconsumerId",consumerId);
+	}
 		
 	public void insert(QnaCMVO qnaCMVO) {
 		log.info("ReviewDAO 클래스의 insert() 매소드 실행");

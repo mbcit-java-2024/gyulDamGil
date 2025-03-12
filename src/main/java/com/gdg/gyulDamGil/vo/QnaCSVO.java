@@ -1,6 +1,7 @@
 package com.gdg.gyulDamGil.vo;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
@@ -12,7 +13,7 @@ public class QnaCSVO {
     private int consumerId;
     private String title;
     private String comment;
-    private Timestamp createDate;
+    private Date createDate;
     private List<QnaCSRepliesVO> replies;
 
 }

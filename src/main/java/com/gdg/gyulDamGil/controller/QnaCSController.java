@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.gdg.gyulDamGil.dao.ConsumerDAO;
 import com.gdg.gyulDamGil.dao.QnaCSDAO;
+import com.gdg.gyulDamGil.dao.SellerDAO;
+import com.gdg.gyulDamGil.vo.ConsumerVO;
+import com.gdg.gyulDamGil.vo.QnaCMVO;
 import com.gdg.gyulDamGil.vo.QnaCSRepliesVO;
 import com.gdg.gyulDamGil.vo.QnaCSVO;
+import com.gdg.gyulDamGil.vo.SellerVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +32,11 @@ public class QnaCSController {
 	@Autowired
 	private QnaCSDAO dao;
 	
+	@Autowired
+	private ConsumerDAO cdao;
+	
+	@Autowired
+	private SellerDAO sdao;
 	
 	
 	@RequestMapping("/faq")
@@ -58,28 +68,30 @@ public class QnaCSController {
 	return viewpage;
 	*/
 	
-	@RequestMapping("/QnaCSList")
-	public String QnaCSList(Model model, HttpServletRequest request) {
-		log.info("HomeController 클래스의 QnaCSList() 메소드 실행");
-		HttpSession session = request.getSession(false);
-		List<QnaCSVO> qnaList = null;
-		String viewpage = "";
-	    if (session != null && session.getAttribute("userType") != null) {
-	        int userType = (int) session.getAttribute("userType");
-	        if (userType == 1) {
-	        	qnaList = dao.selectQnaByconsumerId((int) session.getAttribute("id"));
-	        } else if (userType == 2) {
-	        	qnaList = dao.selectQnaBysellerId((int) session.getAttribute("id"));
-	        }
-	        viewpage = "/QnaCS/QnaCSList";
-	    } else {
-	    	return viewpage = "/consumer/login_2";
-	    }
+	@RequestMapping("/QnaCSListc")
+	public String selectQnaListc(Model model, HttpServletRequest request) {
+    	int consumerId = (int) request.getSession().getAttribute("id");
+        List<QnaCSVO> qnaList = dao.selectQnaByconsumerId(consumerId);
+        log.info("QnaCMController - selectQnaListc() 실행");
+        log.info("consumerId:{}",consumerId);
+        
+        
+        model.addAttribute("consumerId",consumerId);
+        model.addAttribute("qnaList", qnaList);
+        log.info("qnaList: {}", qnaList);
+        
+        return "/QnaCS/QnaCSList";
+	}
+	@RequestMapping("/QnaCSLists")
+	public String selectQnaLists(Model model, HttpServletRequest request) {
+		int sellerId = (int) request.getSession().getAttribute("id");
+		List<QnaCSVO> qnaList = dao.selectQnaBysellerId(sellerId);
+		log.info("QnaCMController - selectQnaLists() 실행");
 		
 		model.addAttribute("qnaList", qnaList);
-//		log.info("qnaList: {}", qnaList);
+		log.info("qnaList: {}", qnaList);
 		
-		return viewpage;
+		return "/QnaCS/QnaCSList";
 	}
 	
 /* 아래 두 요청을 QnaCSList 한 요청으로 통합
@@ -108,9 +120,11 @@ public class QnaCSController {
 */
 	
 	@RequestMapping("/QnaCSInsert")
-	public String QnaInsert() {
+	public String QnaInsert(Model model, HttpServletRequest request) {
+		int consumerId = (int) request.getSession().getAttribute("id");
 		log.info("HomeController 클래스의 QnaInsert() 메소드 실행");
 		
+		model.addAttribute("consumerId",consumerId);
 		return "/QnaCS/QnaCSInsert";
 	}
 	
@@ -127,14 +141,22 @@ public class QnaCSController {
 	
     @RequestMapping("/QnaCSDetail")
     public String selectQnaByIdx(@RequestParam("id") int id, Model model) {
+    	ConsumerVO consumerVO = cdao.selectById(id);
+    	SellerVO sellerVO = sdao.selectById(id);
+    	
         QnaCSVO qnaCSVO = dao.selectQnaByIdx(id);
 
         List<QnaCSRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
 
         log.info("QnaCSController의 selectQnaByIdx() 메소드 실행");
-
+        
+        model.addAttribute("sellerVO", sellerVO);
+        model.addAttribute("consumerVO", consumerVO);
         model.addAttribute("qnaCSVO", qnaCSVO);
         model.addAttribute("replies", replies);
+        
+        log.info("ConsumerVO name: " + consumerVO.getName());
+        log.info("SellerVO farmname: " + sellerVO.getFarmName());
 
         return "/QnaCS/QnaCSDetail"; 
     }
