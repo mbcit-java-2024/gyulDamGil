@@ -10,13 +10,16 @@
 <jsp:include page="../include/header.jsp"/>
 </head>
 <body>
-	<a type="button" href="/myOrder?currentPage=${currentPage}">
-		목록보기
-	</a>
-    <table>
-        <tr style="width:1010px; background-color:orange">
-            <th style="width:100px">주문 ID</th>
-            <th style="width:70px">상품 ID</th>
+	<input 
+		type="button" 
+		onclick="location.href='/myOrder?currentPage=${currentPage}'" 
+		style="font-size: 16px; font-weight: bold; padding: 5px; margin: 10px; border: 1px solid gray;"
+		value="목록보기" />
+	
+    <table style="margin-left: auto; margin-right: auto;">
+        <tr style="width:1050px; background-color:orange">
+            <th style="width:90px">주문ID</th>
+            <th style="width:120px">상품</th>
             <th style="width:70px">재고</th>
             <th style="width:50px">수량</th>
             <th style="width:100px" align="right">총 가격</th>
@@ -26,7 +29,7 @@
         </tr>
      		<tr>
             <td>${order.id}</td>
-            <td>${order.productId}</td>
+            <td>${order.productTitle}</td>
             <td>${stock}</td>
             <td>${order.count}</td>
             <td>${order.totalPrice}원</td>
@@ -87,11 +90,11 @@
         </tr>
     </table>
     <br/><br/><br/><br/>
-    <h2>주문 정보</h2>
-    <table>
-    	<tr style="width:1010px; background-color:orange">
+    <h2 style="margin-left: 20%; font-size: 20px; font-weight: bold;">주문 정보</h2>
+    <table style="margin-left: auto; margin-right: auto;">
+    	<tr style="width:1050px; background-color:orange">
     		<th style="width:150px">판매농가</th>
-    		<th style="width:70px">이름</th>
+    		<th style="width:110px">이름</th>
     		<th style="width:150px">전화번호</th>
     		<th style="width:370px">주소</th>
     		<th style="width:270px">이메일</th>

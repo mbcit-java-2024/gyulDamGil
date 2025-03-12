@@ -93,6 +93,7 @@ public class ConsumerController {
 			return "/consumer/login_2";
 		}
         OrderVO order = orderDAO.selectOrderById(id);
+        order.setProductTitle(productDAO.selectTitleById(order.getProductId()));
         ConsumerVO consumer = consumerDAO.selectConsumerById(order.getConsumerId());
         SellerVO seller = sellerDAO.selectSellerById(order.getSellerId());
         int stock = productDAO.selectStockById(order.getProductId());
