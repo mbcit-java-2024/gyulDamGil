@@ -327,7 +327,7 @@
             <div class="flex flex-col md:flex-row gap-8">
                 <div class="flex-1" id="comments-{{id}}">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold">장바구니 목록</h2>
+                        <h2 class="text-2xl font-bold">귤 바구니</h2>
                     </div>
                     
                     
