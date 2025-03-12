@@ -67,11 +67,14 @@ public class ConsumerController {
 		hmap.put("startNo", orderList.getStartNo());
 		hmap.put("pageSize", orderList.getPageSize());
 		hmap.put("id", consumerId);
-		System.out.println((ArrayList<OrderVO>) orderDAO.selectOrderListForC(hmap));
+//		System.out.println((ArrayList<OrderVO>) orderDAO.selectOrderListForC(hmap));
 		orderList.setOrderList((ArrayList<OrderVO>) orderDAO.selectOrderListForC(hmap));
 		for (int i = 0; i < orderList.getOrderList().size(); i++) {
+//			각 OrderVO 객체마다 farmName을 삽입
 			orderList.getOrderList().get(i).setFarmName(sellerDAO.selectFarmName(orderList.getOrderList().get(i).getSellerId()));
-//			System.out.println("테스트용 프린트 !!! : " + orderList.getOrderList().get(i));
+//			각 OrderVO 객체마다 title을 삽입
+			orderList.getOrderList().get(i).setProductTitle(productDAO.selectTitleById(orderList.getOrderList().get(i).getProductId()));
+			System.out.println("테스트용 프린트 !!! : " + orderList.getOrderList().get(i));
 		}
 		model.addAttribute("orderList", orderList);
 		model.addAttribute("currentPage", currentPage);

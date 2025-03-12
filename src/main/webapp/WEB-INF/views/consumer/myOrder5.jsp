@@ -19,12 +19,12 @@
 	<div class="body-align">
 	    <table id="seller-order-table">
 	        <tr style="background-color:orange">
-	            <th style="width:100px">주문 ID</th>
-	            <th style="width:70px">상품 ID</th>
+	            <th style="width:70px">주문ID</th>
+	            <th style="width:120px">상품</th>
 	            <th style="width:100px">판매자</th>
 	            <th style="width:50px">수량</th>
 	            <th align="right" style="width:100px">총 가격</th>
-	            <th style="width:250px">주문 날짜</th>
+	            <th style="width:240px">주문 날짜</th>
 	            <th style="width:100px">상태</th>
 	            <th style="width:220px">상태 변경</th>
 	            <th>상세 조회</th>
@@ -34,7 +34,7 @@
 	        <c:forEach var="order" items="${list}" varStatus="i">
             <tr>
                 <td>${order.id}</td>
-                <td>${order.productId}</td>
+                <td>${order.productTitle}</td>
                 <td>${order.farmName}</td>
                 <td>${order.count}</td>
                 <td>${order.totalPrice}원</td>

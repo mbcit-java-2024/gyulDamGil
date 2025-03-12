@@ -18,6 +18,7 @@ public interface ProductDAO {
 	void minusStock(HashMap<String, Integer> map);
 	int selectStockById(int id);
 	void updateForSoldOut(int id);
+	String selectTitleById(int id);
 
 //	수빈
 	List<ProductVO> selectJejuGamgyulList(int categoryId);

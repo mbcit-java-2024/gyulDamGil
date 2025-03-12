@@ -67,6 +67,11 @@
 		where id = #{productId} 
 	</update>
 	
+	<select id="selectTitleById" parameterType="int" resultType="String">
+		select title from product where id = ${id}
+	</select>
+	
+	
 	<!-- 예린 -->	
 	<!-- select Count : 갯수(int)를 가져오는 명령문-->
 	
