@@ -7,6 +7,26 @@ body {
 	border :  1px solid orange;
 }
 
+/* orderList.jsp, myOrder.jsp 파일의 목록이름 구역 배너가 스크롤에 따라 같이 움직이는 스타일 */
+/* #orderListBanner {
+	position: sticky;
+	top: 112px;
+	background-color: orange;
+	border-radius: 10px;
+	z-index: 1;
+} */
+
+/* orderList.jsp, myOrder.jsp 파일의 테이블 스타일 */
+#seller-order-table {
+	border:  4px solid orange;
+	padding: 20px;
+	margin: auto;
+	border-radius: 100px;
+	text-align: center;
+}
+
+
+
 /* ************************************* 기존 css ************************************ */
 .body-align {
 	display: flex;
@@ -74,7 +94,6 @@ button {
    color: white;
 }
 
-/* 
 *, ::before, ::after {
    --tw-border-spacing-x: 0;
    --tw-border-spacing-y: 0;
@@ -98,7 +117,6 @@ button {
 
    --tw-contain-style:
 }
-*/
 
 ::backdrop {
    --tw-border-spacing-x: 0;
@@ -124,12 +142,15 @@ button {
 
    --tw-contain-style:
 } /* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */
-::after, ::before {
-   --tw-content: ''
+*, ::after, ::before {
    box-sizing: border-box;
    border-width: 0;
    border-style: solid;
    border-color: #e5e7eb
+}
+
+::after, ::before {
+   --tw-content: ''
 }
 
 :host, html {
@@ -151,8 +172,8 @@ body {
 
 hr {
    height: 0;
-   color: orange;
-   border-top-width: 1px;
+   color: inherit;
+   border-top-width: 1px
 }
 
 abbr:where([title]) {
@@ -167,8 +188,7 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
    color: inherit;
-   text-decoration: none;
-   cursor: pointer;
+   text-decoration: inherit
 }
 
 b, strong {
@@ -204,7 +224,14 @@ sup {
 
 table {
    text-indent: 0;
+   border-color: inherit;
    border-collapse: collapse
+}
+
+tr, th, td {
+	border: 1px solid rgb(249, 115, 22);
+	padding: 8px;
+	text-align: center;
 }
 
 button, input, optgroup, select, textarea {
