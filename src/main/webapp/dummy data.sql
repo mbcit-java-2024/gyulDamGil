@@ -5,11 +5,14 @@ DELETE FROM seller;
 ALTER TABLE seller AUTO_INCREMENT = 1;
 DELETE FROM product;
 ALTER TABLE product AUTO_INCREMENT = 1;
+DELETE FROM cart;
+ALTER TABLE cart AUTO_INCREMENT = 1;
 
 # 테이블 확인
 SELECT * FROM consumer;
 SELECT * FROM seller;
 SELECT * FROM product;
+SELECT * FROM cart;
 
 # seller 더미 데이터
 INSERT INTO seller (userId, PASSWORD, NAME, email, phone, address, detailAddress, createDate, bussinessNumber, farmName, STATUS)

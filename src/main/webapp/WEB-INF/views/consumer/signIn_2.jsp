@@ -77,7 +77,7 @@
 <body>
 
 	<!--  로고 (클릭시 홈 화면으로 이동) -->
-	<div class="center" style="margin-top: 10%; margin-bottom: 10px; ">
+	<div class="center" style="margin-top: 5%; margin-bottom: 10px; ">
 		<img src="/images/gdg/gdgLogo.png" style="width: 150px"
 			onclick="location.href='/'">
 	</div>
