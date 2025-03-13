@@ -113,7 +113,6 @@ function addToBookmarkFarm(button) {
             console.log('success::::::::::::' + JSON.stringify(data));
             
             if (data.code === '0') {
-                alert('상품이 즐겨찾기에 추가되었습니다.');
                 $(button).toggleClass('liked'); // 색칠 처리 
 	            location.reload();
             		
@@ -146,7 +145,6 @@ function deleteBookmarkFarm(button) {
             console.log('success::::::::::::' + JSON.stringify(data));
             
             if (data.code === '0') {
-                alert('상품이 즐겨찾기에서 해제되었습니다.');
                 $(button).toggleClass('liked'); // 색칠 처리 
                 location.reload();
                 // 온클릭 이벤트 변경 추가 

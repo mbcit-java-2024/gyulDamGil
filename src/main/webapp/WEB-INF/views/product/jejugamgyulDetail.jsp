@@ -10,14 +10,101 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../resources/css/style.css">
-	
-	<style>
-.liked {
-    background-color: red;
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<style>
+
+.product-section {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    text-align: center; /* 텍스트 가로 정렬 */
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: none; /* 테두리 제거 */
+    background: none; /* 배경 제거 */
+}
+.fixed-buttons {
+    position: fixed; /* 화면 크기가 줄어도 고정 */
+    top: 20px; /* 화면 상단에서 20px 아래 */
+    right: 20px; /* 오른쪽에서 20px */
+    display: flex;
+    flex-direction: column; /* 버튼을 세로로 배치 */
+    align-items: center;
+    gap: 10px; /* 버튼 간격 */
+    z-index: 1000; /* 다른 요소 위에 표시 */
+}
+.favorite-btn, .farm-info-btn, .review-btn, .cart-btn, .buy-btn {
+    width: 140px; /* 버튼 크기 일정 */
+    height: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap; /* 줄바꿈 방지 */
+    text-align: center;
+    border: none;
+    background-color: #f4a261;
     color: white;
+    cursor: pointer;
+    flex-shrink: 0; /* 크기 변경 방지 */
+}
+.favorite-btn:hover, .farm-info-btn:hover, .review-btn:hover, .cart-btn:hover, .buy-btn:hover {
+    background-color: #e76f51;
+}
+.product-container {
+    display: flex;
+    flex-wrap: wrap; /* 내용이 벗어나지 않도록 자동 줄바꿈 */
+    width: 100%;
+    max-width: 900px; /* 최대 너비 제한 */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden; /* 넘치는 요소 숨김 */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+}
+#count {
+    width: 60px; /* 입력 필드 너비 */
+    height: 30px; /* 높이 조정 */
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.liked {
+    background-color: red !important;
+    color: white !important;
+}
+@media (max-width: 768px) {
+    .fixed-buttons {
+        top: auto;
+        bottom: 10px; /* 화면 하단에 고정 */
+        right: 10px;
+        flex-direction: row; /* 가로 정렬 */
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .favorite-btn, .farm-info-btn, .review-btn {
+        width: 120px; /* 작은 화면에서도 크기 일정 */
+    }
+    
+     .product-section {
+        padding: 8px;
+    }
+
+    .product-section p {
+        font-size: 14px;
+        padding: 4px;
+    }
 }
 </style>
-	
+
 <script>
 function addToBookmarkProduct(button) {
     console.log('addToBookmarkProduct:::::::::::::::::::::::::::::');
@@ -37,7 +124,6 @@ function addToBookmarkProduct(button) {
             console.log('success::::::::::::' + JSON.stringify(data));
             
             if (data.code === '0') {
-            	alert('상품이 즐겨찾기에 추가되었습니다')
 	                location.reload();
             		
                 $(button).toggleClass('liked'); // 색칠 처리 
@@ -70,7 +156,6 @@ function deleteBookmarkProduct(button) {
             console.log('success::::::::::::' + JSON.stringify(data));
             
             if (data.code === '0') {
-                alert('상품이 즐겨찾기에서 해제되었습니다.');
                 $(button).toggleClass('liked'); // 색칠 처리 
                 location.reload();
                 // 온클릭 이벤트 변경 추가 
@@ -169,22 +254,24 @@ function deleteBookmarkProduct(button) {
 							<div class="product-image">
 								<img src="${productDetail.mainImageUrl }" alt="상품 이미지">
 								<div class="buttons">
-										<c:choose>
+									<c:choose>
 										<c:when test="${productDetail.bookMarkCnt == 0}">
-									<button type="button" class="favorite-btn" onclick="addToBookmarkProduct(this)">❤️ 즐겨찾기</button>
+											<button type="button" class="favorite-btn"
+												onclick="addToBookmarkProduct(this)">❤️ 즐겨찾기</button>
 										</c:when>
 										<c:when test="${productDetail.bookMarkCnt != 0}">
-										<%-- <c:otherwise test="${productDetail.bookMarkCnt != 0}"> --%>
-									<button type="button" class="favorite-btn liked" onclick="deleteBookmarkProduct(this)">❤️ 즐겨찾기</button>
-										<%-- </c:otherwise> --%>
+											<%-- <c:otherwise test="${productDetail.bookMarkCnt != 0}"> --%>
+											<button type="button" class="favorite-btn liked"
+												onclick="deleteBookmarkProduct(this)">❤️ 즐겨찾기</button>
+											<%-- </c:otherwise> --%>
 										</c:when>
-										</c:choose>
-										<button type="button" class="farm-info-btn"
-											onclick="location.href='/farmDetail/${productDetail.sellerId}'">🏡
-											농장 정보</button> 
-										<button type="button" class="farm-info-btn"
-											onclick="location.href='/ReviewList?productId=${productDetail.id}'">⭐
-											 리뷰 보기</button> 
+									</c:choose>
+									<button type="button" class="farm-info-btn"
+										onclick="location.href='/farmDetail/${productDetail.sellerId}'">🏡
+										농장 정보</button>
+									<button type="button" class="farm-info-btn"
+										onclick="location.href='/ReviewList?productId=${productDetail.id}'">⭐
+										리뷰 보기</button>
 								</div>
 							</div>
 							<div class="product-details">
@@ -192,9 +279,10 @@ function deleteBookmarkProduct(button) {
 									<p>${productDetail.title }</p>
 									<input type="hidden" name="title"
 										value="${productDetail.title}"> <input type="hidden"
-										name="sellerId" value="${productDetail.sellerId}"> 
-										<input type="hidden" name="id" value="${productDetail.id}">
-										<input type="hidden" name="mainImageUrl" value="${productDetail.mainImageUrl}">
+										name="sellerId" value="${productDetail.sellerId}"> <input
+										type="hidden" name="id" value="${productDetail.id}"> <input
+										type="hidden" name="mainImageUrl"
+										value="${productDetail.mainImageUrl}">
 								</div>
 								<div class="product-section">
 									<p>${productDetail.description }</p>
@@ -214,7 +302,11 @@ function deleteBookmarkProduct(button) {
 											<p>
 												재고 : <span id="stock">${productDetail.stock }</span>개
 											</p>
-											<p><label for="count">수량 선택: </label></p> <input type="number"
+										</div>
+										<div class="product-section quantity-container">
+											<p>
+												수량선택 : 
+											<input type="number"
 												onkeyup="calctotalPrice(${productDetail.id })"
 												onchange="calctotalPrice(${selectGamgyulDetail.id })"
 												id="count" name="count" min="1"
@@ -223,6 +315,7 @@ function deleteBookmarkProduct(button) {
 												value="${productDetail.price }"> <input
 												type="hidden" id="totalPrice" name="totalPrice"
 												value="${productDetail.price }">
+											</p>
 										</div>
 									</c:when>
 									<c:otherwise>
@@ -236,31 +329,31 @@ function deleteBookmarkProduct(button) {
 									<p>
 										총 금액 : <span id="spantotalPrice">${productDetail.price }</span>원
 									</p>
-									</div>
-									<div class="buttons">
-										<c:choose>
-											<c:when test="${productDetail.stock > 0}">
-												<button type="button" class="cart-btn" onclick="addToCart()">장바구니</button>
-											</c:when>
-											<c:otherwise>
-												<button type="button" class="cart-btn" disabled>장바구니</button>
-											</c:otherwise>
-										</c:choose>
-										<button type="submit" class="buy-btn">결제하기</button>
-										
-									</div>
-									</div>
+								</div>
+								<div class="buttons">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<c:choose>
+										<c:when test="${productDetail.stock > 0}">
+											<button type="button" class="cart-btn" onclick="addToCart()"> <i class="fas fa-shopping-cart"></i>&nbsp;장바구니</button>
+										</c:when>
+										<c:otherwise>
+											<button type="button" class="cart-btn" disabled><i class="fas fa-shopping-cart"></i>&nbsp;장바구니</button>
+										</c:otherwise>
+									</c:choose>
+									<button type="submit" class="buy-btn"><i class="fas fa-credit-card"></i>&nbsp;결제하기</button>
+
 								</div>
 							</div>
-
 						</div>
-
-					</form>
 				</div>
+
 			</div>
+
+			</form>
 		</div>
-<!--  수정 -->
-		<%@include file="../include/footer.jsp"%>
+	</div>
+	</div>
+	<!--  수정 -->
+	<%@include file="../include/footer.jsp"%>
 	</div>
 </body>
 </html>
