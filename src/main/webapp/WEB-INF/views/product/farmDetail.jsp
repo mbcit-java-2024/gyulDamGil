@@ -8,10 +8,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>제주귤마을</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="stylesheet" type="text/css"
 	href="../../../resources/css/style.css">
 
 <style>
+.inquiry-btn {
+	display: flex;
+	align-items: center;
+	gap: 5px; /* 아이콘과 텍스트 간격 */
+	padding: 10px 15px;
+	font-size: 1rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: #007bff;
+	color: white;
+	transition: background-color 0.3s ease;
+}
+
+.inquiry-btn:hover {
+	background-color: #0056b3;
+}
+
 .seller-container {
 	display: flex;
 	align-items: center;
@@ -90,9 +110,10 @@
 	background-color: green;
 	color: white;
 }
+
 .liked {
-    background-color: red;
-    color: white;
+	background-color: red;
+	color: white;
 }
 </style>
 <script>
@@ -211,8 +232,8 @@ function deleteBookmarkFarm(button) {
 							<h2>${farmDetail.farmName}</h2>
 
 							<div class="product-section">
-							<input type="hidden" name="userId" value="${farmDetail.userId}">
-							<input type="hidden" name="id" value="${farmDetail.id}">
+								<input type="hidden" name="userId" value="${farmDetail.userId}">
+								<input type="hidden" name="id" value="${farmDetail.id}">
 								<strong>판매자:</strong> ${farmDetail.name}
 							</div>
 
@@ -257,14 +278,19 @@ function deleteBookmarkFarm(button) {
 										onclick="deleteBookmarkFarm(this)">❤️ 즐겨찾기</button>
 								</c:when>
 							</c:choose>
+							<c:if test="${not empty sessionScope.userVO}">
+								<button type="button" class="inquiry-btn" onclick="location.href='/QnaCS/QnaCSInsert/${farmDetail.id}'">
+									<i class="fas fa-envelope"></i> 문의하기
+								</button>
+							</c:if>
 
 							<%-- <div class="seller-buttons">
 								<button type="button" class="favorite-btn" onclick="addToBookmarkFarm(this)">❤️ 좋아요 ${farmDetail.bookMarkCnt}</button>
 							</div> --%>
-							
-							
-							
-							
+
+
+
+
 						</div>
 					</div>
 
