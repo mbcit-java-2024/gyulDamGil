@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>제주귤마을</title>
+<title>귤담길 - 농장 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -229,7 +229,6 @@ function deleteBookmarkFarm(button) {
 		<!-- Shop Section -->
 		<div id="section-shop" class="container mx-auto px-4 py-8">
 			<div class="flex flex-col md:flex-row gap-8">
-				<%@include file="../include/menu.jsp"%>
 
 				<!-- Products Grid -->
 				<div class="flex-1">
@@ -297,9 +296,6 @@ function deleteBookmarkFarm(button) {
 								</form>
 							</c:if>
 
-							<%-- <div class="seller-buttons">
-								<button type="button" class="favorite-btn" onclick="addToBookmarkFarm(this)">❤️ 좋아요 ${farmDetail.bookMarkCnt}</button>
-							</div> --%>
 
 							</div>
 
