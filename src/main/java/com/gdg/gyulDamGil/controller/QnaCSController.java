@@ -179,8 +179,9 @@ public class QnaCSController {
 		ConsumerVO consumerVO = consumerdao.selectConsumerById(qnaCSVO.getConsumerId());
 		SellerVO sellerVO = sellerdao.selectSellerById(qnaCSVO.getSellerId());
 		
-		String consumerUserId = consumerVO.getName();
+		String consumerUserId = consumerVO.getUserId();
 		String sellerUserId = sellerVO.getFarmName();
+		
         
 
         List<QnaCSRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
