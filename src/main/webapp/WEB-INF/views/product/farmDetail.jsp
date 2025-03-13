@@ -229,7 +229,6 @@ function deleteBookmarkFarm(button) {
 		<!-- Shop Section -->
 		<div id="section-shop" class="container mx-auto px-4 py-8">
 			<div class="flex flex-col md:flex-row gap-8">
-				<%@include file="../include/menu.jsp"%>
 
 				<!-- Products Grid -->
 				<div class="flex-1">
@@ -297,9 +296,6 @@ function deleteBookmarkFarm(button) {
 								</form>
 							</c:if>
 
-							<%-- <div class="seller-buttons">
-								<button type="button" class="favorite-btn" onclick="addToBookmarkFarm(this)">❤️ 좋아요 ${farmDetail.bookMarkCnt}</button>
-							</div> --%>
 
 							</div>
 
