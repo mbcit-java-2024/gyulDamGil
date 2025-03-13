@@ -203,7 +203,7 @@ public class ProductController {
 		}
 		
 		ProductVO productVO = new ProductVO();
-		List<ProductVO> selectImg = productDAO.selectImg(productVO); // 이건 왜 하지?? 어디다 써?? 지금 이미지 가져올때
+		List<ProductVO> selectImg = productDAO.selectImg(productVO); 
 		model.addAttribute("selectImg", selectImg);
 		
 		List<CartVO> selectcartList = cartService.selectcartList(cartVO);
@@ -336,8 +336,7 @@ public class ProductController {
 
 	@GetMapping("/orderOKPage")
 	public String orderOKPage(Model model, @RequestParam String orderIds, 
-			@RequestParam Map<String, Object> param, HttpServletRequest req) { // 여기 오더오케이 페이지로 넘어올때
-		// 페이먼트가 비어있으면 redirect:/orderPage하면 되는거아니야? 이거는 주문이 다 완료됏을대라 여기서 페이먼트 체크는 없어야 하는거 아냐? 그렇네
+			@RequestParam Map<String, Object> param, HttpServletRequest req) { 
 		System.out.println("ProductController의 orderOKPage메소드 실행");
 
 		

@@ -81,7 +81,7 @@
     function addToOrder() {
     	
     	
-        console.log('addToOrder:::::::::::::paymentMethod::::::::::::::::' + ($('input[name="paymentMethod"]').val())); // 여길 막았더니 에러 안난다. 
+        console.log('addToOrder:::::::::::::paymentMethod::::::::::::::::' + ($('input[name="paymentMethod"]').val())); 
         
         
             
@@ -114,7 +114,7 @@
             },
             success : function(data){
                 console.log('success:::::::::::111::::::::::::' + JSON.stringify(data));
-            	if ('0' == data.code) { // 여긴 성공인데 왜 != 이지?? 지금 수정했어?? 건든적없는   그래?? 이상하네.. ㅎ 한번 해봐`````
+            	if ('0' == data.code) { 
             		console.log('success:::::::::::payment::::::::::::' + data.payment);
             				location.href = '/orderOKPage?orderIds=' + data.orderIds;
             	} else {

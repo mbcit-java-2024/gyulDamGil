@@ -78,7 +78,7 @@
     </style>
     <script>
     
-    function orderOKToOne() { // 어딘가 신택스 에러가 잇나봐.. 
+    function orderOKToOne() { 
         console.log('orderOKToOne:::::::::::::::::::::::::::::');
         console.log('orderOKToOne:::::::::::::paymentMethod::::::::::::::::' + ($('input[name="paymentMethod"]').val()));
 
@@ -107,7 +107,7 @@
             },
             success : function(data){
                 console.log('success:::::::::::111::::::::::::' + JSON.stringify(data));
-            	if ('0' == data.code) { /// 헐 이것도 같지않음으로돼있어  코드값이 안나와서 이렇게 햇엇나보네.. 컨트롤러를 잘못자서 
+            	if ('0' == data.code) {
             		//console.log('success:::::::::::111::::::::::::' +data.orderId);
             		/* if (!confirm(param.productId + '상품이' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
             		else { */
