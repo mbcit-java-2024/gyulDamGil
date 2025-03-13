@@ -279,9 +279,10 @@ function deleteBookmarkFarm(button) {
 								</c:when>
 							</c:choose>
 							<c:if test="${not empty sessionScope.userVO}">
-								<button type="button" class="inquiry-btn" onclick="location.href='/QnaCS/QnaCSInsert/${farmDetail.id}'">
-									<i class="fas fa-envelope"></i> 문의하기
-								</button>
+								<form id="qnaForm" action="/QnaCSInsert?farmId=${farmDetail.id}" method="post">
+    								<input type="hidden" name="farmId" value="${farmDetail.id}">
+    								<button type="submit" class="inquiry-btn">문의하기</button>
+								</form>
 							</c:if>
 
 							<%-- <div class="seller-buttons">

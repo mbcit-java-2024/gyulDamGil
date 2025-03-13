@@ -20,7 +20,7 @@
     <table width="900" border="1" align="center" cellpadding="3" cellspacing="2">
 	    <tr>
 	        <th width="80">작성자</th>
-	        <td width="520">${qnaSMVO.sellerId}</td>
+	        <td width="520">${sellerUserId}</td>
 	        <th width="80">작성일</th>
 	        <td width="200"><fmt:formatDate value="${qnaSMVO.createDate}" pattern="yyyy-MM-dd HH:mm" /></td>
 	    </tr>

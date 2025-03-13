@@ -33,10 +33,10 @@ public class QnaCSController {
 	private QnaCSDAO dao;
 	
 	@Autowired
-	private ConsumerDAO cdao;
+	private ConsumerDAO consumerdao;
 	
 	@Autowired
-	private SellerDAO sdao;
+	private SellerDAO sellerdao;
 	
 	
 	@RequestMapping("/faq")
@@ -71,23 +71,39 @@ public class QnaCSController {
 	@RequestMapping("/QnaCSListc")
 	public String selectQnaListc(Model model, HttpServletRequest request) {
     	int consumerId = (int) request.getSession().getAttribute("id");
+    	ConsumerVO consumer = consumerdao.selectConsumerById(consumerId);
+    	String consumerUserId = consumer.getUserId();
+    	
         List<QnaCSVO> qnaList = dao.selectQnaByconsumerId(consumerId);
-        log.info("QnaCMController - selectQnaListc() 실행");
-        log.info("consumerId:{}",consumerId);
         
-        
+        model.addAttribute("consumerUserId", consumerUserId);
         model.addAttribute("consumerId",consumerId);
         model.addAttribute("qnaList", qnaList);
         log.info("qnaList: {}", qnaList);
         
         return "/QnaCS/QnaCSList";
 	}
+	
 	@RequestMapping("/QnaCSLists")
 	public String selectQnaLists(Model model, HttpServletRequest request) {
 		int sellerId = (int) request.getSession().getAttribute("id");
+		int consumerId = (int) request.getSession().getAttribute("id");
+		
+		SellerVO seller = sellerdao.selectSellerById(sellerId);
+		ConsumerVO consumer = consumerdao.selectConsumerById(consumerId);
+		
+		String consumerUserId = consumer.getUserId();
+		String sellerUserId = seller.getFarmName();
+		
 		List<QnaCSVO> qnaList = dao.selectQnaBysellerId(sellerId);
+		
+		
 		log.info("QnaCMController - selectQnaLists() 실행");
 		
+		model.addAttribute("consumerUserId", consumerUserId);
+		model.addAttribute("consumerId",consumerId);
+		model.addAttribute("sellerUserId",sellerUserId);
+		model.addAttribute("sellerId",sellerId);
 		model.addAttribute("qnaList", qnaList);
 		log.info("qnaList: {}", qnaList);
 		
@@ -120,14 +136,24 @@ public class QnaCSController {
 */
 	
 	@RequestMapping("/QnaCSInsert")
-	public String QnaInsert(Model model, HttpServletRequest request) {
-		int consumerId = (int) request.getSession().getAttribute("id");
-		log.info("HomeController 클래스의 QnaInsert() 메소드 실행");
-		
-		model.addAttribute("consumerId",consumerId);
-		return "/QnaCS/QnaCSInsert";
-	}
-	
+	public String QnaInsert(@RequestParam("farmId") int farmId, Model model, HttpServletRequest request) {
+	    int consumerId = (int) request.getSession().getAttribute("id");
+	    ConsumerVO consumer = consumerdao.selectConsumerById(consumerId);
+	    
+	    // farmId를 기반으로 Seller 정보 가져오기
+	    SellerVO seller = sellerdao.selectSellerById(farmId);
+	    String farmName =  seller.getFarmName();
+
+	    String consumerUserId = consumer.getUserId();
+	    log.info("HomeController - QnaInsert() 실행");
+
+	    model.addAttribute("consumerUserId", consumerUserId);
+	    model.addAttribute("consumerId", consumerId);
+	    model.addAttribute("farmId", farmId);
+	    model.addAttribute("farmName", farmName); // farmName 추가
+
+	    return "/QnaCS/QnaCSInsert";
+	}	
 	
 	@RequestMapping("/QnaCSInsertOK")
 	public String QnaInsertOK(QnaCSVO qnaCSVO,Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
@@ -143,23 +169,22 @@ public class QnaCSController {
 	}
 	
     @RequestMapping("/QnaCSDetail")
-    public String selectQnaByIdx(@RequestParam("id") int id, Model model) {
-    	ConsumerVO consumerVO = cdao.selectById(id);
-    	SellerVO sellerVO = sdao.selectById(id);
-    	
+    public String selectQnaByIdx(@RequestParam("id") int id, Model model, HttpServletRequest request) {
+		int sellerId = (int) request.getSession().getAttribute("id");
+		SellerVO seller = sellerdao.selectSellerById(sellerId);
+		String sellerUserId = seller.getFarmName();
+		
+		model.addAttribute("sellerUserId",sellerUserId);
+		model.addAttribute("sellerId",sellerId);
         QnaCSVO qnaCSVO = dao.selectQnaByIdx(id);
 
         List<QnaCSRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
 
         log.info("QnaCSController의 selectQnaByIdx() 메소드 실행");
         
-        model.addAttribute("sellerVO", sellerVO);
-        model.addAttribute("consumerVO", consumerVO);
         model.addAttribute("qnaCSVO", qnaCSVO);
         model.addAttribute("replies", replies);
         
-        log.info("ConsumerVO name: " + consumerVO.getName());
-        log.info("SellerVO farmname: " + sellerVO.getFarmName());
 
         return "/QnaCS/QnaCSDetail"; 
     }

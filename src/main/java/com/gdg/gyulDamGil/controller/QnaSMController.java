@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdg.gyulDamGil.dao.QnaSMDAO;
+import com.gdg.gyulDamGil.dao.SellerDAO;
 import com.gdg.gyulDamGil.vo.QnaSMRepliesVO;
 import com.gdg.gyulDamGil.vo.QnaSMVO;
+import com.gdg.gyulDamGil.vo.SellerVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,14 +25,23 @@ public class QnaSMController {
 
     @Autowired
     private QnaSMDAO dao;
+    
+    @Autowired
+    private SellerDAO sellerdao;
 
     // 전체 QnA 목록 출력
     @RequestMapping("/QnaSMList")
     public String selectQnaList(Model model, HttpServletRequest request) {
     	int sellerId = (int) request.getSession().getAttribute("id");
+    	SellerVO seller = sellerdao.selectSellerById(sellerId);
+    	
+    	String sellerUserId = seller.getFarmName();
+    	
+    
         List<QnaSMVO> qnaList = dao.selectQnaBySellerId(sellerId);
         log.info("QnaSMController - selectQnaList() 실행");
         
+        model.addAttribute("sellerUserId", sellerUserId);
         model.addAttribute("qnaList", qnaList);
         log.info("qnaList: {}", qnaList);
         return "/QnaSM/QnaSMList";
@@ -56,13 +67,18 @@ public class QnaSMController {
 
     // QnA 상세 조회
     @RequestMapping("/QnaSMDetail")
-    public String selectQnaByIdx(@RequestParam("id") int id, Model model) {
+    public String selectQnaByIdx(@RequestParam("id") int id, Model model, HttpServletRequest request) {
+    	int sellerId = (int) request.getSession().getAttribute("id");
+    	SellerVO seller = sellerdao.selectSellerById(sellerId);
+    	String sellerUserId = seller.getFarmName();
+    	
         QnaSMVO qnaSMVO = dao.selectQnaByIdx(id);
         List<QnaSMRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
 
         log.info("QnaSMController - selectQnaByIdx() 실행");
 
         model.addAttribute("qnaSMVO", qnaSMVO);
+        model.addAttribute("sellerUserId", sellerUserId);
         model.addAttribute("replies", replies);
 
         return "/QnaSM/QnaSMDetail";

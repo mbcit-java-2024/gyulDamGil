@@ -14,11 +14,11 @@
 			cellspacing="0">
 			<tr>
 				<th width="100">작성자</th>
-				<td width="630">${consumerId}</td>
+				<td width="630">${consumerUserId}</td>
 			</tr>
 			<tr>
 				<th width="100">판매자</th>
-				<td width="500"><input type="text" name="sellerId" /></td>
+				<td width="500">${farmName}</td>
 			</tr>
 			<tr>
 				<th width="100">제목</th>
