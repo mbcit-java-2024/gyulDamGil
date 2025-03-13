@@ -28,14 +28,14 @@
 <body>
 
 	<!--  로고 (클릭시 홈 화면으로 이동) -->
-	<div class="center" style="margin-top: 200px; margin-bottom: 100px">
+	<div class="center" style="margin-top: 100px; margin-bottom: 50px">
 		<img src="/images/gdg/gdgLogo.png" style="width: 150px"
 			onclick="location.href='/'">
 	</div>
 
 <div class="container" style="width: 600px; margin-bottom: 200px">
 	<!-- 구매자/판매자 선택 탭 -->
-		<ul class="nav nav-tabs nav-justified">
+		<ul class="nav nav-tabs nav-justified" style="width: 600px;">
 			<li class="nav-item"><a class="nav-link"
 				style="color: black; padding-top: 15px; padding-bottom: 12px; background-color: #FFECD2; color: #F66F0A;"
 				href="/login/1">일반회원 로그인</a></li>
