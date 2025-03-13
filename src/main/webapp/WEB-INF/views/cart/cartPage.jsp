@@ -12,31 +12,41 @@
 <link rel="stylesheet" type="text/css"
 	href="../../../resources/css/style.css">
 <style>
-/* 이미지가 포함된 td를 중앙 정렬 */
-td {
-    text-align: center;
-    vertical-align: middle;
+/* 테이블 행 높이 조정 */
+td, th {
+	padding: 6px; /* 기존보다 줄여서 높이 감소 */
+	font-size: 14px; /* 글씨 크기 줄이기 */
+	vertical-align: middle;
 }
 
-/* 이미지 컨테이너 크기 조정 및 중앙 정렬 */
-td div {
+/* 이미지와 상품명을 가운데 정렬 */
+.product-info {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 150px; /* 크기 증가 */
-    height: 150px; /* 정사각형 유지 */
-    margin: 0 auto; /* 중앙 정렬 */
-    overflow: hidden;
+    justify-content: center; /* 가로 방향 중앙 정렬 */
+    gap: 10px; /* 이미지와 텍스트 사이 간격 */
+    text-align: center; /* 텍스트 중앙 정렬 */
 }
 
-/* 이미지 크기 조정 및 비율 유지 */
-td div img {
-    width: 100%;
-    height: 100%;
+/* 이미지 크기 조정 */
+.product-info img {
+    width: 100px; /* 기존보다 살짝 확대 */
+    height: 100px; /* 정사각형 유지 */
     object-fit: cover;
-    display: block;
+    border-radius: 5px;
 }
 
+
+
+/* 버튼 크기 조정 */
+.quantity-box button {
+	padding: 3px 6px; /* 버튼 크기 축소 */
+	font-size: 12px;
+}
+
+.quantity-box input {
+	width: 40px; /* 인풋 크기 축소 */
+}
 
 table {
 	width: 100%;
@@ -363,7 +373,7 @@ th {
 			<div class="flex flex-col md:flex-row gap-8">
 				<div class="flex-1" id="comments-{{id}}">
 					<div class="flex justify-between items-center mb-6">
-						<h2 class="text-2xl font-bold">귤 바구니</h2>
+						<h1 class="text-2xl font-bold">귤 바구니</h1>
 					</div>
 
 
@@ -379,6 +389,7 @@ th {
 							<table>
 								<tr>
 									<th><input type="checkbox" id="checkAll"></th>
+									<th>이미지</th>
 									<th>상품명</th>
 									<th>가격</th>
 									<th>수량</th>
@@ -390,17 +401,20 @@ th {
 									<tr id="cart-${cart.id}" data-id="${cart.id}">
 										<td data-name="chk"><input type="checkbox"
 											class="itemCheck"></td>
+											<td>
+											<div class="product-info">
+												<img src="${cart.mainImageUrl}" alt="상품 이미지"> 
+												<!-- 이미지 옆에 상품명 표시 -->
+											</div> 
+											</td>
 										<td>
-
-
-											<div>
-												<img src="${cart.mainImageUrl}" alt="상품 이미지"> <input
-													type="hidden" name="title" value="${cart.title}" />
-											</div> <input type="hidden" name="productId"
-											value="${cart.productId}" /><br>${cart.title} <input
-											type="hidden" name="consumerId" value="${cart.consumerId}" />
-											<input type="hidden" name="stock" value="${cart.stock}" />${cart.stock}
+											<input type="hidden" name="title" value="${cart.title}" />${cart.title}
+											<input type="hidden" name="productId"
+											value="${cart.productId}" /> <input type="hidden"
+											name="consumerId" value="${cart.consumerId}" /> <input
+											type="hidden" name="stock" value="${cart.stock}" />
 										</td>
+
 										<td data-name="productPrice" class="price">${cart.price}</td>
 										<td>
 											<div class="quantity-box">

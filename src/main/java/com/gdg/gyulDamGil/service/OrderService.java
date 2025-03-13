@@ -57,11 +57,8 @@ public class OrderService {
 	        		continue;
 	        	} else { // 정상 작동 시 실행해야하는 실행문들
 	        		resultCnt++;
-	        		System.out.println("orderIds" + param.get("orderId")); // orderId : 디비에서 가지고 온 값
 	        		if (orderIds.equals("")) {
 	        			orderIds = orderIds + param.get("orderId");
-	        			System.out.println("orderIds" + param.get("orderId"));
-	        			System.out.println("orderIds" + param.get("orderIds"));
 	        		}
 	        		else {
 	        			orderIds = orderIds + ',' + param.get("orderId");

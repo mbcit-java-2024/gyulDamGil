@@ -44,7 +44,7 @@
 		(consumerId, sellerId, productId, count, orderDate, totalPrice, price, status)
 		select a.consumerId, b.sellerId, a.productId, a.count, now() as orderDate, a.totalPrice, a.price, '0' status 
 		from cart a left join product b on a.productId = b.id 
-		where a.consumerId = 1
+		where a.consumerId = #{consumerId}
 		and a.id = #{id}
 	</insert>
 	
@@ -52,11 +52,7 @@
 	<select id="selectOrderList" parameterType="OrderVO" resultType="OrderVO" >
 		SELECT a.consumerId, b.sellerId, a.productId, a.price, a.count, a.orderDate, a.totalPrice, a.status, b.title
 		FROM `order` a LEFT JOIN product b ON a.productId  = b.id
-		where a.id
-		IN
-		<foreach item="id" collection="orderIds" open="(" separator="," close=")">
-        	#{id}
-   	 	</foreach>
+		where a.id in (${orderIds})
 	</select>
 	
 	<insert id="insertDetailOneToOrder" parameterType="java.util.HashMap"  useGeneratedKeys="true" keyProperty="orderId">

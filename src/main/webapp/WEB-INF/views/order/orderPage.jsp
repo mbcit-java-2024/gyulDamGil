@@ -165,7 +165,7 @@
         <%@ include file="../include/header.jsp" %>
         
         <div id="section-payment" class="container mx-auto px-4 py-8">
-            <h2 class="text-2xl font-bold mb-6">결제 페이지</h2>
+            <h1 class="text-2xl font-bold mb-6">결제 페이지</h1>
             <!-- <form action="/orderOKPage" method="post"> -->
                 <table>
                     <thead>
