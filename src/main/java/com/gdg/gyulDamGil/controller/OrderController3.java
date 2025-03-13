@@ -36,16 +36,26 @@ public class OrderController3 {
 			param.put("consumerId", consumerId);
 		}
 		
+		// 여기서 payment 값 체크해서 값이 없으면 리턴하도록 코딩 추가 ㅇㅋ?? ㅇㅇㅇ   화면에서만 체크해도 되고, 확실하게 하려면 여기에도 추강ㅇ
+		if (null == param.get("payment")) {	 
+			resultMap.put("code", "-1");
+			resultMap.put("message", "결제수단을 선택해주세요."); 
+			
+			return resultMap;
+		}
 		
 //		param.put("consumerId", 1); 
 		resultMap.put("code", "0");// 성공여부 0:성공, 그외:실패 
-		resultMap.put("message", "");// 에러메세지
+		resultMap.put("message", "");// 에러메세지 성공했을때는 메세지가 비어서 내려가.. 
 		try {
-			resultMap = orderService.orders(param); 
-			resultCnt = (int) resultMap.get("resultCnt");
+			Map<String, Object>  resultMap1 = orderService.orders(param); // 찾았다.. 여기서 resultMap 값이 지워진다.. resultMap에 서비스에서 리턴받은 맵을 받고 있잖아..  
+			resultCnt = (int) resultMap1.get("resultCnt");
 			if (0 == resultCnt) {	 
 				resultMap.put("code", "-1");
 				resultMap.put("message", "등록된 자료가 없습니다."); 
+			} else {		        // 이렇게 다른 변수명으로 리턴받아서 resultMap 으로 옮겨줘야 돼.. 이해됏어?? ㅇㅇ  한버
+				resultMap.put("orderIds", resultMap1.get("orderIds")) ;  
+				resultMap.put("resultCnt", resultMap1.get("resultCnt")) ; 
 			}
 		} catch(Exception e) {			 
 			resultMap.put("code", "-1");// 성공여부 0:성공, 그외:실패 
@@ -72,15 +82,23 @@ public class OrderController3 {
 			param.put("consumerId", consumerId);
 		}
 		
-		
+		if (null == param.get("payment")) {	 
+			resultMap.put("code", "-1");
+			resultMap.put("message", "결제수단을 선택해주세요."); 
+			
+			return resultMap;
+		}
 		resultMap.put("code", "0");// 성공여부 0:성공, 그외:실패 
 		resultMap.put("message", "");// 에러메세지
 		try {
-			resultMap = orderService.orderOKToOne(param); 
-			resultCnt = (int) resultMap.get("resultCnt");
-			if (0 == resultCnt) {	 
+			Map<String, Object>  resultMap1 = orderService.orderOKToOne(param); 
+			resultCnt = (int) resultMap1.get("resultCnt");
+			if (0 == resultCnt) {	 // 여기를 탔어.. 
 				resultMap.put("code", "-1");// 성공여부 0:성공, 그외:실패 
 				resultMap.put("message", "등록된 자료가 없습니다."); 
+			} else {		        // 이렇게 다른 변수명으로 리턴받아서 resultMap 으로 옮겨줘야 돼.. 이해됏어?? ㅇㅇ  한버
+				resultMap.put("orderIds", resultMap1.get("orderIds")) ;  
+				resultMap.put("resultCnt", resultMap1.get("resultCnt")) ; 
 			}
 		} catch(Exception e) {			 
 			resultMap.put("code", "-1");// 성공여부 0:성공, 그외:실패 

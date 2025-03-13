@@ -60,6 +60,7 @@
 						            <img class="product-image" src="${vo.mainImageUrl}" alt="상품 이미지">
 						        </div>
 						        <input type="hidden" name="id" value="${vo.id}">
+						        <input type="hidden" name="id" value="${vo.title}">
 						        <h4 class="font-semibold mb-2 text-center">
 						            <a href="/jejugamgyulDetail/${vo.id}">${vo.title}</a>
 						        </h4>

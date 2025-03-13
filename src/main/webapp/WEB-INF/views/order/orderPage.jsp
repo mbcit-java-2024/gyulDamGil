@@ -79,9 +79,13 @@
     <script>
     
     function addToOrder() {
-        console.log('addToOrder:::::::::::::::::::::::::::::');
+    	
+    	
+        console.log('addToOrder:::::::::::::paymentMethod::::::::::::::::' + ($('input[name="paymentMethod"]').val())); // 여길 막았더니 에러 안난다. 
+        
+        
             
-            let param = {cartIds: '${cartIds}' 
+           let param = {cartIds: '${cartIds}' 
             		, recipientName: $('#recipientName').val()
             		, address: $('#address').val()
             		, title: $('input[name="title"]').val()
@@ -90,11 +94,10 @@
             			, totalPrice: $('input[name="totalPrice"]').val()
             			, email: $('#email').val()
             			, phone: $('#phone').val()
-            			, payment: $('input[name="paymentMethod"]').val()
+            			, payment: $('input[name="paymentMethod"]:checked').val()
             			, consumerId: $('input[name="consumerId"]').val()
             			};
             
-        
 
         console.log('addToOrder:::::::::::::::::::param::::::::::'+ JSON.stringify(param));
 
@@ -106,26 +109,16 @@
             dataType : "json",
             contentType:"application/json",
             data : JSON.stringify(param),// param, //
-            //timeout: 10000,
             beforeSend:function(){
 	            console.log('addToOrder:::::::::beforeSend::::::::::::::::::::');
-                //$('#loading').removeClass('display-none');
             },
             success : function(data){
                 console.log('success:::::::::::111::::::::::::' + JSON.stringify(data));
-            	if ('0' != data.code) {
-            		console.log('success:::::::::::111::::::::::::' +data.orderIds);
-            		/* if (!confirm(param.productId + '상품이' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
-            		else { */
-            			// 주문완료페이지로 이동 
-            			location.href = '/orderOKPage?orderIds=' + data.orderIds;
+            	if ('0' == data.code) { // 여긴 성공인데 왜 != 이지?? 지금 수정했어?? 건든적없는   그래?? 이상하네.. ㅎ 한번 해봐`````
+            		console.log('success:::::::::::payment::::::::::::' + data.payment);
+            				location.href = '/orderOKPage?orderIds=' + data.orderIds;
             	} else {
-            		if (null != data.message) {
-            			alert(data.message);
-            		}
-            		else {
-            			alert('알수없는 에러');
-            		}
+            		alert(data.message ? data.message : '알 수 없는 에러');
             	}
             	
             },
@@ -141,7 +134,7 @@
             complete:function(){
                 //$('#loading').addClass('display-none');
             }
-    	}); 
+    	});  
         
     }
         $(document).ready(function() {
@@ -166,7 +159,6 @@
         
         <div id="section-payment" class="container mx-auto px-4 py-8">
             <h1 class="text-2xl font-bold mb-6">결제 페이지</h1>
-            <!-- <form action="/orderOKPage" method="post"> -->
                 <table>
                     <thead>
                         <tr>
@@ -217,8 +209,10 @@
                 </div>
                 
                 <div id="togglePaymentMethod" class="toggle-button">결제 수단 선택</div>
+                
                 <div class="payment-method">
-                    <label><input type="radio" name="paymentMethod" value="credit_card" required> 신용카드</label>
+                    <input type="hidden" id="payment" name="payment" value="${Consumerinfo.payment}"> <!-- 여기서 payment값을 어떻게 보내줘야할지모르겠어 payment 값 체크를 하면 돼 컨트롤러로  보내기전에 -->
+                    <label><input type="radio" name="paymentMethod" value="credit_card"> 신용카드</label>
                     <label><input type="radio" name="paymentMethod" value="bank_transfer"> 계좌이체</label>
                     <label><input type="radio" name="paymentMethod" value="mobile_payment"> 휴대폰 결제</label>
                     <label><input type="radio" name="paymentMethod" value="paypal"> PayPal</label>
@@ -227,7 +221,6 @@
                 <div class="btn-container">
                     <button type="button" name="addToOrder" onclick="addToOrder()">결제하기</button>
                 </div>
-            <!-- </form> -->
         </div>
 
         <%@ include file="../include/footer.jsp" %>

@@ -95,19 +95,17 @@ public class OrderService {
 		int cnt1 = 0;
 		int resultCnt = 0;
 		Map<String, Object> resultMap1 = new HashMap<String, Object>();
-		Map<String, Object> updateProduct = new HashMap<String, Object>();
 		
 		
 		try {
-			cnt1 = orderDAO.insertDetailOneToOrder(param); // 카트 1건 읽어서 오더에 인서트, 오더아이디 리턴받음
+			resultCnt = orderDAO.insertDetailOneToOrder(param); // 카트 1건 읽어서 오더에 인서트, 오더아이디 리턴받음
 			orderIds = param.get("orderId");
-//			productDAO.updateOneProduct(param); // 재성: 주석처리 stock 을 두번 처리함
 		} catch (Exception e) {
 		}
         
 		resultMap1.put("orderIds", orderIds) ; 
-    	resultMap1.put("resultCnt", resultCnt) ; 
-    	
+    	resultMap1.put("resultCnt", resultCnt) ; // resultCnt 값을 넣는 부분이 없네.. 찾았어?? ㅇㅇ
+    	// 이렇게야?고러췌``ㅋㅋㅋㅇㅇ ㅎㅎ
 		return resultMap1;  
 	}
 

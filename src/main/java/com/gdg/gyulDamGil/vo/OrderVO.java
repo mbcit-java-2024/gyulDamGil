@@ -24,5 +24,4 @@ public class OrderVO {
     private String farmName;
     private String productTitle;
     private String mainImageUrl;
-    
 }
