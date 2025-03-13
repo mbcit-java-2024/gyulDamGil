@@ -32,10 +32,19 @@
 	margin: auto;
 }
 
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.wrapper {
+    flex: 1;
+}
+
 </style>
 </head>
-<body>
-
+<body style="flex: 1;">
+<div class="wrapper">
 	<div style="justify-content: center; padding-top: 60px;">
 		<c:set var="list" value="${orderList.orderList}"></c:set>
 		<c:if test="${fn:length(list) != 0}">
@@ -177,6 +186,7 @@
 			</div>
 		</c:if>
 	</div>
+</div>
+<jsp:include page="../include/footer.jsp" />
 </body>
-	<jsp:include page="../include/footer.jsp" />
 </html>
