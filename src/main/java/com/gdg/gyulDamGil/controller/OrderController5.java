@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gdg.gyulDamGil.dao.ConsumerDAO;
 import com.gdg.gyulDamGil.dao.OrderDAO;
 import com.gdg.gyulDamGil.dao.ProductDAO;
+import com.gdg.gyulDamGil.dao.SellerDAO;
 import com.gdg.gyulDamGil.service.OrderService;
 import com.gdg.gyulDamGil.vo.ConsumerVO;
 import com.gdg.gyulDamGil.vo.OrderList;
@@ -38,6 +39,9 @@ public class OrderController5 {
 	
 	@Autowired
 	private ConsumerDAO consumerDAO;
+	
+	@Autowired
+	private SellerDAO sellerDAO;
 	
 	@RequestMapping("/orderList")
 	public String orderList(Model model, HttpServletRequest request) {
@@ -77,15 +81,18 @@ public class OrderController5 {
 	@RequestMapping("/orderDetail/{orderId}/{currentPage}")
     public String orderDetail(@PathVariable("orderId") int id,@PathVariable("currentPage") int currentPage, Model model, HttpServletRequest request) {
 		log.info("OrderController5 클래스의 orderDetail() 메소드 실행");
-		if ((int) request.getSession().getAttribute("userType") == 1) {
-			return "redirect:/myOrder";
-		}
 		try {
+			if ((int) request.getSession().getAttribute("userType") == 1) {
+				return "redirect:/myOrder";
+			}
 			int login = (int) request.getSession().getAttribute("id");
 		} catch (NullPointerException e) {
 			return "/seller/login_2";
 		}
         OrderVO order = orderDAO.selectOrderById(id);
+        order.setFarmName(sellerDAO.selectFarmName(order.getSellerId()));
+        order.setProductTitle(productDAO.selectTitleById(order.getProductId()));
+        order.setMainImageUrl(productDAO.selectImageById(order.getProductId()));
         ConsumerVO consumer = consumerDAO.selectConsumerById(order.getConsumerId());
         int stock = productDAO.selectStockById(order.getProductId());
         model.addAttribute("order", order);

@@ -66,6 +66,9 @@ td {
     background-color: orange;
     color: white;
 }
+.under-line {
+	border-bottom: 1px solid white;
+}
 
 </style>
 
@@ -141,9 +144,6 @@ td {
 					</form>
 					<br />
 				</div>
-				<div>
-					<a href="/myOrderDetail/${order.id}/${orderList.currentPage}">상세보기</a>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -160,7 +160,7 @@ td {
 			<td>${stock}</td>
 		</tr>
 		-->
-		<tr>
+		<tr class="under-line">
 			<th>상태</th>
 			<td>
 				<c:choose>
@@ -173,15 +173,15 @@ td {
                 </c:choose>
 			</td>
 		</tr>
-		<tr>
+		<tr class="under-line">
 			<th>이름</th>
 			<td>${consumer.name}</td>
 		</tr>
-		<tr>
+		<tr class="under-line">
 			<th>전화번호</th>
 			<td>${consumer.phone}</td>
 		</tr>
-		<tr>
+		<tr class="under-line">
 			<th>주소</th>
 			<td>${consumer.address} ${consumer.detailAddress}</td>
 		</tr>
@@ -190,7 +190,7 @@ td {
 			<td>${consumer.email}</td>
 		</tr>
 	</table>
-	<hr class="line"/>
+	<hr class="line"/><br/><br/><br/>
     
 
 </body>

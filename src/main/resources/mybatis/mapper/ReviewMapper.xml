@@ -22,8 +22,8 @@
 	</select>
 	
 	<insert id="insert" parameterType="ReviewVO">
-	    INSERT INTO review (userId, sellerId, productId, rate, comment, createDate, updateDate)
-	    VALUES (#{userId}, #{sellerId}, #{productId}, #{rate}, #{comment}, NOW(), NOW())
+	    INSERT INTO review (consumerId, sellerId, productId, rate, comment, createDate, updateDate)
+	    VALUES (#{consumerId}, #{sellerId}, #{productId}, #{rate}, #{comment}, NOW(), NOW())
 	</insert>
 	
 	<update id="update" parameterType="ReviewVO">

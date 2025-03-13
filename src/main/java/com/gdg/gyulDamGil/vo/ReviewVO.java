@@ -9,7 +9,7 @@ import lombok.Data;
 public class ReviewVO {
 
 	private int id;
-	private int userId;
+	private int consumerId;
 	private int sellerId;
 	private int productId;
 	private float rate;

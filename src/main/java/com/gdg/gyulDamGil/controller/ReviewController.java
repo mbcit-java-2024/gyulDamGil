@@ -28,9 +28,7 @@ public class ReviewController {
 	@RequestMapping("/ReviewInsert")
 	public String insert(HttpSession session) {
 		log.info("HomeController 클래스의 insert() 메소드 실행");
-		session.invalidate();
 		return "/Review/ReviewInsert";
-
 	}
 
 	@RequestMapping("/ReviewInsertOK")
