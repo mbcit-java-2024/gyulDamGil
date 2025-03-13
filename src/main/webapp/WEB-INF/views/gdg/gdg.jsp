@@ -43,6 +43,8 @@
    	.center {
   		display: flex;
   		justify-content: center;
+  		align-items: center;
+  		align-content: center;
   	}
   	
   	  .search-bar {
@@ -89,6 +91,10 @@
 	  margin-top: auto; /* footer를 아래로 밀어줍니다. */
 	}
 	
+	input::placeholder {
+    	text-align: center;
+	}
+
 </style>
   
 </head>
@@ -99,12 +105,13 @@
     <!-- <h2 class="center">상품 검색</h2> -->
 
     <form action="searchOK" method="get" class="center">
-    <div class="search-bar-inner center">
-        <input type="hidden" name="categoryId" value="0">
-        <input type="text" name="title" placeholder="찾으시는 상품이 있나요?">
-        <button type="submit" style="width: 30px;"><img alt="상품검색" src="/images/gdg/search.png"> </button>
-    </div>
+	    <div class="search-bar-inner center">
+	        <input type="hidden" name="categoryId" value="0">
+	        <input type="text" name="title" placeholder="찾으시는 상품이 있나요?" >
+	        <button type="submit" style="width: 30px;"><img alt="상품검색" src="/images/gdg/search.png"> </button>
+	    </div>
     </form>
+    
   </div>
 
 	

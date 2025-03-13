@@ -188,15 +188,21 @@ public class LoginController_2 {
 		log.info("LoginController 컨트롤러의 idCheck() 메소드 실행");
 		log.info("userid: " + userid);
 		List<String> ids;
+		
+//		구매자인지 판매자인지 판별한다.
 		if (i == 1) {
 			ids = consumerDao.getUserIds();
 		}else {
 			ids = sellerDao.getUserIds();
 		}
-		int result = 0;
+		
+		int result;
+		
 	    if (ids.indexOf(userid) >= 0) {
 	    	result = 1;
+	    	log.info( userid +"는(은) 이미 있는 아이디입니다.");
 	    } else {
+	    	result = 0;
 	    }
 		return result;
 	}

@@ -81,7 +81,7 @@
 			<button type="submit" class="btn mb-2 mt-2 btn-lg"
 				style="background-color: #F89D00; width: 300px; color: white; font-weight: bold;">로그인</button>
 			<!-- 회원가입 버튼 -->
-			<a href="/signIn/1" style="text-dㅁecoration: none; color: #707070;">회원가입</a>
+			<a href="/signIn/2" style="text-dㅁecoration: none; color: #707070;">회원가입</a>
 		</form>
 	</div>
 	</div>
