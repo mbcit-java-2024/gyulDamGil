@@ -219,7 +219,7 @@ function deleteBookmarkProduct(button) {
                 console.log('success:::::::::::111::::::::::::' + JSON.stringify(data));
                 if ('0' == data.code) {
                 	getCartCount();
-                    if (!confirm('${selectGamgyulDetail.title }' + '상품이' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
+                    if (!confirm('${selectGamgyulDetail.title }' + ' 상품 ' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
                     else {
                         location.href = '/cartPage';
                     }
