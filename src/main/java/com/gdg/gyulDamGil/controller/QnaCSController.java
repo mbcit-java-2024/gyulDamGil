@@ -171,17 +171,25 @@ public class QnaCSController {
     @RequestMapping("/QnaCSDetail")
     public String selectQnaByIdx(@RequestParam("id") int id, Model model, HttpServletRequest request) {
 		int sellerId = (int) request.getSession().getAttribute("id");
-		SellerVO seller = sellerdao.selectSellerById(sellerId);
-		String sellerUserId = seller.getFarmName();
 		
-		model.addAttribute("sellerUserId",sellerUserId);
-		model.addAttribute("sellerId",sellerId);
-        QnaCSVO qnaCSVO = dao.selectQnaByIdx(id);
+		SellerVO seller = sellerdao.selectSellerById(sellerId);
+		
+		QnaCSVO qnaCSVO = dao.selectQnaByIdx(id);
+		
+		ConsumerVO consumerVO = consumerdao.selectConsumerById(qnaCSVO.getConsumerId());
+		SellerVO sellerVO = sellerdao.selectSellerById(qnaCSVO.getSellerId());
+		
+		String consumerUserId = consumerVO.getName();
+		String sellerUserId = sellerVO.getFarmName();
+        
 
         List<QnaCSRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
 
         log.info("QnaCSController의 selectQnaByIdx() 메소드 실행");
         
+        model.addAttribute("consumerUserId",consumerUserId);
+        model.addAttribute("sellerUserId",sellerUserId);
+        model.addAttribute("sellerId",sellerId);
         model.addAttribute("qnaCSVO", qnaCSVO);
         model.addAttribute("replies", replies);
         

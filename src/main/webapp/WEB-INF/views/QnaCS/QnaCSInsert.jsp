@@ -18,7 +18,10 @@
 			</tr>
 			<tr>
 				<th width="100">판매자</th>
-				<td width="500">${farmName}</td>
+				<td width="500">
+				${farmName}
+				<input type="hidden" name="sellerId" value="${farmId}">
+				</td>
 			</tr>
 			<tr>
 				<th width="100">제목</th>
@@ -32,6 +35,7 @@
 			<tr>
 				<th colspan="4"><input type="submit" value="등록하기" />
 				<input type="hidden" name="consumerId" value="${consumerId}">
+				<input type="hidden" name="farmName"value="${farmName}">
 				<input type="button" value="취소하기" onclick="window.history.back();" /></th>
 			</tr>
 		</table>
