@@ -186,7 +186,7 @@ $.ajax({
 				<li>
 					<button id="tab-farms" onclick="location.href='/farms'"
 						class="px-4 py-2 font-medium border-b-2 border-transparent hover:text-orange-500">
-						귤농가들</button>
+						귤농장들</button>
 				</li>
 				<c:if test="${sessionScope.userType == 2}">
 					<li><a onclick="location.href='/sellerList'"
@@ -203,40 +203,6 @@ $.ajax({
 		</nav>
 	</div>
 </header>
-
-<!-- Mobile Menu -->
-<div id="mobile-menu" class="md:hidden hidden bg-white border-b">
-	<nav class="container mx-auto px-4 py-4">
-		<ul class="space-y-4">
-			<li><a
-				href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
-				onclick="location.href='/'" class="block hover:text-orange-500">홈</a></li>
-			<li><a
-				href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
-				onclick="location.href='/info'" class="block hover:text-orange-500">귤담길 소개</a></li>
-			<li><a
-				href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
-				onclick="location.href='/jejugamgyulList/1'"
-				class="block hover:text-orange-500">귤담기</a></li>
-			<li><a
-				href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
-				href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
-				onclick="showSection(&#39;section-farms&#39;)"
-				class="block hover:text-orange-500">입점 농가</a></li>
-
-			<c:if test="${sessionScope.userType == 2}">
-				<li><a
-					href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
-					onclick="location.href='/sellerList'"
-					class="block hover:text-orange-500">내 상품보기</a></li>
-				<li><a
-					href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
-					onclick="location.href='/insert'"
-					class="block hover:text-orange-500">상품 등록</a></li>
-			</c:if>
-		</ul>
-	</nav>
-</div>
 
 
 
@@ -262,7 +228,7 @@ $.ajax({
 			<a onclick="location.href='/myOrder'" class="block px-4 py-2 hover:bg-orange-50" style="cursor: pointer;">주문/배송 조회</a>
 		</c:if>
 		<c:if test="${sessionScope.userType == 2}">
-			<a onclick="location.href='/orderList'"	class="block px-4 py-2 hover:bg-orange-50" style="cursor: pointer;">주문/배송 조회</a>
+			<a onclick="location.href='/orderList'"	class="block px-4 py-2 hover:bg-orange-50" style="cursor: pointer;">주문확인</a>
 		</c:if>
 		<a
 			href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
@@ -271,7 +237,7 @@ $.ajax({
 		<a
 			href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
 			onclick="location.href='/myInfo'"
-			class="block px-4 py-2 hover:bg-orange-50">개인정보 수정</a>
+			class="block px-4 py-2 hover:bg-orange-50">회원정보</a>
 		<hr class="my-2">
 		<a
 			href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
