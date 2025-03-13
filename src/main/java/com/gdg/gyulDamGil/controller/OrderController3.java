@@ -45,7 +45,7 @@ public class OrderController3 {
 		
 //		param.put("consumerId", 1); 
 		resultMap.put("code", "0");// 성공여부 0:성공, 그외:실패 
-		resultMap.put("message", "");// 에러메세지 성공했을때는 메세지가 비어서 내려가.. 
+		resultMap.put("message", "");
 		try {
 			Map<String, Object>  resultMap1 = orderService.orders(param);  
 			resultCnt = (int) resultMap1.get("resultCnt");
