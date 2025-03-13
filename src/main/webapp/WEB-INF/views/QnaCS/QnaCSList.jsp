@@ -98,9 +98,6 @@
 				                    </td>
 				                </tr>
 				            </c:forEach>
-			                <div align="right">
-							    <button onclick="location.href='QnaCSInsert'">문의글 작성</button>
-							</div>
 				        </tbody>
 				    </table>
 			   	</c:if>
