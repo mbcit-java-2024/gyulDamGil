@@ -10,17 +10,14 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../resources/css/style.css">
-
-<style>
-
-
-
+	
+	<style>
 .liked {
-	background-color: red;
-	color: white;
+    background-color: red;
+    color: white;
 }
 </style>
-
+	
 <script>
 function addToBookmarkProduct(button) {
     console.log('addToBookmarkProduct:::::::::::::::::::::::::::::');
@@ -137,7 +134,7 @@ function deleteBookmarkProduct(button) {
                 console.log('success:::::::::::111::::::::::::' + JSON.stringify(data));
                 if ('0' == data.code) {
                 	getCartCount();
-                    if (!confirm('상품 ' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
+                    if (!confirm($('input[name="title"]').val() + '상품이' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
                     else {
                         location.href = '/cartPage';
                     }
@@ -170,36 +167,16 @@ function deleteBookmarkProduct(button) {
 
 						<div class="product-container">
 							<div class="product-image">
-								<img src="${productDetail.mainImageUrl }" alt="상품 이미지">&nbsp;&nbsp;
-								<div class="buttons">&nbsp;&nbsp;&nbsp;
-									<c:choose>
-										<c:when test="${productDetail.bookMarkCnt == 0}">
-											<button type="button" class="favorite-btn"
-												onclick="addToBookmarkProduct(this)">❤️ 즐겨찾기</button>
-										</c:when>
-										<c:when test="${productDetail.bookMarkCnt != 0}">
-											<%-- <c:otherwise test="${productDetail.bookMarkCnt != 0}"> --%>
-											<button type="button" class="favorite-btn liked"
-												onclick="deleteBookmarkProduct(this)">❤️ 즐겨찾기</button>
-											<%-- </c:otherwise> --%>
-										</c:when>
-									</c:choose>
-									<button type="button" class="farm-info-btn"
-										onclick="location.href='/farmDetail/${productDetail.sellerId}'">🏡
-										농장 정보</button>
-									<button type="button" class="farm-info-btn"
-										onclick="location.href='/farmDetail/${productDetail.sellerId}'">⭐
-										리뷰 보기</button>
-								</div>
+								<img src="${productDetail.mainImageUrl }" alt="상품 이미지">
 							</div>
 							<div class="product-details">
 								<div class="product-section" id="title">
 									<h2>${productDetail.title }</h2>
 									<input type="hidden" name="title"
 										value="${productDetail.title}"> <input type="hidden"
-										name="sellerId" value="${productDetail.sellerId}"> <input
-										type="hidden" name="id" value="${productDetail.id}"> <input
-										type="hidden" name="id" value="${productDetail.mainImageUrl}">
+										name="sellerId" value="${productDetail.sellerId}"> 
+										<input type="hidden" name="id" value="${productDetail.id}">
+										<input type="hidden" name="id" value="${productDetail.mainImageUrl}">
 								</div>
 								<div class="product-section">
 									<p>${productDetail.description }</p>
@@ -251,7 +228,24 @@ function deleteBookmarkProduct(button) {
 											</c:otherwise>
 										</c:choose>
 										<button type="submit" class="buy-btn">결제하기</button>
-
+										<div class="buttons">
+										<c:choose>
+										<c:when test="${productDetail.bookMarkCnt == 0}">
+									<button type="button" class="favorite-btn" onclick="addToBookmarkProduct(this)">❤️ 즐겨찾기</button>
+										</c:when>
+										<c:when test="${productDetail.bookMarkCnt != 0}">
+										<%-- <c:otherwise test="${productDetail.bookMarkCnt != 0}"> --%>
+									<button type="button" class="favorite-btn liked" onclick="deleteBookmarkProduct(this)">❤️ 즐겨찾기</button>
+										<%-- </c:otherwise> --%>
+										</c:when>
+										</c:choose>
+										<button type="button" class="farm-info-btn"
+											onclick="location.href='/farmDetail/${productDetail.sellerId}'">🏡
+											농장 정보</button> 
+										<button type="button" class="farm-info-btn"
+											onclick="location.href='/ReviewList?productId=${productDetail.id}'">⭐
+											 리뷰 보기</button> 
+								</div>
 									</div>
 								</div>
 							</div>
@@ -262,7 +256,7 @@ function deleteBookmarkProduct(button) {
 				</div>
 			</div>
 		</div>
-
+<!--  수정 -->
 		<%@include file="../include/footer.jsp"%>
 	</div>
 </body>
