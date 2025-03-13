@@ -25,11 +25,11 @@
 		<li class="pl-4"><a href="/login/1" onclick="alert('로그인이 필요한 서비스입니다.')" class="text-gray-600 hover:text-orange-500" style="cursor: pointer">사이트 문의</a></li>
 		</c:if>
 		<c:if test="${sessionScope.userType == 1}">
-		<li class="pl-4"><a onclick="location.href='/QnaCMList'" class="text-gray-600 hover:text-orange-500" style="cursor: pointer">사이트 문의</a></li>
+		<li class="pl-4"><a onclick="location.href='/QnaCMList'" class="text-gray-600 hover:text-orange-500" style="cursor: pointer">귤담길 문의</a></li>
 		<li class="pl-4"><a onclick="location.href='/QnaCSListc'" class="text-gray-600 hover:text-orange-500" style="cursor: pointer">농장 문의</a></li>
 		</c:if>
 		<c:if test="${sessionScope.userType == 2}">
-		<li class="pl-4"><a onclick="location.href='/QnaSMList'" class="text-gray-600 hover:text-orange-500" style="cursor: pointer">사이트 문의</a></li>
+		<li class="pl-4"><a onclick="location.href='/QnaSMList'" class="text-gray-600 hover:text-orange-500" style="cursor: pointer">귤담길 문의</a></li>
 		<li class="pl-4"><a onclick="location.href='/QnaCSLists'" class="text-gray-600 hover:text-orange-500" style="cursor: pointer">내 고객 문의</a></li>
 		</c:if>
 	</ul>
