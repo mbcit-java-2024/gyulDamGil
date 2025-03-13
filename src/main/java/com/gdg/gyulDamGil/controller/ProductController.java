@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.origin.SystemEnvironmentOrigin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -279,6 +280,7 @@ public class ProductController {
 	public String detailToOrderPage(@RequestParam Map<String, Object> param, Model model, HttpServletRequest request) {
 		System.out.println("ProductController의 detailToOrderPage메소드 실행");
 
+		
 		log.info("userType: " + request.getAttribute("userType"));
 		log.info("userId: " + request.getAttribute("id"));
 		String result = "/";
@@ -334,9 +336,11 @@ public class ProductController {
 
 	@GetMapping("/orderOKPage")
 	public String orderOKPage(Model model, @RequestParam String orderIds, 
-			@RequestParam Map<String, Object> param, HttpServletRequest req) {
+			@RequestParam Map<String, Object> param, HttpServletRequest req) { // 여기 오더오케이 페이지로 넘어올때
+		// 페이먼트가 비어있으면 redirect:/orderPage하면 되는거아니야? 이거는 주문이 다 완료됏을대라 여기서 페이먼트 체크는 없어야 하는거 아냐? 그렇네
 		System.out.println("ProductController의 orderOKPage메소드 실행");
 
+		
 		List<OrderVO> orderOK = orderService.selectOrderList(orderIds);
 		System.out.println("orderOK: " + orderOK);
 		model.addAttribute("orderOK", orderOK);

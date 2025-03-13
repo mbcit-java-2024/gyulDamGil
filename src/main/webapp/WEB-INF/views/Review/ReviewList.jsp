@@ -27,7 +27,7 @@
     <c:forEach var="review" items="${reviewList}">
 	    <div class="review-container">
 	        <p>상품 이름: ${review.productId}</p>
-	        <p>작성자: ${review.userId}</p>
+	        <p>작성자: ${review.consumerId}</p>
 	        <p>날짜:
 	        	<c:choose>
 			        <c:when test="${not empty review.updateDate}">

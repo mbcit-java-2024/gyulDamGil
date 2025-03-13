@@ -456,7 +456,7 @@ th {
 		<form name="form1" action="/orderPage" method="post">
 			<input type="hidden" name="cartIds" value="" />
 		</form>
-		<%@ include file="../include/footer.jsp"%>
 	</div>
+		<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

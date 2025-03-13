@@ -17,5 +17,5 @@ public class ConsumerVO {
 	private String detailAddress;
 	private Date createDate;
 	private Date updateDate;
-
+	private String payment;
 }

@@ -78,32 +78,21 @@
     </style>
     <script>
     
-    function orderOKToOne() {
+    function orderOKToOne() { // 어딘가 신택스 에러가 잇나봐.. 
         console.log('orderOKToOne:::::::::::::::::::::::::::::');
-            
-        // consumerId, sellerId, productId, count, orderDate, totalPrice, price, status 여기서 이 값들을 잘 넘겨야함. 
-            /* let param = {id: $('input[name="id"]').val() 
-            		, title: $('input[name="title"]').val()
-            		, count: $('input[name="count"]').val()
-            		, price: $('input[name="price"]').val()
-            			, totalPrice: $('input[name="totalPrice"]').val()
-            			, payment: $('input[name="paymentMethod"]').val()
-            			, consumerId: $('input[name="consumerId"]').val()
-            			}; */
-            let param = {productId: ${productVO.id}
-            			, sellerId : ${productVO.sellerId}
-            			, count: ${productVO.count}
-            			, price: ${productVO.price}
-            			, totalPrice: ${productVO.totalPrice}
-            			, payment: $('input[name="paymentMethod"]').val()
-            			, title: $('input[name="title"]').val()
-            			}; 
-            
+        console.log('orderOKToOne:::::::::::::paymentMethod::::::::::::::::' + ($('input[name="paymentMethod"]').val()));
+
+        let param = {productId: ${productVO.id}
+		, sellerId : ${productVO.sellerId}
+		, count: ${productVO.count}
+		, price: ${productVO.price}
+		, totalPrice: ${productVO.totalPrice}
+		, payment: $('input[name="paymentMethod"]:checked').val()
+		, title: $('input[name="title"]').val()
+		};
         
-
         console.log('orderOKToOne:::::::::::::::::::param::::::::::'+ JSON.stringify(param));
-
-        //return;
+        
         
         $.ajax({
             url : '/orderOKToOne',
@@ -118,18 +107,13 @@
             },
             success : function(data){
                 console.log('success:::::::::::111::::::::::::' + JSON.stringify(data));
-            	if ('0' != data.code) {
+            	if ('0' == data.code) { /// 헐 이것도 같지않음으로돼있어  코드값이 안나와서 이렇게 햇엇나보네.. 컨트롤러를 잘못자서 
             		//console.log('success:::::::::::111::::::::::::' +data.orderId);
             		/* if (!confirm(param.productId + '상품이' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
             		else { */
             			location.href = '/orderOKPage?orderIds=' + data.orderIds; 
             	} else {
-            		if (null != data.message) {
-            			alert(data.message);
-            		}
-            		else {
-            			alert('알수없는 에러');
-            		}
+            		alert(data.message ? data.message : '알 수 없는 에러') ;
             	}
             	
             },
@@ -146,6 +130,7 @@
                 //$('#loading').addClass('display-none');
             }
     	}); 
+        
         
     }
         $(document).ready(function() {
@@ -221,7 +206,8 @@
                 
                 <div id="togglePaymentMethod" class="toggle-button">결제 수단 선택</div>
                 <div class="payment-method">
-                    <label><input type="radio" name="paymentMethod" value="credit_card" required> 신용카드</label>
+                <input type="hidden" id="payment" name="payment" value="${Consumerinfo.payment}">
+                    <label><input type="radio" name="paymentMethod" value="credit_card"> 신용카드</label>
                     <label><input type="radio" name="paymentMethod" value="bank_transfer"> 계좌이체</label>
                     <label><input type="radio" name="paymentMethod" value="mobile_payment"> 휴대폰 결제</label>
                     <label><input type="radio" name="paymentMethod" value="paypal"> PayPal</label>

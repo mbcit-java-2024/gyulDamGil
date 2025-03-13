@@ -110,6 +110,9 @@ html, body {
 							<br />
 						</div>
 						<div>
+							<a href="/ReviewInsert">리뷰쓰기</a>
+						</div>
+						<div>
 							<a href="/myOrderDetail/${order.id}/${orderList.currentPage}">상세보기</a>
 						</div>
 					</div>
