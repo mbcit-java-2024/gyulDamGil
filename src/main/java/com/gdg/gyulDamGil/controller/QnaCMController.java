@@ -27,34 +27,47 @@ public class QnaCMController {
     private QnaCMDAO dao;
     
     @Autowired
-    private ConsumerDAO consumerDAO;
+    private ConsumerDAO consumerdao;
 
     // 전체 QnA 목록 출력
     @RequestMapping("/QnaCMList")
-    public String selectQnaList(ConsumerVO consumerVO, Model model, HttpServletRequest request) {
-    	int consumerId = (int) request.getSession().getAttribute("id");
-  
-    	String consumerName = consumerVO.getName();
-    	
+    public String selectQnaList(Model model, HttpServletRequest request) {
+        // 세션에서 consumerId 가져오기
+        int consumerId = (int) request.getSession().getAttribute("id");
+
+        // consumerId로 해당 ConsumerVO 조회
+        ConsumerVO consumer = consumerdao.selectConsumerById(consumerId);
+
+        // userId 가져오기 (null 체크 추가)
+        String consumerUserId = consumer.getUserId();
+
+        // consumerId를 기준으로 QnA 리스트 조회
         List<QnaCMVO> qnaList = dao.selectQnaByconsumerId(consumerId);
-        
+
         log.info("QnaCMController - selectQnaList() 실행");
-        
-        model.addAttribute("consumerName",consumerName);
+
+        // 모델에 값 추가
+        model.addAttribute("consumerUserId", consumerUserId);
         model.addAttribute("qnaList", qnaList);
         log.info("qnaList: {}", qnaList);
-        
+
         return "/QnaCM/QnaCMList";
-        
-    }
+    }    
     
     // QnA 작성 페이지 이동
     @RequestMapping("/QnaCMInsert")
     public String QnaInsert(Model model, HttpServletRequest request ) {
     	int consumerId =(int) request.getSession().getAttribute("id");
+    	
+    	ConsumerVO consumer = consumerdao.selectConsumerById(consumerId);
+    	
+    	String consumerUserId = consumer.getUserId();
+    	
         log.info("QnaCMController - QnaInsert() 실행");
-
-    	model.addAttribute("consumerId",consumerId);
+        
+        model.addAttribute("consumerUserId", consumerUserId);
+        model.addAttribute("consumerId", consumerId);
+        
         return "/QnaCM/QnaCMInsert";
     }
 
@@ -62,10 +75,15 @@ public class QnaCMController {
     @RequestMapping("/QnaCMInsertOK")
     public String QnaInsertOK(QnaCMVO qnaCMVO, RedirectAttributes redirectAttributes, HttpServletRequest request, Model model) {
     	int consumerId = (int) request.getSession().getAttribute("id");
+    	ConsumerVO consumer = consumerdao.selectConsumerById(consumerId);
+    	String consumerUserId = consumer.getUserId();
+    	
         log.info("QnaCMController - QnaInsertOK() 실행");
         dao.insert(qnaCMVO);
         qnaCMVO.setConsumerId(consumerId);
         
+        
+        model.addAttribute("consumerUserId", consumerUserId);
         model.addAttribute("consumerId", consumerId);
         redirectAttributes.addFlashAttribute("message", "문의가 등록되었습니다.");
         return "redirect:/QnaCMList";
@@ -73,10 +91,15 @@ public class QnaCMController {
 
     // QnA 상세 조회
     @RequestMapping("/QnaCMDetail")
-    public String selectQnaByIdx(@RequestParam("id") int id, Model model) {
+    public String selectQnaByIdx(@RequestParam("id") int id, Model model, HttpServletRequest request) {
         QnaCMVO qnaCMVO = dao.selectQnaByIdx(id);
         List<QnaCMRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
-
+        
+        int consumerId = (int) request.getSession().getAttribute("id");
+        ConsumerVO consumer = consumerdao.selectConsumerById(consumerId);
+        String consumerUserId = consumer.getUserId();
+        
+        model.addAttribute("consumerUserId", consumerUserId);
         log.info("QnaCMController - selectQnaByIdx() 실행");
 
         model.addAttribute("qnaCMVO", qnaCMVO);

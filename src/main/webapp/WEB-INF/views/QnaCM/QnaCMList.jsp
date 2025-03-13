@@ -80,7 +80,7 @@
 				                <tr>
 				                    <td>${status.index + 1}</td>
 				                    <td>
-				                        ${consumerName}
+				                        ${consumerUserId}
 				                    </td>
 				                    <td>
 				                        <a href="QnaCMDetail?id=${qna.id}">
