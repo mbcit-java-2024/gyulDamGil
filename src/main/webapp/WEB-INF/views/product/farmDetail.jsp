@@ -10,26 +10,38 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="stylesheet" type="text/css"
 	href="../../../resources/css/style.css">
 
 <style>
+.button-group {
+    display: flex;
+    align-items: center;  /* 버튼들을 같은 높이로 정렬 */
+    gap: 10px;  /* 버튼 사이 간격 설정 */
+}
+.inquiry-form {
+    display: inline-block; /* 폼을 인라인 요소처럼 배치하여 버튼이 옆으로 정렬되도록 함 */
+}
+
+
 .inquiry-btn {
-	display: flex;
-	align-items: center;
-	gap: 5px; /* 아이콘과 텍스트 간격 */
-	padding: 10px 15px;
-	font-size: 1rem;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	background-color: #007bff;
-	color: white;
-	transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* 아이콘과 텍스트 간격 */
+    padding: 5px 10px; /* 버튼 크기 줄이기 */
+    font-size: 0.9rem; /* 폰트 크기 조정 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
 }
 
 .inquiry-btn:hover {
-	background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 .seller-container {
@@ -180,9 +192,6 @@ function deleteBookmarkFarm(button) {
     });
 }
 
-/* function goToFarmDetail(sellerId) {
-    location.href = "/farmDetail?sellerId=" + sellerId;
-} */ // 이건 안쓰는건가보네. 일단 막아보자 패스로 보내야 하는데 겟으로 보내네..  
 
     function calctotalPrice(id) {
         var price = parseFloat(document.getElementById('price').value);
@@ -267,7 +276,7 @@ function deleteBookmarkFarm(button) {
 
 
 
-
+						<div class="button-group">
 							<c:choose>
 								<c:when test="${farmDetail.bookMarkCnt == 0}">
 									<button type="button" class="favorite-btn"
@@ -279,9 +288,12 @@ function deleteBookmarkFarm(button) {
 								</c:when>
 							</c:choose>
 							<c:if test="${not empty sessionScope.userVO}">
-								<form id="qnaForm" action="/QnaCSInsert?farmId=${farmDetail.id}" method="post">
-    								<input type="hidden" name="farmId" value="${farmDetail.id}">
-    								<button type="submit" class="inquiry-btn">문의하기</button>
+								<form id="qnaForm" action="/QnaCSInsert?farmId=${farmDetail.id}"
+									method="post">
+									<input type="hidden" name="farmId" value="${farmDetail.id}">
+									<button type="submit" class="inquiry-btn">
+										<i class="fas fa-envelope"></i> 문의하기
+									</button>
 								</form>
 							</c:if>
 
@@ -289,7 +301,7 @@ function deleteBookmarkFarm(button) {
 								<button type="button" class="favorite-btn" onclick="addToBookmarkFarm(this)">❤️ 좋아요 ${farmDetail.bookMarkCnt}</button>
 							</div> --%>
 
-
+							</div>
 
 
 						</div>
@@ -300,7 +312,7 @@ function deleteBookmarkFarm(button) {
 			</div>
 		</div>
 
-		<%@include file="../include/footer.jsp"%>
 	</div>
+		<%@include file="../include/footer.jsp"%>
 </body>
 </html>
