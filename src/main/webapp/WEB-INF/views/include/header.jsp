@@ -188,17 +188,11 @@ $.ajax({
 						class="px-4 py-2 font-medium border-b-2 border-transparent hover:text-orange-500">
 						귤농가들</button>
 				</li>
-				<c:if test="${sessionScope.userType == 1}">
-					<li><a onclick="location.href='/myOrder'"
-						class="block hover:text-orange-500" style="cursor: pointer;">주문 목록</a></li>
-				</c:if>
 				<c:if test="${sessionScope.userType == 2}">
 					<li><a onclick="location.href='/sellerList'"
 						class="block hover:text-orange-500" style="cursor: pointer;">내 상품보기</a></li>
 					<li><a onclick="location.href='/insert'"
 						class="block hover:text-orange-500" style="cursor: pointer;">상품 등록</a></li>
-					<li><a onclick="location.href='/orderList'"
-						class="block hover:text-orange-500" style="cursor: pointer;">주문 목록</a></li>
 				</c:if>
 				<li>
 					<button id="tab-qna" onclick="location.href='/faq'"
@@ -264,9 +258,12 @@ $.ajax({
 			href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
 			onclick="location.href='/cartPage'"
 			class="block px-4 py-2 hover:bg-orange-50">귤바구니</a>
-		<a
-			href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
-			onclick="" class="block px-4 py-2 hover:bg-orange-50">주문/배송 조회</a>
+		<c:if test="${sessionScope.userType == 1}">
+			<a onclick="location.href='/myOrder'" class="block px-4 py-2 hover:bg-orange-50" style="cursor: pointer;">주문/배송 조회</a>
+		</c:if>
+		<c:if test="${sessionScope.userType == 2}">
+			<a onclick="location.href='/orderList'"	class="block px-4 py-2 hover:bg-orange-50" style="cursor: pointer;">주문/배송 조회</a>
+		</c:if>
 		<a
 			href="file:///C:/Users/hi/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/%EC%A0%9C%EC%A3%BC%20%EA%B7%A4%20%EC%A7%81%EA%B1%B0%EB%9E%98%20%ED%8E%98%EC%9D%B4%EC%A7%80.html#"
 			onclick="location.href='/bookmark'"

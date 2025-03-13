@@ -84,16 +84,18 @@ public class ConsumerController {
 	@RequestMapping("/myOrderDetail/{orderId}/{currentPage}")
     public String myOrderDetail(@PathVariable("orderId") int id,@PathVariable("currentPage") int currentPage, Model model, HttpServletRequest request) {
 		log.info("ConsumerController 클래스의 myOrderDetail() 메소드 실행");
-		if ((int) request.getSession().getAttribute("userType") == 2) {
-			return "redirect:/orderList";
-		}
 		try {
+			if ((int) request.getSession().getAttribute("userType") == 2) {
+				return "redirect:/orderList";
+			}
 			int login = (int) request.getSession().getAttribute("id");
 		} catch (NullPointerException e) {
 			return "/consumer/login_2";
 		}
         OrderVO order = orderDAO.selectOrderById(id);
+        order.setFarmName(sellerDAO.selectFarmName(order.getSellerId()));
         order.setProductTitle(productDAO.selectTitleById(order.getProductId()));
+        order.setMainImageUrl(productDAO.selectImageById(order.getProductId()));
         ConsumerVO consumer = consumerDAO.selectConsumerById(order.getConsumerId());
         SellerVO seller = sellerDAO.selectSellerById(order.getSellerId());
         int stock = productDAO.selectStockById(order.getProductId());
