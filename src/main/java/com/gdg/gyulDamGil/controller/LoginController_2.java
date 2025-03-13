@@ -71,11 +71,14 @@ public class LoginController_2 {
 			} else if (check == 1 && !cvo.getPassword().equals(pw)) {
 //			로그인 실패: 비밀번호 불일치
 				model.addAttribute("result", 1);
+				model.addAttribute("id", request.getParameter("userId"));
 				result = "/consumer/login_2";
+				log.info("result: 1");
 			} else {
 //			로그인 실패: 계정 비존재
 				model.addAttribute("result", 0);
 				result = "/consumer/login_2";
+				log.info("result: 0");
 			}
 		} else if (i == 2) {
 			int check = sellerDao.selectCountByUserId(uid);
