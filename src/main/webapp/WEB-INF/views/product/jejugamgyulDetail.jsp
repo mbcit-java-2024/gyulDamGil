@@ -36,6 +36,7 @@
     gap: 10px; /* 버튼 간격 */
     z-index: 1000; /* 다른 요소 위에 표시 */
 }
+
 .favorite-btn, .farm-info-btn, .review-btn, .cart-btn, .buy-btn {
     width: 140px; /* 버튼 크기 일정 */
     height: 40px;
@@ -49,9 +50,11 @@
     cursor: pointer;
     flex-shrink: 0; /* 크기 변경 방지 */
 }
+
 .favorite-btn:hover, .farm-info-btn:hover, .review-btn:hover, .cart-btn:hover, .buy-btn:hover {
     background-color: #e76f51;
 }
+
 .product-container {
     display: flex;
     flex-wrap: wrap; /* 내용이 벗어나지 않도록 자동 줄바꿈 */

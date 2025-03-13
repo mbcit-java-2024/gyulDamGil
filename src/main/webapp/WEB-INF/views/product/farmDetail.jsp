@@ -18,8 +18,27 @@
 <style>
 .button-group {
     display: flex;
-    align-items: center;  /* 버튼들을 같은 높이로 정렬 */
-    gap: 10px;  /* 버튼 사이 간격 설정 */
+    align-items: center;
+    gap: 10px;
+    padding-left: 240px;
+}
+
+.common-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+.common-btn i {
+    font-size: 1rem;
 }
 .inquiry-form {
     display: inline-block; /* 폼을 인라인 요소처럼 배치하여 버튼이 옆으로 정렬되도록 함 */
@@ -27,23 +46,14 @@
 
 
 .inquiry-btn {
-    display: flex;
-    align-items: center;
-    gap: 5px; /* 아이콘과 텍스트 간격 */
-    padding: 5px 10px; /* 버튼 크기 줄이기 */
-    font-size: 0.9rem; /* 폰트 크기 조정 */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
     background-color: #007bff;
     color: white;
-    transition: background-color 0.3s ease;
 }
 
 .inquiry-btn:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
-
 .seller-container {
 	display: flex;
 	align-items: center;
@@ -102,30 +112,54 @@
 	margin-right: 5px;
 }
 
-.cart-btn {
-	background-color: orange;
-	color: white;
-}
 
-.buy-btn {
-	background-color: red;
-	color: white;
+.favorite-btn,  .inquiry-btn {
+    width: 140px; /* 버튼 크기 일정 */
+    height: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap; /* 줄바꿈 방지 */
+    text-align: center;
+    border: none;
+    background-color: #f4a261;
+    color: white;
+    cursor: pointer;
+    flex-shrink: 0; /* 크기 변경 방지 */
 }
+/* .favorite-btn i {
+    color: black;
+} */
 
-.favorite-btn {
-	background-color: white;
-	border: 1px solid red;
-	color: red;
+.favorite-btn:hover , .inquiry-btn:hover{
+     background-color: #e76f51;
 }
-
-.farm-info-btn {
-	background-color: green;
-	color: white;
-}
-
 .liked {
-	background-color: red;
-	color: white;
+    background-color: red !important;
+    color: white !important;
+}
+.liked:hover {
+    background-color: #cc0000 !important;
+}
+.liked i {
+    color: white !important;
+}
+
+@media (max-width: 768px) {
+    .fixed-buttons {
+        top: auto;
+        bottom: 10px; /* 화면 하단에 고정 */
+        right: 10px;
+        flex-direction: row; /* 가로 정렬 */
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .favorite-btn, .farm-info-btn, .review-btn {
+        width: 120px; /* 작은 화면에서도 크기 일정 */
+    }
+    
 }
 </style>
 <script>
