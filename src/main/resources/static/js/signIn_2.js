@@ -87,7 +87,7 @@ function farmNameCheck() {
 							result.innerHTML = '<span style="color: blue;">중복 검사할 농장이름을 입력하세요.</span>'
 						} else if (check == 1){
 							result.innerHTML = 
-							'<span style="color: red;">' + farmName +'는(은) 사용할 수 없는 아이디입니다.</span>'
+							'<span style="color: red;">' + farmName +'는(은) 사용할 수 없는 이름입니다.</span>'
 						//	아이디를 입력하지 않았거나 사용중인 아이디일 경우 아이디를 다시 입력할 수 있도록 아이디 입력 상자의 내용을 지우고
 						// 	focus를 이동시킨다.
 							document.getElementById('farmName').value = '' 
@@ -96,7 +96,7 @@ function farmNameCheck() {
 						} else {
 							ch2=1;
 							result.innerHTML = 
-							'<span style="color: green;">' + farmName +'는(은) 사용할 수 있는 아이디입니다.</span>'
+							'<span style="color: green;">' + farmName +'는(은) 사용할 수 있는 이름입니다.</span>'
 							document.getElementsByName('address')[0].focus()  
 							//+ '&nbsp;&nbsp; <input type="button" value="사용하기" onclick="insertID( \''+userid+'\')"/>'
 						}

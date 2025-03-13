@@ -214,10 +214,11 @@ public class LoginController_2 {
 		log.info("LoginController 컨트롤러의 farmNameCheck() 메소드 실행");
 		log.info("farmName: " + farmName);
 		List<String> farmNames = sellerDao.getFarmNames();
-		int result = 0;
+		int result;
 		if (farmNames.indexOf(farmName) >= 0) {
 			result = 1;
 		} else {
+			result = 0;
 		}
 		return result;
 	}

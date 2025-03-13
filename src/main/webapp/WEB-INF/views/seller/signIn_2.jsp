@@ -83,7 +83,7 @@
 	</div>
 	<br/>
 	
-<form action="/consumerSignIn" method="post" onsubmit="return subCheck1();" 
+<form action="/sellerSignIn" method="post" onsubmit="return subCheck2();" 
 		class="needs-validation d-flex flex-column align-items-center">
 		
 	<div class="table-container center"  style="width: 500px;">
@@ -128,7 +128,7 @@
 				<td colspan="2">
 					<input type="password" name="password2" placeholder="비밀번호 확인"
 						class="is-invalid"  onkeyup="return pwCh(this)" required="required">
-					<div id="checkMsg" style="font-size: 80%; justify-content: left; text-align: left; margin-top: 3px""></div>
+					<div id="checkMsg" style="font-size: 80%; justify-content: left; text-align: left; margin-top: 3px"></div>
 				</td>
 			</tr>
 			<!--  이메일 --> 
@@ -158,22 +158,22 @@
 						<input type="text" name="name" placeholder="이름" required="required">
 				</td>
 			</tr>
-			<!-- 농장 -->
+			<!-- 농장이름 -->
 			<tr >
 				<td width="50px" height="50px;" style="border-right: none; padding: 5px;">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-signpost-2" viewBox="-2 0 18 18">
+				  <path d="M7 1.414V2H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h5v1H2.5a1 1 0 0 0-.8.4L.725 8.7a.5.5 0 0 0 0 .6l.975 1.3a1 1 0 0 0 .8.4H7v5h2v-5h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H9V6h4.5a1 1 0 0 0 .8-.4l.975-1.3a.5.5 0 0 0 0-.6L14.3 2.4a1 1 0 0 0-.8-.4H9v-.586a1 1 0 0 0-2 0M13.5 3l.75 1-.75 1H2V3zm.5 5v2H2.5l-.75-1 .75-1z"/>
+				</svg>
 				</td>
 				<td width="350px" style="border-right: none;">
-				
-				<input id="userId" type="text" name="userId" placeholder="아이디" 
-					required="required">
-				<div id="result" style="font-size: 80%; justify-content: left; text-align: left; margin-top: 3px"></div>
+				<input id="farmName" type="text" name="farmName" placeholder="농장이름" required="required">
+				<div id="result2" style="font-size: 80%; justify-content: left; text-align: left; margin-top: 3px"></div>
 				</td>
-				
 				<td width="100px">
 				<input class="rounded-pill" 
 					style="background-color: #F66F0A; color: white; display: right; justify-content: right; 
 						font-size: 14px; padding-top: 5px; padding-bottom:5px; padding-left: 10px; padding-right: 10px" 
-					type="button" value="중복확인" onclick="confirmCheck(1)" required="required">
+					type="button" value="중복확인" onclick="farmNameCheck()" required="required">
 				</td>
 			</tr>
 			<!-- 전화번호 -->
@@ -188,6 +188,24 @@
 					<input type="text" name="phone" placeholder="전화번호 '-'를 제외하고 입력하세요" required="required">
 				</td>
 			</tr>
+			<!-- 사업자등록번호 -->
+			<tr>
+				<td style="border-right: none;">
+				<svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-file-text" viewBox="-1 0 16 16">
+				  <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z"/>
+				  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
+				</svg>
+				</td>
+				<td colspan="2">
+					<input type="text" name="bussinessNumber" 
+						placeholder="사업자등록번호 '-'를 제외하고 입력하세요" 
+						onkeyup="bnCheck(this)"
+						required="required"
+						maxlength="10">
+					<div id="checkBnMsg" style="font-size: 80%; justify-content: left; text-align: left; margin-top: 3px"></div>
+				</td>
+			</tr>
+			
 			<!-- 주소 -->
 			<tr>
 				<td style="border-right: none;">
@@ -242,99 +260,4 @@
 </body>
 <jsp:include page="../include/footer.jsp" />
 
-</html>
-
-<form action="/sellerSignIn" method="post" onsubmit="return subCheck2();">
-<table width="500" border="1" cellpadding="5" cellspacing="0">
-		<tr>
-			<th colspan="2">회원가입</th>
-		</tr>
-		<tr>
-			<th width="150">이름</th>
-			<td width="350">
-				<input type="text" name="name" placeholder="이름을 입력하세요" required="required">
-			</td>
-		</tr>
-		<tr>
-			<th width="150">아이디</th>
-			<td width="350">
-				<input id="userId" type="text" name="userId" placeholder="아이디를 입력하세요" required="required">
-				<input type="button" value="중복확인" onclick="confirmCheck(2)" required="required">
-				<div id="result"></div>
-			</td>
-		</tr>
-		<tr>
-			<th width="150">비밀번호</th>
-			<td width="350">
-				<input type="password" name="password" placeholder="비밀번호를 입력하세요" required="required">
-			</td>
-		</tr>
-		<tr>
-			<th width="150">비밀번호 확인</th>
-			<td width="350">
-				<input type="password" name="password2" placeholder="비밀번호를 한 번 더 입력하세요"
-					onkeyup="return pwCh(this)" required="required">
-				<div id="checkMsg"></div>
-			</td>
-		</tr>
-		<tr>
-			<th width="150">전화번호</th>
-			<td width="350">
-				<input type="text" name="phone" 
-					placeholder="'-'를 제외하고 입력하세요" 
-					required="required"
-					maxlength="11"
-					min="">
-			</td>
-		</tr>
-		<tr>
-			<th width="150">이메일</th>
-			<td width="350">
-				<input type="email" name="email" placeholder="email을 입력하세요" required="required">
-			</td>
-		</tr>
-		<tr>
-			<th width="150">사업자등록번호</th>
-			<td width="350">
-				<input type="text" name="bussinessNumber" 
-					placeholder="'-'를 제외하고 입력하세요" 
-					onkeyup="bnCheck(this)"
-					required="required"
-					maxlength="10">
-				<div id="checkBnMsg"></div>
-			</td>
-		</tr>
-		<tr>
-			<th width="150">농장이름</th>
-			<td width="350">
-				<input id="farmName" type="text" name="farmName" placeholder="농장이름을 입력하세요" required="required">
-				<input type="button" value="중복확인" onclick="farmNameCheck()" required="required">
-				<div id="result2"></div>
-			</td>
-		</tr>
-		<tr>
-			<th width="150">주소</th>
-			<td width="350">
-				<input type="text" name="address" placeholder="주소를 입력하세요" required="required">
-				<input type="text" name="detailAddress" placeholder="상세 주소를 입력하세요 (예: 건물명, 층수, 동, 호)" required="required">
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				개인정보 이용 동의 <br/>
-				동의함<input type="radio" name="agree" value="yes" required="required"  onclick="agreeCheck(1)">
-				동의하지 않음<input type="radio" name="agree" checked="checked" value="no" onclick="agreeCheck(2)">
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center">
-				<input type="submit" value="회원가입">
-				<input type="reset" value="다시쓰기">
-			</td>
-		</tr>
-	</table>
-</form>
-
-
-</body>
 </html>
