@@ -130,8 +130,9 @@
     color: black;
 } */
 
-.favorite-btn:hover , .inquiry-btn:hover{
+.favorite-btn:hover {
      background-color: #e76f51;
+     transform: scale(1.05);
 }
 .liked {
     background-color: red !important;
@@ -139,6 +140,7 @@
 }
 .liked:hover {
     background-color: #cc0000 !important;
+    transform: scale(1.05);
 }
 .liked i {
     color: white !important;

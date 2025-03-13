@@ -51,8 +51,26 @@
     flex-shrink: 0; /* 크기 변경 방지 */
 }
 
-.favorite-btn:hover, .farm-info-btn:hover, .review-btn:hover, .cart-btn:hover, .buy-btn:hover {
+.favorite-btn:hover  {
     background-color: #e76f51;
+    transform: scale(1.05);
+}
+
+.farm-info-btn:hover {
+	background-color: #329632;
+    transform: scale(1.05);
+}
+.buy-btn:hover {
+	background-color: #148CFF;
+    transform: scale(1.05);
+}
+.cart-btn:hover {
+	background-color: #FF8200;
+    transform: scale(1.05);
+}
+.review-btn:hover {
+	background-color: #FFC31E;
+    transform: scale(1.05);
 }
 
 .product-container {
@@ -272,7 +290,7 @@ function deleteBookmarkProduct(button) {
 									<button type="button" class="farm-info-btn"
 										onclick="location.href='/farmDetail/${productDetail.sellerId}'">🏡
 										농장 정보</button>
-									<button type="button" class="farm-info-btn"
+									<button type="button" class="review-btn"
 										onclick="location.href='/ReviewList?productId=${productDetail.id}'">⭐
 										리뷰 보기</button>
 								</div>
