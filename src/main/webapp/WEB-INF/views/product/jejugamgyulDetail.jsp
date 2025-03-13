@@ -333,10 +333,10 @@ function deleteBookmarkProduct(button) {
 								<div class="buttons">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<c:choose>
 										<c:when test="${productDetail.stock > 0}">
-											<button type="button" class="cart-btn" onclick="addToCart()"> <i class="fas fa-shopping-cart"></i>&nbsp;장바구니</button>
+											<button type="button" class="cart-btn" onclick="addToCart()"> <i class="fas fa-shopping-cart"></i>&nbsp;귤바구니</button>
 										</c:when>
 										<c:otherwise>
-											<button type="button" class="cart-btn" disabled><i class="fas fa-shopping-cart"></i>&nbsp;장바구니</button>
+											<button type="button" class="cart-btn" disabled><i class="fas fa-shopping-cart"></i>&nbsp;귤바구니</button>
 										</c:otherwise>
 									</c:choose>
 									<button type="submit" class="buy-btn"><i class="fas fa-credit-card"></i>&nbsp;결제하기</button>

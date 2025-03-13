@@ -57,7 +57,7 @@ public class OrderController5 {
 		} catch (NullPointerException e) {
 			return "/seller/login_2";
 		}
-		int totalCount = orderDAO.selectCountForS(sellerId);
+		int totalCount = orderDAO.selectCountForS(sellerId); // 셀러에 대한 오더리스트의 총 개수 (주문의개수)
 		try {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 			currentPage = (currentPage < 1) ? 1 : currentPage;
@@ -71,8 +71,8 @@ public class OrderController5 {
 		hmap.put("pageSize", orderList.getPageSize());
 		hmap.put("id", sellerId);
 //		System.out.println((ArrayList<OrderVO>) orderDAO.selectOrderListForS(hmap));
-		orderList.setOrderList((ArrayList<OrderVO>) orderDAO.selectOrderListForS(hmap));
-		System.out.println(orderList.getOrderList());
+		orderList.setOrderList((ArrayList<OrderVO>) orderDAO.selectOrderListForS(hmap)); // 오더의 셀러에게 들어온 주문을 페이지 개수만큼 역순으로 불러옴
+		System.out.println(orderList.getOrderList()); // 디비에 있는 주문 목록을 가져옴
 		model.addAttribute("orderList", orderList);
 		model.addAttribute("currentPage", currentPage);
 		return "/seller/orderList5";

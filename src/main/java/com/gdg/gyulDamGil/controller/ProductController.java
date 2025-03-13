@@ -2,6 +2,7 @@ package com.gdg.gyulDamGil.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ import com.gdg.gyulDamGil.service.OrderService;
 import com.gdg.gyulDamGil.vo.BookmarkVO;
 import com.gdg.gyulDamGil.vo.CartVO;
 import com.gdg.gyulDamGil.vo.ConsumerVO;
+import com.gdg.gyulDamGil.vo.OrderList;
 import com.gdg.gyulDamGil.vo.OrderVO;
 import com.gdg.gyulDamGil.vo.ProductVO;
 import com.gdg.gyulDamGil.vo.SellerVO;
@@ -52,8 +54,10 @@ public class ProductController {
 	private BookmarkDAO bookmarkDAO;
 
 	@GetMapping("/jejugamgyulList/{categoryId}")
-	public String jejugamgyulList(Model model, @PathVariable("categoryId") int categoryId) {
+	public String jejugamgyulList(Model model, @PathVariable("categoryId") int categoryId
+			, HttpServletRequest request) {
 		System.out.println("ProductController의 jejugamgyul메소드 실행");
+		
 		List<ProductVO> selectJejuGamgyulList = productDAO.selectJejuGamgyulList(categoryId);
 
 		for (ProductVO vo : selectJejuGamgyulList) {

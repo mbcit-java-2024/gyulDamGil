@@ -4,6 +4,12 @@
 
 <mapper namespace="com.gdg.gyulDamGil.dao.ProductDAO">
 
+	
+
+
+
+
+
 	<select id="selectJejuGamgyulList" resultType="ProductVO">
 		SELECT * FROM product WHERE categoryId = #{categoryId}
 	</select>
