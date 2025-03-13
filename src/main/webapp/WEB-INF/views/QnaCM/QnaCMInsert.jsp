@@ -26,6 +26,7 @@
 			</tr>
 			<tr>
 				<th colspan="4"><input type="submit" value="등록하기" />
+				<input type="hidden" name="consumerId" value="${consumerId}">
 				<input type="button" value="취소하기" onclick="window.history.back();" /></th>
 			</tr>
 		</table>

@@ -130,13 +130,16 @@ public class QnaCSController {
 	
 	
 	@RequestMapping("/QnaCSInsertOK")
-	public String QnaInsertOK(QnaCSVO qnaCSVO,Model model, RedirectAttributes redirectAttributes) {
+	public String QnaInsertOK(QnaCSVO qnaCSVO,Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+		int consumerId = (int) request.getSession().getAttribute("id");
 		log.info("HomeController 클래스의 QnaInsertOK() 메소드 실행");
 		dao.insert(qnaCSVO);
+		qnaCSVO.setConsumerId(consumerId);
 		
+		model.addAttribute("consumerId", consumerId);
 		redirectAttributes.addFlashAttribute("message", "문의가 등록되었습니다.");
 
-		return "redirect:/QnaCSList1?sellerId="+ qnaCSVO.getSellerId();
+		return "redirect:/QnaCSListc";
 	}
 	
     @RequestMapping("/QnaCSDetail")

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.gdg.gyulDamGil.dao.ConsumerDAO;
 import com.gdg.gyulDamGil.dao.QnaCMDAO;
+import com.gdg.gyulDamGil.vo.ConsumerVO;
 import com.gdg.gyulDamGil.vo.QnaCMRepliesVO;
 import com.gdg.gyulDamGil.vo.QnaCMVO;
 
@@ -23,14 +25,22 @@ public class QnaCMController {
  
     @Autowired
     private QnaCMDAO dao;
+    
+    @Autowired
+    private ConsumerDAO consumerDAO;
 
     // 전체 QnA 목록 출력
     @RequestMapping("/QnaCMList")
-    public String selectQnaList(Model model, HttpServletRequest request) {
+    public String selectQnaList(ConsumerVO consumerVO, Model model, HttpServletRequest request) {
     	int consumerId = (int) request.getSession().getAttribute("id");
+  
+    	String consumerName = consumerVO.getName();
+    	
         List<QnaCMVO> qnaList = dao.selectQnaByconsumerId(consumerId);
+        
         log.info("QnaCMController - selectQnaList() 실행");
         
+        model.addAttribute("consumerName",consumerName);
         model.addAttribute("qnaList", qnaList);
         log.info("qnaList: {}", qnaList);
         
@@ -50,10 +60,13 @@ public class QnaCMController {
 
     // QnA 작성 처리
     @RequestMapping("/QnaCMInsertOK")
-    public String QnaInsertOK(QnaCMVO qnaCMVO, RedirectAttributes redirectAttributes) {
+    public String QnaInsertOK(QnaCMVO qnaCMVO, RedirectAttributes redirectAttributes, HttpServletRequest request, Model model) {
+    	int consumerId = (int) request.getSession().getAttribute("id");
         log.info("QnaCMController - QnaInsertOK() 실행");
         dao.insert(qnaCMVO);
-
+        qnaCMVO.setConsumerId(consumerId);
+        
+        model.addAttribute("consumerId", consumerId);
         redirectAttributes.addFlashAttribute("message", "문의가 등록되었습니다.");
         return "redirect:/QnaCMList";
     }
