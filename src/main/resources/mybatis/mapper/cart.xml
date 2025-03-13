@@ -18,6 +18,8 @@
 		VALUES(#{consumerId}, #{productId}, #{price}, #{count}, #{totalPrice})
 	</insert>
 	
+	
+	
 	<!-- 상품상세에서 담을때  -->
 	<update id="updateDetail" parameterType="CartVO">
 		UPDATE cart

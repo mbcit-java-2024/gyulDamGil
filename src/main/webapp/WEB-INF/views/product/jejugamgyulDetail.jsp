@@ -174,8 +174,9 @@ function deleteBookmarkProduct(button) {
 									<h2>${productDetail.title }</h2>
 									<input type="hidden" name="title"
 										value="${productDetail.title}"> <input type="hidden"
-										name="sellerId" value="${productDetail.sellerId}"> <input
-										type="hidden" name="id" value="${productDetail.id}">
+										name="sellerId" value="${productDetail.sellerId}"> 
+										<input type="hidden" name="id" value="${productDetail.id}">
+										<input type="hidden" name="id" value="${productDetail.mainImageUrl}">
 								</div>
 								<div class="product-section">
 									<p>${productDetail.description }</p>

@@ -201,6 +201,10 @@ public class ProductController {
 			return "/consumer/login_2";
 		}
 		
+		ProductVO productVO = new ProductVO();
+		List<ProductVO> selectImg = productDAO.selectImg(productVO); // 이건 왜 하지?? 어디다 써?? 지금 이미지 가져올때
+		model.addAttribute("selectImg", selectImg);
+		
 		List<CartVO> selectcartList = cartService.selectcartList(cartVO);
 		model.addAttribute("selectcartList", selectcartList);
 
