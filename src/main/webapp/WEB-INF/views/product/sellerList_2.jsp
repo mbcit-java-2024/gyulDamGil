@@ -26,8 +26,8 @@
 }
 
 .newDate {
-	font-size: 20px;
-	font-weight: bold;
+	font-size: 15px;
+	text-align: right;
 	width: 800px;
 	margin: auto;
 }
@@ -45,52 +45,52 @@ html, body {
 </head>
 <body style="flex: 1;">
 
-<br/>
-나의 상품 총 개수: ${count} | 나의 등록완료된 상품: ${status1} /${count} | 나의 임시저장된 상품: ${status0} /${count}
-<br/>
 
 <div class="wrapper">
 	<div style="justify-content: center; padding-top: 60px;">
+		<br/>
+		<div class="newDate">
+			 등록완료: ${status1} /${count} | 임시저장: ${status0} /${count}
+		</div>
+		<br/>
+		
 		<c:set var="list" value="${productList.productListForOnePage}"></c:set>
 		<c:if test="${fn:length(list) != 0}">
-			
 			<c:forEach var="product" items="${list}" varStatus="i">
 				<fmt:formatNumber value="${product.price}" pattern="#,###" var="price"/>
 				
-				<div class="bg-white rounded-lg shadow-md p-4" onclick="location.href='/show/'${product.id}"
+				<div class="bg-white rounded-lg shadow-md p-4" onclick="location.href='/show/${product.id}'"
 					style="border-top: 1px solid orange; display: flex; width: 800px; margin: auto; margin-bottom: 30px;">
 					<img class="product-image" src="${product.mainImageUrl}" alt="상품 이미지" style="margin-right: 20px;"/>
 					<div style="width: 300px;">
 						<h3 style="font-weight: bold;">${product.title}</h3><!-- 상품명 -->
-								<hr/>
+						<br/><hr/>
 						재고 : 
 						<c:if test="${product.stock > 1}">총 </c:if>
 						${product.stock}개<br/>
 								<hr/>
-						${price}원<br/>
+						${price}원
 					</div>
 					<div>
-						${product.farmName}<br/> <!-- 판매자 (농장이름) -->
-						<div>
-							등록상태 :
-								<c:if test="${product.status == 0}">임시 저장</c:if>
-								<c:if test="${product.status == 1}">등록 완료</c:if>
-								<c:if test="${product.status == 2}">품절</c:if>
-							<br/>
-								<hr/>
-							<!-- 상품 등록일 -->
-							<c:set var="date" value="null"/>
-							<c:if test="${product.updateDate == date}">
-								<fmt:formatDate value="${product.createDate}" pattern="yyyy년 MM월 dd일" var="createDate"/>
-								<c:set var="date" value="${createDate}"/>
-								${date} 등록
-							</c:if> 
-							<c:if test="${product.updateDate != date}">
+						<br/>
+						등록상태 :
+							<c:if test="${product.status == 0}">임시 저장</c:if>
+							<c:if test="${product.status == 1}">등록 완료</c:if>
+							<c:if test="${product.status == 2}">품절</c:if>
+						<br/>
+							<hr/>
+						<!-- 상품 등록/수정일 -->
+						<c:if test="${empty product.updateDate}">
+							<fmt:formatDate value="${product.createDate}" pattern="yyyy년 MM월 dd일" var="createDate"/>
+							등록일: ${createDate}
+						</c:if> 
+						<c:if test="${not empty product.updateDate}">
 							<fmt:formatDate value="${product.updateDate}" pattern="yyyy년 MM월 dd일" var="updateDate"/>
-								${updateDate}
-							</c:if> 
-								<hr/>
-						</div>
+							마지막 수정일: ${updateDate}
+						</c:if> 
+						<br/> 
+							<hr/>
+						${product.farmName}	<!-- 판매자 (농장이름) -->
 					</div>
 				</div>
 			</c:forEach>
