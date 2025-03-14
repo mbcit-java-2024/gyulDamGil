@@ -86,7 +86,8 @@
         
         
             
-           let param = {cartIds: '${cartIds}' 
+           let param = {cartIds: '${cartIds}'
+        		   
             		, recipientName: $('#recipientName').val()
             		, address: $('#address').val()
             		, title: $('input[name="title"]').val()
