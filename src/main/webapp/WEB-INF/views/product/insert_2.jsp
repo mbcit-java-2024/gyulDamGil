@@ -168,7 +168,7 @@
 	<input type="submit" class="btn mb-2 mt-2 btn-lg" value="저장하기"
 			style="background-color: #F89D00; width: 200px; color: white; margin: 10px"/>
 	<input type="button" class="btn mb-2 btn-lg" value="목록보기"
-		style="border-color: #F89D00; width: 200px; color: #F89D00;" onclick="location.href='sellerList'"/>
+		style="border-color: #F89D00; width: 200px; color: #F89D00;" onclick="location.href='/sellerList'"/>
 </div>
 </form>
 </body>
