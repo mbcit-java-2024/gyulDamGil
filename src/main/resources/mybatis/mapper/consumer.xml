@@ -4,6 +4,10 @@
 
 <mapper namespace="com.gdg.gyulDamGil.dao.ConsumerDAO">
 
+	<select id="selectUserIdById" parameterType="int" resultType="String">
+		select userId from consumer where id = ${id}
+	</select>
+
 	<select id="selectConsumerById" parameterType="int" resultType="ConsumerVO">
 		select * from consumer where id = #{id}
 	</select>
@@ -49,6 +53,10 @@
 		select * from consumer where id = #{id}
 	</select>
 	
+	<select id="selectVOByconsumerId" parameterType="int" resultType="ConsumerVO">
+		select * from consumer where id = #{id}
+	</select>
+	
 	<select id="selectByUserId" parameterType="String" resultType="ConsumerVO">
 		select * from consumer where userId = #{id}
 	</select>
@@ -67,5 +75,7 @@
 	<delete id="delete" parameterType="int">
 		delete from consumer where id = #{id}
 	</delete>
+	
+
 
 </mapper>

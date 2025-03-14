@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>귤담길 - 주문 상세 정보</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-<%@ include file="../include/header.jsp" %>
+<jsp:include page="../include/header.jsp"/>
 </head>
 <body>
 	<a type="button" href="/orderList?currentPage=${currentPage}">
@@ -94,10 +94,10 @@
                     		취소된 주문입니다.
                     	</option>
                     	</c:if>
-                        </select>
-                        <c:if test="${order.status < 3}">
-                        <button type="submit">(으)로 변경</button>
-                        </c:if>
+                    </select>
+                    <c:if test="${order.status < 3}">
+                    <button type="submit">(으)로 변경</button>
+                    </c:if>
                 </form>
             </td>
         </tr>
@@ -121,5 +121,5 @@
     	</tr>
     </table>
 </body>
-<%@ include file="../include/footer.jsp" %>
+<jsp:include page="../include/footer.jsp"/>
 </html>

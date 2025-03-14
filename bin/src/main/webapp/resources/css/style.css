@@ -3,22 +3,31 @@
 body {
    font-family: Arial, sans-serif;
 }
+.sb {
+	border :  1px solid orange;
+}
 
-#orderListBanner {
+/* orderList.jsp, myOrder.jsp 파일의 목록이름 구역 배너가 스크롤에 따라 같이 움직이는 스타일 */
+/* #orderListBanner {
 	position: sticky;
 	top: 112px;
 	background-color: orange;
+	border-radius: 10px;
 	z-index: 1;
-}
+} */
 
+/* orderList.jsp, myOrder.jsp 파일의 테이블 스타일 */
 #seller-order-table {
 	border:  4px solid orange;
 	padding: 20px;
 	margin: auto;
-	border-radius: 10px;
+	border-radius: 100px;
 	text-align: center;
 }
 
+
+
+/* ************************************* 기존 css ************************************ */
 .body-align {
 	display: flex;
 	width: 80%;

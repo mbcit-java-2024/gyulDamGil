@@ -18,6 +18,8 @@
 		VALUES(#{consumerId}, #{productId}, #{price}, #{count}, #{totalPrice})
 	</insert>
 	
+	
+	
 	<!-- 상품상세에서 담을때  -->
 	<update id="updateDetail" parameterType="CartVO">
 		UPDATE cart
@@ -57,6 +59,12 @@
 	<delete id="deleteCartItems" parameterType="java.util.HashMap">
 		delete from cart where id = #{id} 
 	</delete>
+	<select id="selectCartCount" resultType="int">  
+		SELECT COUNT(*) 
+		FROM cart
+		WHERE consumerId = #{consumerId}
+
+	</select>
 	
 	
 <!--

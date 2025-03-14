@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdg.gyulDamGil.vo.ConsumerVO;
+import com.gdg.gyulDamGil.vo.QnaCSVO;
 
 @Mapper
 public interface ConsumerDAO {

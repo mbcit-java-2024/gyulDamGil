@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Qna 답글달기</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<jsp:include page="../include/header.jsp"/>
 </head>
 <body>
     <c:if test="${not empty message}">
@@ -14,7 +16,7 @@
             alert("${message}");
         </script>
     </c:if>
-
+    
     <table width="900" border="1" align="center" cellpadding="3" cellspacing="2">
 	    <tr>
 	        <th width="80">작성자</th>
@@ -40,12 +42,12 @@
         <tr>
             <td style="text-align: right;">
             <!-- consumerId 와 sellerId 를 받게 되면 나눠서 할것 -->
-            	<%-- <c:if test="${not empty sellerId}"> --%>
-                <input type="button" value="목록으로" onclick="location.href='/QnaCSList1?sellerId=${qnaCSVO.sellerId}';" />
-                <%-- </c:if> --%>
-            	<%-- <c:if test="${not empty consumerId}">
-                <input type="button" value="목록으로" onclick="location.href='/QnaCSList2?sellerId=${qnaCSVO.consumerId}';" />
-                </c:if> --%>
+            	<c:if test="${sessionScope.userType == 1}">
+                	<input type="button" value="목록으로" onclick="location.href='/QnaCSListc';" />
+                </c:if>
+            	<c:if test="${sessionScope.userType == 2}">
+                	<input type="button" value="목록으로" onclick="location.href='/QnaCSLists';" />
+                </c:if>
             </td>
         </tr>
     </table>
@@ -64,7 +66,7 @@
                         <td>
                             <div style="display: flex; align-items: center;">
                                 <textarea name="comment" style="width: 805px; height: 80px; margin-right: 10px;"></textarea>
-                                <input type="hidden" name="parentId" value="${qnaCSVO.idx}" />
+                                <input type="hidden" name="parentId" value="${qnaCSVO.id}" />
                                 <input type="submit" value="답변 달기" style="height: 80px;" />
                             </div>
                         </td>
@@ -76,7 +78,12 @@
         <c:if test="${not empty replies}">
             <c:forEach var="reply" items="${replies}">
 	            <tr>
-			        <th width="80">${reply.consumerId}</th>
+	            <c:if test="${sessionScope.userType == 1}">
+			        <th width="80">${consumerVO.name}</th>
+				</c:if>
+				<c:if test="${sessionScope.userType == 2}">
+			        <th width="80">${sellerVO.farmname}</th>
+				</c:if>
 			        <td width="750">${reply.comment}</td>
 			        <td width="170"><fmt:formatDate value="${qnaCSVO.createDate}" pattern="yyyy-MM-dd HH:mm" /></td>
 			    </tr>
@@ -88,7 +95,7 @@
                             <div style="display: flex; align-items: center;">
                                 <textarea name="comment" style="width: 805px; height: 80px; margin-right: 10px;"></textarea>
                                 <input type="hidden" name="consumerId" value="${qnaCSVO.consumerId}" /> <!-- 로그인후 session에서 정보꺼내오기 consumerId -> sessionScope.id -->
-                                <input type="hidden" name="parentId" value="${qnaCSVO.idx}" />
+                                <input type="hidden" name="parentId" value="${qnaCSVO.id}" />
                                 <input type="submit" value="답변 달기" style="height: 80px;" />
                             </div>
                         </td>
@@ -98,4 +105,5 @@
         </c:if>
     </table>
 </body>
+<jsp:include page="../include/footer.jsp"/>
 </html>

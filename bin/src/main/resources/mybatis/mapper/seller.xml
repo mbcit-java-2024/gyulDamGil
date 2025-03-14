@@ -3,6 +3,7 @@
 
 <mapper namespace="com.gdg.gyulDamGil.dao.SellerDAO">
 
+	<!-- 재성 -->
     <!-- 판매자 1명 조회 -->
     <select id="selectSellerById" parameterType="int" resultType="SellerVO">
         select * from seller where id = #{id}
@@ -13,9 +14,19 @@
         select * from seller
     </select>
     
+    <select id="getReviewCount" parameterType="int" resultType="int">
+    	select count(*) from review where sellerId = ${id}
+    </select>
+    
+    <select id="selectFarmName" parameterType="int" resultType="String">
+    	select farmName from seller where id = ${id}
+    </select>
+    
+    <!-- 수빈 -->
     <select id="selectFarmDetail" resultType="SellerVO">
 		SELECT
 		s.id,
+		s.userId,
 		s.password,
 		s.name,
 		s.email,
@@ -27,10 +38,16 @@
 		s.bussinessNumber,
 		s.farmName,
 		s.reviewCount,
-		s.status
+		s.status,
+		(SELECT COUNT(1)
+		FROM bookmark
+		WHERE sellerId = #{sellerId}
+		AND productId IS NULL) AS bookMarkCnt
 		FROM
 		seller s
-		WHERE s.id= #{id}
+		WHERE
+		s.id = #{id}
+
 	</select>
 
 	<!-- 예린 -->

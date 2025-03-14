@@ -4,6 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <title>리뷰 작성</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<jsp:include page="../include/header.jsp"/>
 <body>
 
 	<form action="QnaCMInsertOK" method="post">
@@ -11,7 +13,7 @@
 			cellspacing="0">
 			<tr>
 				<th width="100">작성자</th>
-				<td width="630"><input type="text" name="consumerId" /></td>
+				<td width="630">${consumerId}</td>
 			</tr>
 			<tr>
 				<th width="100">제목</th>
@@ -30,4 +32,5 @@
 	</form>
 
 </body>
+<jsp:include page="../include/footer.jsp"/>
 </html>

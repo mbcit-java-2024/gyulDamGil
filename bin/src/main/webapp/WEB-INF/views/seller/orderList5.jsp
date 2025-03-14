@@ -12,13 +12,13 @@
 <meta charset="UTF-8">
 <title>귤담길 - 주문 목록</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-<%@ include file="../include/header.jsp" %>
+<jsp:include page="../include/header.jsp"/>
 </head>
 <body>
 
 	<div class="body-align">
 	    <table id="seller-order-table">
-	        <tr id="orderListBanner" style="background-color:orange">
+	        <tr style="background-color:orange">
 	            <th style="width:100px">주문 ID</th>
 	            <th style="width:70px">상품 ID</th>
 	            <th style="width:50px">수량</th>
@@ -224,5 +224,5 @@
 	</div>
 	
 </body>
-<%@ include file="../include/footer.jsp" %>
+<jsp:include page="../include/footer.jsp"/>
 </html>

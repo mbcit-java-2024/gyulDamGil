@@ -49,6 +49,16 @@
 	</insert>
 	
 	<!-- 결제 페이지에서 보여줄 값들 -->
+	<!-- <select id="selectOrderList" parameterType="OrderVO" resultType="OrderVO" >
+		SELECT a.consumerId, b.sellerId, a.productId, a.price, a.count, a.orderDate, a.totalPrice, a.status, b.title
+		FROM `order` a LEFT JOIN product b ON a.productId  = b.id
+		where a.id
+		IN
+		<foreach item="id" collection="orderIds" open="(" separator="," close=")">
+        	#{id}
+   	 	</foreach>
+	</select> -->
+	
 	<select id="selectOrderList" parameterType="OrderVO" resultType="OrderVO" >
 		SELECT a.consumerId, b.sellerId, a.productId, a.price, a.count, a.orderDate, a.totalPrice, a.status, b.title
 		FROM `order` a LEFT JOIN product b ON a.productId  = b.id

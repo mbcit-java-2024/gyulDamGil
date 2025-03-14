@@ -21,6 +21,7 @@
 		onclick="goOrderList(<%= request.getSession().getAttribute("sellerId") %>)"
 	/>
 	<h2>판매자 목록</h2>
+	1231231231123
 	<table border="1">
 		<tr>
 			<th>아이디</th>

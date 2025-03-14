@@ -8,17 +8,18 @@
 		SELECT * FROM product WHERE categoryId = #{categoryId}
 	</select>
 
-	<select id="selectGamgyulDetail" resultType="ProductVO">
+	<select id="selectGamgyulDetail" parameterType="java.util.HashMap" resultType="ProductVO">
 		select a.*
 		, (select count(1) 
 			from bookmark b 
-		   where b.productId = a.id and b.consumerId = #{consumerId}) as bookMarkCnt 
+		   where b.productId is not null  and b.productId = a.id and b.consumerId = #{consumerId}) as bookMarkCnt 
 		 from product a where id = #{id}
 	</select>
 
 	<select id="selectImg" resultType="ProductVO">
 		select * from product where mainImageUrl = #{mainImageUrl}
 	</select>
+
 
 <!--
 	체험예약 관련 코드 
@@ -34,6 +35,10 @@
 	<update id="minusStock" parameterType="java.util.HashMap">
 		update product set stock = stock - ${count} where id = #{productId}
 	</update>
+	
+	<select id="searchByTitle" parameterType="string" resultType="com.gdg.gyulDamGil.vo.ProductVO">
+    	select * from product where title like concat('%', #{title}, '%')
+	</select>
 	
 	<!--
 	재성: 주석처리 stock 을 두번 처리함 / 위의 minusStock 메소드와 같은 일을 실행함
@@ -61,6 +66,14 @@
 		SET a.stock = a.stock - #{count}
 		where id = #{productId} 
 	</update>
+	
+	<select id="selectTitleById" parameterType="int" resultType="String">
+		select title from product where id = ${id}
+	</select>
+	
+	<select id="selectImageById" parameterType="int" resultType="String">
+		select mainImageUrl from product where id = ${id}
+	</select>
 	
 	<!-- 예린 -->	
 	<!-- select Count : 갯수(int)를 가져오는 명령문-->
@@ -104,7 +117,6 @@
 		limit #{startNo}, #{pageSize}
 	</select>
 		
-	<!-- insert, update, delete -->
  	<insert id="insert" parameterType="ProductVO">
 		insert into product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate, farmName, status)
 			values (#{sellerId}, #{categoryId}, #{title}, #{price}, #{description}, #{stock}, #{mainImageUrl}, now(), #{farmName},#{status})

@@ -22,6 +22,9 @@
             color: black;
         }
     </style>
+
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<jsp:include page="../include/header.jsp"/>
 </head>
 <body>
 
@@ -69,12 +72,12 @@
 	            	<input type="hidden" name="title" value="${qna.title}">
 	            	<input type="hidden" name="comment" value="${qna.comment}">
 	                <tr>
-	                    <td>${qna.idx}</td> 
+	                    <td>${qna.id}</td> 
 	                    <td>
 	                        ${qna.sellerId}
 	                    </td>
 	                    <td>
-	                        <a href="QnaSMDetail?idx=${qna.idx}">
+	                        <a href="QnaSMDetail?id=${qna.id}">
 		                    ${qna.title}
 	                        </a>
 	                    </td>
@@ -95,4 +98,5 @@
    	</c:if>
 
 </body>
+<jsp:include page="../include/footer.jsp"/>
 </html>

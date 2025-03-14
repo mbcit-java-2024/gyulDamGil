@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>제주귤마을 - 결제</title>
+    <title>귤담길 - 결제</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../../resources/css/style.css">
     <style>
@@ -169,7 +169,7 @@
         <%@ include file="../include/header.jsp" %>
         
         <div id="section-payment" class="container mx-auto px-4 py-8">
-            <h2 class="text-2xl font-bold mb-6">orderPage</h2>
+            <h2 class="text-2xl font-bold mb-6">결제 페이지</h2>
             <!-- <form action="/orderOKPage" method="post"> -->
                 <table>
                     <thead>

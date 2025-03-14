@@ -90,28 +90,35 @@
 	background-color: green;
 	color: white;
 }
+.liked {
+    background-color: red;
+    color: white;
+}
 </style>
 <script>
-function addToFavorites() {
-    console.log('addToFavorites:::::::::::::::::::::::::::::');
+function addToBookmarkFarm(button) {
+    console.log('addToBookmarkFarm:::::::::::::::::::::::::::::');
     
-    let param = {
-          productId: ${selectGamgyulDetail.id }
-        , sellerId: ${selectGamgyulDetail.sellerId }
+    let param = { 
+          sellerId: ${selectFarmDetail.id }
     };
 
     $.ajax({
-        url: '/addToFavorites', // 즐겨찾기 추가 API
+        url: '/addToBookmarkFarm', // 즐겨찾기 추가 API
         type: 'POST',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(param),
         success: function(data) {
             console.log('success::::::::::::' + JSON.stringify(data));
+            
             if (data.code === '0') {
                 alert('상품이 즐겨찾기에 추가되었습니다.');
+                $(button).toggleClass('liked'); // 색칠 처리 
+	            location.reload();
+            		
             } else {
-                alert(data.message ? data.message : '알 수 없는 오류');
+            	location.href='/login/1';
             }
         },
         error: function(request, status, error) {
@@ -120,10 +127,43 @@ function addToFavorites() {
     });
 }
 
-function goToFarmDetail(sellerId) {
-    location.href = "/farmDetail?sellerId=" + sellerId;
+function deleteBookmarkFarm(button) {
+    console.log('deleteBookmarkFarm:::::::::::::::::::::::::::::');
+    
+    let param = { 
+          sellerId: ${selectFarmDetail.id }
+    
+        <%--//, sellerId: ${selectFarmDetail.sellerId }--%>
+    };
+
+    $.ajax({
+        url: '/deleteBookmarkFarm', // 즐겨찾기 추가 API
+        type: 'POST',
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(param),
+        success: function(data) {
+            console.log('success::::::::::::' + JSON.stringify(data));
+            
+            if (data.code === '0') {
+                alert('상품이 즐겨찾기에서 해제되었습니다.');
+                $(button).toggleClass('liked'); // 색칠 처리 
+                location.reload();
+                // 온클릭 이벤트 변경 추가 
+            } else {
+            	 //alert(data.message ? data.message : '알 수 없는 오류');
+            	location.href='/login/1';
+            }
+        },
+        error: function(request, status, error) {
+            console.log('responseText::::::::::::::::::::::::' + request.responseText);
+        }
+    });
 }
 
+/* function goToFarmDetail(sellerId) {
+    location.href = "/farmDetail?sellerId=" + sellerId;
+} */ // 이건 안쓰는건가보네. 일단 막아보자 패스로 보내야 하는데 겟으로 보내네..  
 
     function calctotalPrice(id) {
         var price = parseFloat(document.getElementById('price').value);
@@ -150,47 +190,7 @@ function goToFarmDetail(sellerId) {
     }
     
     // 상품 디테일에서 결제페이지
-    function addToCart() {
-        console.log('addToCart:::::::::::::::::::::::::::::');
-        let param = {
-              productId: ${selectGamgyulDetail.id }
-            , count: $('#count').val()
-            , price : ${selectGamgyulDetail.price }
-            , totalPrice : $('#totalPrice').val()
-            , sellerId : ${selectGamgyulDetail.sellerId }
-            };         
-        
-        $.ajax({
-            url : '/addToCart',
-            type : 'POST',
-            dataType : "json",
-            contentType:"application/json",
-            data : JSON.stringify(param),
-            beforeSend:function(){
-                console.log('addToCart:::::::::beforeSend::::::::::::::::::::');
-            },
-            success : function(data){
-                console.log('success:::::::::::111::::::::::::' + JSON.stringify(data));
-                if ('0' == data.code) {
-                    if (!confirm($('input[name="title"]').val() + '상품이' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
-                    else {
-                        location.href = '/cartPage';
-                    }
-                } else {
-                    if (null != data.message) {
-                        alert(data.message);
-                    }
-                    else {
-                        alert('알 수 없는 에러');
-                    }
-                }
-            },
-            error : function(request, status, error){
-                console.log('responseText::::::::::::::::::::::::'+request.responseText);
-            },
-            complete:function(){}
-        });
-    }
+    
 </script>
 </head>
 
@@ -206,66 +206,69 @@ function goToFarmDetail(sellerId) {
 				<!-- Products Grid -->
 				<div class="flex-1">
 					<!-- <form name="form1" action="/detailToOrderPage" method="post"> -->
-						<c:set var="farmDetail" value="${ selectFarmDetail}" />
-						<div class="seller-container">
+					<c:set var="farmDetail" value="${ selectFarmDetail}" />
+					<div class="seller-container">
 
-							<div class="seller-details">
-								<h2>${farmDetail.farmName}</h2>
+						<div class="seller-details">
+							<h2>${farmDetail.farmName}</h2>
 
-								<div class="product-section">
-									<strong>판매자:</strong> ${farmDetail.name}
-								</div>
-
-								<div class="product-section">
-									<strong>이메일:</strong> ${farmDetail.email}
-								</div>
-
-								<div class="product-section">
-									<strong>전화번호:</strong> ${farmDetail.phone}
-								</div>
-
-								<div class="product-section">
-									<strong>주소:</strong> ${farmDetail.address},
-									${farmDetail.detailAddress}
-								</div>
-
-								<div class="product-section">
-									<strong>사업자 번호:</strong> ${farmDetail.bussinessNumber}
-								</div>
-
-								<div class="product-section">
-									<strong>리뷰 수:</strong> ${farmDetail.reviewCount}
-								</div>
-
-								<div class="product-section">
-									<strong>상태:</strong>
-									<c:choose>
-										<c:when test="${farmDetail.status == 1}">
-											<span class="status-active">활성</span>
-										</c:when>
-										<c:otherwise>
-											<span class="status-inactive">비활성</span>
-										</c:otherwise>
-									</c:choose>
-								</div>
-
-								<div class="product-section">
-									<strong>가입일:</strong>
-									<fmt:formatDate value="${farmDetail.createDate}"
-										pattern="yyyy-MM-dd" />
-								</div>
-
-								<div class="product-section">
-									<strong>정보 수정일:</strong>
-									<fmt:formatDate value="${farmDetail.updateDate}"
-										pattern="yyyy-MM-dd" />
-								</div>
-
-								<div class="seller-buttons">
-									<button class="favorite-btn">❤️ 좋아요</button>
-								</div>
+							<div class="product-section">
+							<input type="hidden" name="userId" value="${farmDetail.userId}">
+							<input type="hidden" name="id" value="${farmDetail.id}">
+								<strong>판매자:</strong> ${farmDetail.name}
 							</div>
+
+							<div class="product-section">
+								<strong>이메일:</strong> ${farmDetail.email}
+							</div>
+
+							<div class="product-section">
+								<strong>전화번호:</strong> ${farmDetail.phone}
+							</div>
+
+							<div class="product-section">
+								<strong>주소:</strong> ${farmDetail.address},
+								${farmDetail.detailAddress}
+							</div>
+
+							<div class="product-section">
+								<strong>사업자 번호:</strong> ${farmDetail.bussinessNumber}
+							</div>
+
+							<div class="product-section">
+								<strong>리뷰 수:</strong> ${farmDetail.reviewCount}
+							</div>
+
+
+							<div class="product-section">
+								<strong>가입일:</strong>
+								<fmt:formatDate value="${farmDetail.createDate}"
+									pattern="yyyy-MM-dd" />
+							</div>
+
+
+
+
+							<c:choose>
+								<c:when test="${farmDetail.bookMarkCnt == 0}">
+									<button type="button" class="favorite-btn"
+										onclick="addToBookmarkFarm(this)">❤️ 즐겨찾기</button>
+								</c:when>
+								<c:when test="${farmDetail.bookMarkCnt != 0}">
+									<button type="button" class="favorite-btn liked"
+										onclick="deleteBookmarkFarm(this)">❤️ 즐겨찾기</button>
+								</c:when>
+							</c:choose>
+
+							<%-- <div class="seller-buttons">
+								<button type="button" class="favorite-btn" onclick="addToBookmarkFarm(this)">❤️ 좋아요 ${farmDetail.bookMarkCnt}</button>
+							</div> --%>
+							
+							
+							
+							
 						</div>
+					</div>
 
 					<!-- </form> -->
 				</div>

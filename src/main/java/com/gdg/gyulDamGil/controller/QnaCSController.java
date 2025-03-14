@@ -175,41 +175,34 @@ public class QnaCSController {
 		return "redirect:/QnaCSListc";
 	}
 	
-    @RequestMapping("/QnaCSDetail")
-    public String selectQnaByIdx(@RequestParam("id") int id, Model model, HttpServletRequest request) {
-    	int userType = (int) request.getSession().getAttribute("userType");
-    	if(userType == 1) {
-    		int consumerId = (int) request.getSession().getAttribute("id");
-    		String consumerName = consumerdao.selectUserIdById(consumerId);
-    		ConsumerVO consumerVO = consumerdao.selectById(consumerId);
-    		
-    		model.addAttribute("consumerName",consumerName);
-    		model.addAttribute("consumerId",consumerId);
-    		
-    		
-    	} else if (userType == 2) {
-    		int sellerId = (int) request.getSession().getAttribute("id");
-    		String sellerName = sellerdao.selectFarmName(sellerId);
-    		
-    		SellerVO sellerVO = sellerdao.selectSellerById(sellerId);
-    		
-    		model.addAttribute("sellerId",sellerId);
-    		model.addAttribute("sellerName",sellerName);
-    		
-    	}
-		
-		QnaCSVO qnaCSVO = dao.selectQnaByIdx(id);
-		
-        List<QnaCSRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
+	@RequestMapping("/QnaCSDetail")
+	public String selectQnaByIdx(@RequestParam("id") int id, Model model, HttpServletRequest request) {
+	    int userType = (int) request.getSession().getAttribute("userType");
+	    int sessionId = (int) request.getSession().getAttribute("id");
 
-        log.info("QnaCSController의 selectQnaByIdx() 메소드 실행");
-        
-        model.addAttribute("qnaCSVO", qnaCSVO);
-        model.addAttribute("replies", replies);
+	    QnaCSVO qnaCSVO = dao.selectQnaByIdx(id);
+	    List<QnaCSRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
+	    
+	    if (userType == 1) { 
+	        String consumerName = consumerdao.selectUserIdById(sessionId);
+	        qnaCSVO.setFarmName(sellerdao.selectFarmName(qnaCSVO.getSellerId()));
 
-        return "/QnaCS/QnaCSDetail"; 
-    }
-    
+	        model.addAttribute("consumerName", consumerName);
+	        model.addAttribute("consumerId", sessionId);
+	        
+	    } else if (userType == 2) { // 판매자
+	        String sellerName = sellerdao.selectFarmName(sessionId);
+	        qnaCSVO.setConsumerName(consumerdao.selectUserIdById(qnaCSVO.getConsumerId()));
+
+	        model.addAttribute("sellerName", sellerName);
+	        model.addAttribute("sellerId", sessionId);
+	    }
+
+	    model.addAttribute("qnaCSVO", qnaCSVO);
+	    model.addAttribute("replies", replies);
+	    
+	    return "/QnaCS/QnaCSDetail";
+	}    
     @RequestMapping("/QnaCSReplyInsert")
     public String QnaReplyInsert(QnaCSRepliesVO qnaCSRepliesVO, RedirectAttributes redirectAttributes) {
     	

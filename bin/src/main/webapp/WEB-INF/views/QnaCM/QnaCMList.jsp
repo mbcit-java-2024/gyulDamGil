@@ -3,6 +3,8 @@
 
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<jsp:include page="../include/header.jsp"/>
 <head>
     <meta charset="UTF-8">
     <title>QnA 목록</title>
@@ -24,8 +26,6 @@
     </style>
 </head>
 <body>
-
-    <h2>QnA 목록</h2>
     
     <c:if test="${not empty message}">
 	    <script>
@@ -69,12 +69,12 @@
 	            	<input type="hidden" name="title" value="${qna.title}">
 	            	<input type="hidden" name="comment" value="${qna.comment}">
 	                <tr>
-	                    <td>${qna.idx}</td> 
+	                    <td>${qna.id}</td> 
 	                    <td>
 	                        ${qna.consumerId}
 	                    </td>
 	                    <td>
-	                        <a href="QnaCMDetail?idx=${qna.idx}">
+	                        <a href="QnaCMDetail?id=${qna.id}">
 		                    ${qna.title}
 	                        </a>
 	                    </td>
@@ -86,13 +86,18 @@
 	                    	<c:if test="${not empty qna.replies}">
 	                    		답변 완료
 	                    	</c:if>
-	               
+	                    	
 	                    </td>
 	                </tr>
 	            </c:forEach>
+	            <div align="right">
+				    <button onclick="location.href='QnaCMInsert'">문의글 작성</button>
+				</div>
 	        </tbody>
+	        
 	    </table>
    	</c:if>
 
 </body>
+<jsp:include page="../include/footer.jsp"/>
 </html>

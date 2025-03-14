@@ -50,6 +50,8 @@
 	color: gold;
 }
 </style>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<jsp:include page="../include/header.jsp"/>
 </head>
 <body>
 	<c:if test="${not empty message}">
@@ -59,7 +61,7 @@
 	</c:if>
 
 	<form action="ReviewUpdateOK" method="post">
-		<input type="hidden" name="idx" value="${review.idx}" />
+		<input type="hidden" name="id" value="${review.id}" />
 
 		<table width="800" border="1" align="center" cellpadding="5"
 			cellspacing="0">
@@ -126,4 +128,5 @@
 	</form>
 
 </body>
+<jsp:include page="../include/footer.jsp"/>
 </html>
