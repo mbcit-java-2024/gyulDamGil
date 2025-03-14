@@ -170,7 +170,7 @@ $.ajax({
 			<ul class="flex items-center space-x-8">
 				<li>
 					<button id="tab-home" onclick="location.href='/'"
-						class="px-4 py-2 font-medium border-b-2 border-transparent text-gray-500 hover:text-orange-500">
+						class="px-4 py-2 font-medium border-b-2 border-transparent hover:text-orange-500">
 						홈</button>
 				</li>
 				<li>
