@@ -135,9 +135,9 @@ $.ajax({
 
 			<div class="flex items-center space-x-4">
 				<div class="relative hidden md:block">
-				 <form action="searchOK" method="get" class="center">
+				 <form action="/searchOK" method="get" class="center">
 			        <input type="hidden" name="categoryId" value="0">
-					<input type="text" name="title" placeholder="상품 또는 농가를 검색하세요"
+					<input type="text" name="title" placeholder="상품을 검색하세요"
 						class="w-64 px-4 py-1 border rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
 					<button type="submit" class="absolute right-3 top-1/2 transform -translate-y-1/2">
 						<svg class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">

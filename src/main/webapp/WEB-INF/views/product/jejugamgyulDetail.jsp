@@ -36,6 +36,7 @@
     gap: 10px; /* 버튼 간격 */
     z-index: 1000; /* 다른 요소 위에 표시 */
 }
+
 .favorite-btn, .farm-info-btn, .review-btn, .cart-btn, .buy-btn {
     width: 140px; /* 버튼 크기 일정 */
     height: 40px;
@@ -49,9 +50,29 @@
     cursor: pointer;
     flex-shrink: 0; /* 크기 변경 방지 */
 }
-.favorite-btn:hover, .farm-info-btn:hover, .review-btn:hover, .cart-btn:hover, .buy-btn:hover {
+
+.favorite-btn:hover  {
     background-color: #e76f51;
+    transform: scale(1.05);
 }
+
+.farm-info-btn:hover {
+	background-color: #329632;
+    transform: scale(1.05);
+}
+.buy-btn:hover {
+	background-color: #148CFF;
+    transform: scale(1.05);
+}
+.cart-btn:hover {
+	background-color: #FF8200;
+    transform: scale(1.05);
+}
+.review-btn:hover {
+	background-color: #FFC31E;
+    transform: scale(1.05);
+}
+
 .product-container {
     display: flex;
     flex-wrap: wrap; /* 내용이 벗어나지 않도록 자동 줄바꿈 */
@@ -219,7 +240,7 @@ function deleteBookmarkProduct(button) {
                 console.log('success:::::::::::111::::::::::::' + JSON.stringify(data));
                 if ('0' == data.code) {
                 	getCartCount();
-                    if (!confirm('${selectGamgyulDetail.title }' + '상품이' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
+                    if (!confirm('${selectGamgyulDetail.title }' + ' 상품 ' + $('#count').val() + '개가 장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')) {} 
                     else {
                         location.href = '/cartPage';
                     }
@@ -269,7 +290,7 @@ function deleteBookmarkProduct(button) {
 									<button type="button" class="farm-info-btn"
 										onclick="location.href='/farmDetail/${productDetail.sellerId}'">🏡
 										농장 정보</button>
-									<button type="button" class="farm-info-btn"
+									<button type="button" class="review-btn"
 										onclick="location.href='/ReviewList?productId=${productDetail.id}'">⭐
 										리뷰 보기</button>
 								</div>
