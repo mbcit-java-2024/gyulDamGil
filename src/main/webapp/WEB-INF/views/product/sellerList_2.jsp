@@ -101,7 +101,7 @@ html, body {
 				<c:if test="${productList.currentPage > 1}">
 					<button class="btn btn-outline-primary btn-sm" type="button"
 						title="첫 페이지로 이동합니다."
-						onclick="location.href='/myOrder?currentPage=1'">처음</button>
+						onclick="location.href='/sellerList?currentPage=1'">처음</button>
 				</c:if>
 				<c:if test="${productList.currentPage <= 1}">
 					<button class="btn btn-danger btn-sm" type="button"
@@ -113,7 +113,7 @@ html, body {
 				<c:if test="${productList.startPage > 1}">
 					<button class="btn btn-outline-primary btn-sm" type="button"
 						title="이전 10페이지로 이동합니다."
-						onclick="location.href='/myOrder?currentPage=${orderList.startPage - 1}'">이전</button>
+						onclick="location.href='/sellerList?currentPage=${orderList.startPage - 1}'">이전</button>
 				</c:if>
 				<c:if test="${productList.startPage <= 1}">
 					<button class="btn btn-danger btn-sm" type="button"
@@ -138,7 +138,7 @@ html, body {
 				<c:if test="${productList.endPage < productList.totalPage}">
 					<button class="btn btn-outline-primary btn-sm" type="button"
 						title="다음 10페이지로 이동합니다."
-						onclick="location.href='/myOrder?currentPage=${productList.endPage + 1}'">다음</button>
+						onclick="location.href='/sellerList?currentPage=${productList.endPage + 1}'">다음</button>
 				</c:if>
 				<c:if test="${productList.endPage >= productList.totalPage}">
 					<button class="btn btn-danger btn-sm" type="button"
@@ -150,7 +150,7 @@ html, body {
 				<c:if test="${productList.currentPage < productList.totalPage}">
 					<button class="btn btn-outline-primary btn-sm" type="button"
 						title="마지막 페이지로 이동합니다."
-						onclick="location.href='/myOrder?currentPage=${productList.totalPage}'">마지막</button>
+						onclick="location.href='/sellerList?currentPage=${productList.totalPage}'">마지막</button>
 				</c:if>
 				<c:if test="${productList.currentPage >= productList.totalPage}">
 					<button class="btn btn-danger btn-sm" type="button"

@@ -580,13 +580,37 @@ public class ProductController {
 	}
 
 	@RequestMapping("/updateOK")
-	public String updateOK(ProductVO productVO) {
+	public String updateOK(ProductVO productVO, @RequestParam("mainImage") MultipartFile file, 
+			HttpServletRequest request, Model model) {
 		log.info("ProductController 클래스의 updateOK() 메소드 실행");
 		ProductVO vo = productVO;
-		log.info("수정된 categoryId: " + vo.getCategoryId());
-		productDAO.update(vo);
-		log.info("상품 1건 수정: " + vo);
-		return "redirect:/show/" + vo.getId();
+		
+//		if (vo.getMainImageUrl() == null) {
+//			vo.setMainImageUrl(productDAO.selectById(vo.getId()).getMainImageUrl());
+//		}
+		
+		if (file.isEmpty()) {
+
+		}
+
+		try {
+			// 프로젝트 내부 `upload` 폴더 경로 가져오기
+			String filePath = imageToUrl(request.getServletContext().getRealPath("/upload/"), file);
+
+			// ProductVO 객체에 이미지 경로 저장
+			vo.setMainImageUrl(filePath);
+			log.info("수정된 categoryId: " + vo.getCategoryId());
+			log.info("수정된 mainImageUrl: " + vo.getMainImageUrl());
+		
+			productDAO.update(vo);
+			log.info("상품 1건 수정: " + vo);
+			return "redirect:/show/" + vo.getId();
+			
+		}catch (IOException e) {
+			e.printStackTrace();
+			model.addAttribute("fail", "이미지 저장 실패");
+			return "/product/update_2";
+		}
 	}
 
 //	판매자-상품1건 삭제

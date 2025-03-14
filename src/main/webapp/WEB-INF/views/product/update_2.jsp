@@ -85,10 +85,12 @@
 		<tr>
 			<td width="100" style="border-right: 1px solid #ccc;">귤 품종</td>
 			<td width="500" style="text-align: left;">
+				<input type="hidden" name="id" value="${vo.id}"/>
 				<input type="hidden" name="sellerId" value="${sessionScope.id}"/>
 				<input type="hidden" name="farmName" value="${sessionScope.userVO.farmName}"/>
 				<%
-					String[] category = {"제주감귤", "온주밀감", "한라봉", "천혜향", "레드향", "청견", "황금향", "카라향", "진지향","세토카","주스", "잼/청", "기타"};
+					String[] category = {"제주감귤", "온주밀감", "한라봉", "천혜향", "레드향", "청견", 
+										"황금향", "카라향", "진지향","세토카","주스", "잼/청", "기타"};
 					int cid = (int) request.getAttribute("cid");
 					for (int i=0; i<category.length; i++){
 						if (i == cid){
@@ -120,6 +122,9 @@
 				기존 이미지 파일명: <input type="text" name="mainImageUrl" value="${vo.mainImageUrl }">
 				<br/>
 			  <input class="form-control" type="file" name="mainImage">
+  				<c:if test="${not empty fail}">
+					<span style="color: red;">${fail}</span> 
+				</c:if>
 			</td>
 		</tr>
 		<tr>
