@@ -65,7 +65,8 @@ html, body {
 						${order.productTitle}<br/>
 						${order.count}개<br/>
 						<c:if test="${order.count > 1}">총 </c:if>
-						${order.totalPrice}원<br/>
+						<fmt:formatNumber value="${order.totalPrice}" pattern="#,###" var="totalPrice"/>
+						${totalPrice}원<br/>
 					</div>
 					<div>
 						<div>

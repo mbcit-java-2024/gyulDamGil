@@ -116,6 +116,14 @@
 		order by id desc
 		limit #{startNo}, #{pageSize}
 	</select>
+
+	<!-- sellerId에 해당하는 상품 목록 pageSize 개 만큼 얻어오기 -->
+	<select id="selectPageListBySellerId" parameterType="java.util.HashMap" resultType="ProductVO">
+		select * from product 
+		where sellerId = #{sellerId} 
+		order by id desc
+		limit #{startNo}, #{pageSize}
+	</select>
 		
  	<insert id="insert" parameterType="ProductVO">
 		insert into product (sellerId, categoryId, title, price, description, stock, mainImageUrl, createDate, farmName, status)

@@ -33,6 +33,7 @@ import com.gdg.gyulDamGil.vo.CartVO;
 import com.gdg.gyulDamGil.vo.ConsumerVO;
 import com.gdg.gyulDamGil.vo.OrderList;
 import com.gdg.gyulDamGil.vo.OrderVO;
+import com.gdg.gyulDamGil.vo.ProductList;
 import com.gdg.gyulDamGil.vo.ProductVO;
 import com.gdg.gyulDamGil.vo.SellerVO;
 
@@ -375,12 +376,52 @@ public class ProductController {
 		if (session != null && session.getAttribute("userType") != null) {
 			int userType = (int) session.getAttribute("userType");
 			log.info("userType: " + session.getAttribute("userType"));
+			
+//			로그인 상태인 경우
 			if (userType == 2) {
 				int sellerId = (int) session.getAttribute("id");
-				model.addAttribute("productList", productDAO.selectListBySellerId(sellerId));
-				model.addAttribute("count", productDAO.selectCountBySellerId(sellerId));
-				model.addAttribute("status0", productDAO.selectCountByStatus(sellerId, 0));
-				model.addAttribute("status1", productDAO.selectCountByStatus(sellerId, 1));
+				
+//				판매자의 모든 상품 리스트
+//				List<ProductVO> productList = productDAO.selectListBySellerId(sellerId);
+				
+//				페이징 작업
+				int pageSize = 10;
+				int currentPage;
+				int totalCount = productDAO.selectCountBySellerId(sellerId); // 판매자의 판매 상품 총 개수
+				
+				try {
+					currentPage = Integer.parseInt(request.getParameter("currentPage"));
+					currentPage = (currentPage < 1) ? 1 : currentPage;
+					currentPage = (currentPage > totalCount) ? totalCount : currentPage;
+				} catch (NumberFormatException e) {
+					currentPage = 1;
+				}
+				
+				model.addAttribute("count", productDAO.selectCountBySellerId(sellerId)); // 판매 상품 총 개수
+				model.addAttribute("status0", productDAO.selectCountByStatus(sellerId, 0)); // 임시저장 총 개수
+				model.addAttribute("status1", productDAO.selectCountByStatus(sellerId, 1)); // 등록완료 총 개수
+				
+				ProductList productList = new ProductList(pageSize, totalCount, currentPage);
+				HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+				hmap.put("startNo", productList.getStartNo());
+				hmap.put("pageSize", productList.getPageSize());
+				hmap.put("sellerId", sellerId);
+				// 판매자가 등록한 상품을 페이지 개수만큼 역순으로 불러옴
+				productList.setProductListForOnePage((ArrayList<ProductVO>) productDAO.selectPageListBySellerId(hmap));
+				
+//				product 이미지 경로 변환
+				for (ProductVO pvo : productList.getProductListForOnePage()) {
+					File file = new File(pvo.getMainImageUrl());
+					String fileName = file.getName(); // 파일명만 추출
+					String relativePath = "/upload/" + fileName;
+					log.info("이미지 상대 경로: " + relativePath);
+					pvo.setMainImageUrl(relativePath);
+				}
+				
+				System.out.println(productList.getProductListForOnePage()); // 디비에 있는 주문 목록을 가져옴
+				model.addAttribute("productList", productList);
+				model.addAttribute("currentPage", currentPage);
+				
 				result = "/product/sellerList_2";
 			}
 		} else {

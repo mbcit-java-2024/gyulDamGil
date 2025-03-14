@@ -310,7 +310,8 @@ function deleteBookmarkProduct(button) {
 								</div>
 								<div class="product-section">
 									<p>
-										가격 : <span id="spanprice">${productDetail.price }</span>원
+										<fmt:formatNumber value="${productDetail.price}" pattern="#,###" var="price"/>
+										가격 : <span id="spanprice">${price }</span>원
 									</p>
 									<input type="hidden" name="price"
 										value="${productDetail.price}">

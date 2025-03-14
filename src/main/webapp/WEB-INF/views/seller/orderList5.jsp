@@ -37,7 +37,8 @@
                 <td>${order.id}</td>
                 <td>${order.productId}</td>
                 <td>${order.count}</td>
-                <td>${order.totalPrice}원</td>
+                <fmt:formatNumber value="${order.totalPrice}" pattern="#,###" var="totalPrice"/>
+                <td>${totalPrice}원</td>
                 <td>
                 	<fmt:formatDate value="${order.orderDate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/>
 				</td>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*, java.util.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -173,9 +174,11 @@
                                 <input type="hidden" name="id" value="${productVO.id}"></td>
                                 <td>${productVO.count}
                                 <input type="hidden" name="count" value="${productVO.count}"></td>
-                                <td>${productVO.price} 원
+                                <fmt:formatNumber value="${productVO.price}" pattern="#,###" var="price"/>
+                                <td>${price} 원
                                 <input type="hidden" name="price" value="${productVO.price}"></td>
-                                <td class="total-price">${productVO.totalPrice} 원
+                                <fmt:formatNumber value="${productVO.totalPrice}" pattern="#,###" var="totalPrice"/>
+                                <td class="total-price">${totalPrice} 원
                                 <input type="hidden" name="totalPrice" value="${productVO.totalPrice}"></td>
                             </tr>
                     </tbody>

@@ -37,6 +37,7 @@ public interface ProductDAO {
 	List<ProductVO> selectList();
 	List<ProductVO> selectListBySellerId(int sellerId);
 	List<ProductVO> selectListByCategoryId(HashMap<String, Integer> hmap);
+	List<ProductVO> selectPageListBySellerId(HashMap<String, Integer> hmap);
 	Object selectCountByStatus(@Param("sellerId") int sellerId, @Param("status") int i);
 	void insert(ProductVO productVO);
 	void update(ProductVO productVO);

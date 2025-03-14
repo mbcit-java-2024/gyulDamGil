@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*, java.util.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,8 +124,10 @@
                         <tr>
                             <td>${item.title}</td>
                             <td>${item.count} 개</td>
-                            <td>${item.price} 원</td>
-                            <td>${item.totalPrice} 원</td>
+                            <fmt:formatNumber value="${item.price}" pattern="#,###" var="price"/>
+                            <fmt:formatNumber value="${item.totalPrice}" pattern="#,###" var="totalPrice"/>
+                            <td>${price} 원</td>
+                            <td>${totalPrice} 원</td>
                         </tr>
                     </c:forEach>
                 </tbody>
