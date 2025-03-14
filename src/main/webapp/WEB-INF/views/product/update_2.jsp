@@ -119,7 +119,7 @@
 				<br/>
 				기존 이미지 파일명: <input type="text" name="mainImageUrl" value="${vo.mainImageUrl }">
 				<br/>
-			  <input class="form-control" type="file" name="mainImage" required="required">
+			  <input class="form-control" type="file" name="mainImage">
 			</td>
 		</tr>
 		<tr>
