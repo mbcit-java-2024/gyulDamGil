@@ -120,8 +120,8 @@
 			<tr>
 				<th colspan="4">
 					<input type="hidden" name="productId" value="${productId}">
-					<input type="submit" value="수정 완료" >
-					<input type="button" value="취소" onclick="window.history.back();" />
+					<input type="submit" value="등록하기" style="background-color: #ff7f00; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;"/>
+					<input type="button" value="취소하기" onclick="window.history.back();"style="background-color: #cccccc; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" />
 				</th>
 			</tr>
 		</table>

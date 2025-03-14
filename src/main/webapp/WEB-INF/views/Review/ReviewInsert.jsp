@@ -60,7 +60,7 @@
 			cellspacing="0">
 			<tr>
 				<th width="100">작성자</th>
-				<td width="630"><input type="text" name="consumerId" /></td>
+				<td width="630">${consumerUserId}</td>
 			</tr>
 			<tr>
 				<th width="100">상품번호</th>
@@ -111,8 +111,11 @@
 						style="resize: none; width: 99%"></textarea></td>
 			</tr>
 			<tr>
-				<th colspan="4"><input type="submit" value="등록하기" />
-				<input type="button" value="취소하기" onclick="window.history.back();" /></th>
+				<input type="hidden" name="consumerId" value="${consumerId}"/>
+				<th colspan="4">
+				<input type="submit" value="등록하기" style="background-color: #ff7f00; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;"/>
+				<input type="button" value="취소하기" onclick="window.history.back();"style="background-color: #cccccc; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" />
+				</th>
 			</tr>
 		</table>
 	</form>

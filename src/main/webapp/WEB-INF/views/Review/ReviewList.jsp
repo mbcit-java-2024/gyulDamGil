@@ -106,7 +106,24 @@
             flex-direction: column;
             justify-content: space-between;
         }
-    </style>
+ 		.write-review-button {
+            background-color: #ff7f00;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            margin: 0 auto 30px; 
+        }
+
+        .write-review-button:hover {
+            background-color: #e06c00; 
+        }    
+        
+        </style>
 </head>
 <body>
 
@@ -122,11 +139,16 @@
         <p class="no-reviews">리뷰가 없습니다.</p>
     </c:if>
 
+    <!-- "리뷰 쓰기" 버튼 -->
+    <a href="/ReviewInsert">
+        <button class="write-review-button">리뷰 쓰기</button>
+        <input type="hidden" name="productId" value="${review.productId}">
+    </a>
     <c:forEach var="review" items="${reviewList}">
         <div class="review-container">
             <div class="review-item">
                 <p class="review-title">상품 이름: ${productName}</p>
-                <p class="review-title">작성자: ${review.consumerId}</p>
+                <p class="review-title">작성자: ${review.consumerName}</p>
 
                 <p class="review-date">
                     날짜: 
@@ -186,6 +208,8 @@
                         <input type="hidden" name="id" value="${review.id}">
                         <input type="hidden" name="productId" value="${review.productId}">
                         <input type="hidden" name="sellerId" value="${review.sellerId}">
+                        <input type="hidden" name="consumerId" value="${review.consumerId}">
+                        
                         <button type="submit">수정</button>
                     </form>
                     <form action="ReviewDelete" method="post" style="display:inline;">

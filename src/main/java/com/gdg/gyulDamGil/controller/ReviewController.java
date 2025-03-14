@@ -3,6 +3,7 @@ package com.gdg.gyulDamGil.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.gdg.gyulDamGil.dao.ConsumerDAO;
 import com.gdg.gyulDamGil.dao.ProductDAO;
 import com.gdg.gyulDamGil.dao.ReviewDAO;
+import com.gdg.gyulDamGil.vo.ConsumerVO;
 import com.gdg.gyulDamGil.vo.ProductVO;
+import com.gdg.gyulDamGil.vo.QnaCSVO;
 import com.gdg.gyulDamGil.vo.ReviewVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +32,21 @@ public class ReviewController {
 
 	@Autowired
 	private ProductDAO productdao;
+	
+	@Autowired
+	private ConsumerDAO consumerdao;
 
 	@RequestMapping("/ReviewInsert")
-	public String insert(HttpSession session) {
+	public String insert(Model model, HttpSession session, HttpServletRequest request) {
+		int consumerId = (int) request.getSession().getAttribute("id");
+		ConsumerVO consumer = consumerdao.selectConsumerById(consumerId);
+		String consumerUserId = consumer.getUserId();
+		
+		model.addAttribute("consumerUserId",consumerUserId);
+		model.addAttribute("consumerId",consumerId);
+		
+		
+		
 		log.info("HomeController 클래스의 insert() 메소드 실행");
 		return "/Review/ReviewInsert";
 	}
@@ -65,11 +81,15 @@ public class ReviewController {
     @RequestMapping("/ReviewList")
     public String getProductReviews(@RequestParam("productId") int productId, Model model) {
         log.info("받은 productId: " + productId);
-        
+                
         ProductVO productVO = productdao.selectById(productId);
         String productName = productVO.getTitle();
         
         List<ReviewVO> reviews = (List<ReviewVO>) dao.selectReviewByProductId(productId);
+        
+        for (int i = 0; i < reviews.size(); i++) {
+        	reviews.get(i).setConsumerName(consumerdao.selectUserIdById(reviews.get(i).getConsumerId()));
+		}
         
         model.addAttribute("productName",productName);
         model.addAttribute("productId", productId);

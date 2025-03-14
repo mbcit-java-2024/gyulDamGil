@@ -1,127 +1,131 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+	
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>리뷰 목록</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-	<jsp:include page="../include/header.jsp"/>
+<meta charset="UTF-8">
+<title>리뷰 수정</title>
+<style type="text/css">
+@import
+	url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+.rate {
+	display: inline-block;
+	border: 0;
+}
+
+.rate>input {
+	display: none;
+}
+
+.rate>label {
+	float: right;
+	color: #ddd;
+}
+
+.rate>label:before {
+	display: inline-block;
+	font-size: 1rem;
+	padding: .3rem .2rem;
+	margin: 0;
+	cursor: pointer;
+	font-family: FontAwesome;
+	content: "\f005 ";
+}
+
+.rate .half:before {
+	content: "\f089 ";
+	position: absolute;
+	padding-right: 0;
+}
+
+.rate input:checked ~ label, .rate label:hover, .rate label:hover ~
+	label {
+	color: gold;
+}
+
+.rate input:checked+.rate label:hover, .rate input:checked ~ .rate label:hover 
+	~ label, .rate label:hover ~ input:checked ~ label {
+	color: gold;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<jsp:include page="../include/header.jsp"/>
 </head>
 <body>
-
-	        <p>별점:
-	        </p>
-    <h2>리뷰 목록</h2>
-    <hr>
-   <p> 판매자 전체 평점 :
-		<c:choose>
-    <c:when test="${averageRating >= 4.7}">
-	        <img src="images/rating/5.jpg" width="90" >
-	    </c:when>
-	    <c:when test="${averageRating >= 4.3 && averageRating < 4.7}">
-	        <img src="images/rating/4.5.jpg" width="90" >
-	    </c:when>
-	    <c:when test="${averageRating >= 3.9 && averageRating < 4.3}">
-	        <img src="images/rating/4.jpg" width="90" >
-	    </c:when>
-	    <c:when test="${averageRating >= 3.5 && averageRating < 3.9}">
-	        <img src="images/rating/3.5.jpg" width="90" >
-	    </c:when>
-	    <c:when test="${averageRating >= 3.0 && averageRating < 3.5}">
-	        <img src="images/rating/3.jpg" width="90" >
-	    </c:when>
-	    <c:when test="${averageRating >= 2.5 && averageRating < 3.0}">
-	        <img src="images/rating/2.5.jpg" width="90" >
-	    </c:when>
-	    <c:when test="${averageRating >= 2.0 && averageRating < 2.5}">
-	        <img src="images/rating/2.jpg" width="90" >
-	    </c:when>
-	    <c:when test="${averageRating >= 1.5 && averageRating < 2.0}">
-	        <img src="images/rating/1.5.jpg" width="90" >
-	    </c:when>
-	    <c:when test="${averageRating >= 1.0 && averageRating < 1.5}">
-	        <img src="images/rating/1.jpg" width="90" >
-	    </c:when>
-	    <c:when test="${averageRating >= 0.5 && averageRating < 1.0}">
-	        <img src="images/rating/0.5.jpg" width="90" >
-	    </c:when>
-	    <c:when test="${averageRating >= 0.0 && averageRating < 0.5}">
-	        <img src="images/rating/0.0.jpg" width="90" >
-	    </c:when>
-	</c:choose>
-   		 ${averageRating}
-   	</p>
-    
-    <hr>
-    <c:if test="${not empty message}">
+	<c:if test="${not empty message}">
 	    <script>
 	        alert("${message}");
 	    </script>
 	</c:if>
 
-    <c:if test="${empty reviewList}">
-        <p>리뷰가 없습니다.</p>
-    </c:if>
+	<form action="ReviewUpdateOK" method="post">
+		<input type="hidden" name="id" value="${review.id}" />
 
-    <c:forEach var="review" items="${reviewList}">
-	    <div class="review-container">
-	        <p>상품 이름: ${review.productId}</p>
-	        <p>작성자: ${review.consumerId}</p>
-	        <p>날짜:
-	        	<c:choose>
-			        <c:when test="${not empty review.updateDate}">
-			            ${review.updateDate}
-			        </c:when>
-			        <c:otherwise>
-			            ${review.createDate}
-			        </c:otherwise>
-    			</c:choose>
-	        </p>
-	        <p>별점:
-	            <c:choose>
-	                <c:when test="${review.rate == 5}">
-	                    <img src="images/5.jpg" width="90" >
-	                </c:when>
-	                <c:when test="${review.rate == 4.5}">
-	                    <img src="images/4.5.jpg" width="90" >
-	                </c:when>
-	                <c:when test="${review.rate == 4}">
-	                    <img src="images/4.jpg" width="90" >
-	                </c:when>
-	                <c:when test="${review.rate == 3.5}">
-	                    <img src="images/3.5.jpg" width="90" >
-	                </c:when>
-	                <c:when test="${review.rate == 3}">
-	                    <img src="images/3.jpg" width="90" >
-	                </c:when>
-	                <c:when test="${review.rate == 2.5}">
-	                    <img src="images/2.5.jpg" width="90" >
-	                </c:when>
-	                <c:when test="${review.rate == 2}">
-	                    <img src="images/2.jpg" width="90" >
-	                </c:when>
-	                <c:when test="${review.rate == 1.5}">
-	                    <img src="images/1.5.jpg" width="90" >
-	                </c:when>
-	                <c:when test="${review.rate == 1}">
-	                    <img src="images/1.jpg" width="90" >
-	                </c:when>
-	                <c:when test="${review.rate == 0.5}">
-	                    <img src="images/0.5.jpg" width="90" >
-	                </c:when>
-	                <c:when test="${review.rate == 0.0}">
-	                    <img src="images/0.0.jpg" width="90" >
-	                </c:when>
-				</c:choose>
-	        </p>
-	        
-	        <p>리뷰 내용: ${review.comment}</p>
-			
-        <hr>
-    </c:forEach>
+		<table width="800" border="1" align="center" cellpadding="5"
+			cellspacing="0">
+			<tr>
+				<th width="100">작성자</th>
+				<td width="630"><input type="text" name="userId"
+					value="${review.consumerId}" /></td>
+			</tr>
+			<tr>
+				<th width="100">상품번호</th>
+				<td width="500"><input type="text" name="productId"
+					value="${review.productId}" /></td>
+			</tr>
+			<tr>
+				<td width="50" align="center">평점</td>
+				<td width="170">
+					<fieldset class="rate">
+						<input type="radio" id="rating10" name="rate" value="5.0">
+						<label for="rating10" title="5점"></label>
+						 
+						<input type="radio" id="rating9" name="rate" value="4.5">
+						<label class="half" for="rating9" title="4.5점"></label> 
+						
+						<input type="radio" id="rating8" name="rate" value="4.0">
+						<label for="rating8" title="4점"></label> 
+						
+						<input type="radio" id="rating7" name="rate" value="3.5">
+						<label class="half" for="rating7" title="3.5점"></label> 
+						
+						<input type="radio" id="rating6" name="rate" value="3.0"/>
+						<label for="rating6" title="3점"></label> 
+						
+						<input type="radio" id="rating5" name="rate" value="2.5"/>
+						<label class="half" for="rating5" title="2.5점"></label> 
+						
+						<input type="radio" id="rating4" name="rate" value="2.0"/>
+						<label for="rating4" title="2점"></label>
+						
+						<input type="radio"	id="rating3" name="rate" value="1.5"/>
+						<label class="half" for="rating3" title="1.5점"></label>
+						
+						<input type="radio" id="rating2" name="rate" value="1.0"/>
+						<label for="rating2" title="1점"></label>
+						
+						<input type="radio"	id="rating1" name="rate" value="0.5"/>
+						<label class="half" for="rating1" title="0.5점"></label>
+						
+					</fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th width="100">내용</th>
+				<td colspan="3"><textarea rows="15" name="comment"
+						style="resize: none; width: 99%">${review.comment}</textarea></td>
+			</tr>
+			<tr>
+				<th colspan="4">
+					<input type="hidden" name="productId" value="${productId}">
+					<input type="submit" value="등록하기" style="background-color: #ff7f00; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;"/>
+					<input type="button" value="취소하기" onclick="window.history.back();"style="background-color: #cccccc; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" />
+				</th>
+			</tr>
+		</table>
+	</form>
 
 </body>
 <jsp:include page="../include/footer.jsp"/>

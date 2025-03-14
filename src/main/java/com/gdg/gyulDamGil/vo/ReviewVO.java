@@ -17,5 +17,7 @@ public class ReviewVO {
 	private Date createDate;
 	private Date updateDate;
 	
+	private String consumerName;
+	
 }
 
