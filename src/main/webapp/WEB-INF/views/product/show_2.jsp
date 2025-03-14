@@ -87,7 +87,7 @@
 			<td width="100" style="border-right: 1px solid #ccc;">귤 품종</td>
 			<td width="500">
 				<%
-				String[] category = {"제주감귤", "온주밀감", "한라봉", "천혜향", "레드향", "청견", "황금향", "카라향", "진지향","세토카"};
+				String[] category = {"제주감귤", "온주밀감", "한라봉", "천혜향", "레드향", "청견", "황금향", "카라향", "진지향","세토카","주스", "잼/청", "기타"};
 				int cid = (int) request.getAttribute("cid");
 				String c = category[cid];
 				%>
