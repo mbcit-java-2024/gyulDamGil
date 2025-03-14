@@ -49,9 +49,15 @@ public class QnaSMController {
 
     // QnA 작성 페이지 이동
     @RequestMapping("/QnaSMInsert")
-    public String QnaInsert() {
+    public String QnaInsert(Model model, HttpServletRequest request) {
+    	int sellerId = (int) request.getSession().getAttribute("id");
+    	
+    	SellerVO seller = sellerdao.selectSellerById(sellerId);
+    	String sellerUserId = seller.getFarmName();
         log.info("QnaSMController - QnaInsert() 실행");
-
+        
+        model.addAttribute("sellerId",sellerId);
+        model.addAttribute("sellerUserId",sellerUserId);
         return "/QnaSM/QnaSMInsert";
     }
 

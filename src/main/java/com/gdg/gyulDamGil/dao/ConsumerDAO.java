@@ -17,6 +17,7 @@ public interface ConsumerDAO {
 	void insert(ConsumerVO vo);
 	void update(ConsumerVO vo);
 	void delete(int id);
+	String selectUserIdById(int id); // id로 name 한 건 꺼내오는 메소드
 	
 	
 }

@@ -9,6 +9,44 @@
 <title>Qna 답글달기</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <jsp:include page="../include/header.jsp"/>
+<style>
+	
+	
+	.first-table th {
+	    background-color: #ffcc99;
+	    color: black; 
+	    padding: 10px;
+	}
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-list {
+        background-color: #ffcc99;
+        color: black;
+    }
+
+    .btn-list:hover {
+        background-color: #ff7f00;
+    }
+
+    .btn-reply {
+        background-color: #ffcc99;
+        color: black;
+    }
+
+    .btn-reply:hover {
+        background-color: #ff7f00;
+    }
+</style>
+
 </head>
 <body>
     <c:if test="${not empty message}">
@@ -17,9 +55,9 @@
         </script>
     </c:if>
     
-    <table width="900" border="1" align="center" cellpadding="3" cellspacing="2">
+    <table class="first-table" width="900" border="1" align="center" cellpadding="3" cellspacing="2">
 	    <tr>
-	        <th width="80">작성자</th>
+	        <th width="80">농장이름</th>
 	        <td width="520">${consumerUserId}</td>
 	        <th width="80">작성일</th>
 	        <td width="200"><fmt:formatDate value="${qnaCSVO.createDate}" pattern="yyyy-MM-dd HH:mm" /></td>
@@ -38,19 +76,18 @@
 	    </tr>
 	</table>
 
-    <table width="900" border="0" align="center" cellpadding="3" cellspacing="2">
-        <tr>
-            <td style="text-align: right;">
-            <!-- consumerId 와 sellerId 를 받게 되면 나눠서 할것 -->
-            	<c:if test="${sessionScope.userType == 1}">
-                	<input type="button" value="목록으로" onclick="location.href='/QnaCSListc';" />
-                </c:if>
-            	<c:if test="${sessionScope.userType == 2}">
-                	<input type="button" value="목록으로" onclick="location.href='/QnaCSLists';" />
-                </c:if>
-            </td>
-        </tr>
-    </table>
+    
+   	<c:if test="${sessionScope.userType == 1}">
+   		<div style="width: 900px; margin: 20px auto; text-align: right;">
+    		<input type="button" value="목록으로" class="btn btn-list" onclick="location.href='/QnaCSListc';"  />
+		</div>
+    </c:if>
+   	<c:if test="${sessionScope.userType == 2}">
+   		<div style="width: 900px; margin: 20px auto; text-align: right;">
+    		<input type="button" value="목록으로" class="btn btn-list" onclick="location.href='/QnaCSLists';"  />
+		</div>
+    </c:if>
+      
     
     <br/><br/>
     
@@ -67,7 +104,7 @@
                             <div style="display: flex; align-items: center;">
                                 <textarea name="comment" style="width: 805px; height: 80px; margin-right: 10px;"></textarea>
                                 <input type="hidden" name="parentId" value="${qnaCSVO.id}" />
-                                <input type="submit" value="답변 달기" style="height: 80px;" />
+                                <input type="submit" value="답변 달기" class="btn btn-reply"  style="height: 80px;" />
                             </div>
                         </td>
                     </tr>
@@ -79,10 +116,10 @@
             <c:forEach var="reply" items="${replies}">
 	            <tr>
 	            <c:if test="${sessionScope.userType == 1}">
-			        <th width="80">${consumerVO.name}</th>
+			        <th width="80">${consumerName}</th>
 				</c:if>
 				<c:if test="${sessionScope.userType == 2}">
-			        <th width="80">${sellerVO.farmname}</th>
+			        <th width="80">${sellerName}</th>
 				</c:if>
 			        <td width="750">${reply.comment}</td>
 			        <td width="170"><fmt:formatDate value="${qnaCSVO.createDate}" pattern="yyyy-MM-dd HH:mm" /></td>
@@ -94,9 +131,14 @@
                         <td>
                             <div style="display: flex; align-items: center;">
                                 <textarea name="comment" style="width: 805px; height: 80px; margin-right: 10px;"></textarea>
-                                <input type="hidden" name="consumerId" value="${qnaCSVO.consumerId}" /> <!-- 로그인후 session에서 정보꺼내오기 consumerId -> sessionScope.id -->
+					            <c:if test="${sessionScope.userType == 1}">
+                                	<input type="hidden" name="consumerId" value="${consumerName}" /> 
+								</c:if>
+								<c:if test="${sessionScope.userType == 2}">
+                                	<input type="hidden" name="consumerId" value="${sellerName}" />
+								</c:if>
                                 <input type="hidden" name="parentId" value="${qnaCSVO.id}" />
-                                <input type="submit" value="답변 달기" style="height: 80px;" />
+                                <input type="submit" value="답변 달기" class="btn btn-reply" style="height: 80px;" />
                             </div>
                         </td>
                     </tr>

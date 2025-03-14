@@ -68,7 +68,7 @@
 			<tr>
 				<th width="100">작성자</th>
 				<td width="630"><input type="text" name="userId"
-					value="${review.userId}" /></td>
+					value="${review.consumerId}" /></td>
 			</tr>
 			<tr>
 				<th width="100">상품번호</th>

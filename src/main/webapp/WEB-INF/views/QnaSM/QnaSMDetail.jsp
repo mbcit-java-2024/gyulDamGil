@@ -9,6 +9,43 @@
 <title>Qna 답글달기</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <jsp:include page="../include/header.jsp"/>
+<style>
+	
+	
+	.first-table th {
+	    background-color: #ffcc99;
+	    color: black; 
+	    padding: 10px;
+	}
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-list {
+        background-color: #ffcc99;
+        color: black;
+    }
+
+    .btn-list:hover {
+        background-color: #ff7f00;
+    }
+
+    .btn-reply {
+        background-color: #ffcc99;
+        color: black;
+    }
+
+    .btn-reply:hover {
+        background-color: #ff7f00;
+    }
+</style>
 </head>
 <body>
     <c:if test="${not empty message}">
@@ -17,7 +54,7 @@
         </script>
     </c:if>
 
-    <table width="900" border="1" align="center" cellpadding="3" cellspacing="2">
+    <table class="first-table" width="900" border="1" align="center" cellpadding="3" cellspacing="2">
 	    <tr>
 	        <th width="80">작성자</th>
 	        <td width="520">${sellerUserId}</td>
@@ -34,13 +71,9 @@
 	    </tr>
 	</table>
 
-    <table width="900" border="0" align="center" cellpadding="3" cellspacing="2">
-        <tr>
-            <td style="text-align: right;">
-                <input type="button" value="목록으로" onclick="location.href='/QnaSMList';" />
-            </td>
-        </tr>
-    </table>
+    <div style="width: 900px; margin: 20px auto; text-align: right;">
+    	<input type="button" value="목록으로" class="btn btn-list" onclick="location.href='/QnaSMList';" />
+	</div>
     
     <br/><br/>
     
@@ -57,7 +90,7 @@
                             <div style="display: flex; align-items: center;">
                                 <textarea name="comment" style="width: 805px; height: 80px; margin-right: 10px;"></textarea>
                                 <input type="hidden" name="parentId" value="${qnaSMVO.id}" />
-                                <input type="submit" value="답변 달기" style="height: 80px;" />
+                                <input type="submit" value="답변 달기" class="btn btn-reply" style="height: 80px;" />
                             </div>
                         </td>
                     </tr>
@@ -83,7 +116,7 @@
                                 <input type="hidden" name="sellerId" value="${qnaSMVO.sellerId}" /> <!-- 로그인후 session에서 정보꺼내오기 consumerId -> sessionScope.id -->
                                 <input type="hidden" name="parentId" value="${qnaSMVO.id}" />
                                 <input type="hidden" name="replies" value="${qnaSMVO.replies }">
-                                <input type="submit" value="답변 달기" style="height: 80px;" />
+                                <input type="submit" value="답변 달기" class="btn btn-reply" style="height: 80px;" />
                             </div>
                         </td>
                     </tr>

@@ -76,6 +76,10 @@ public class QnaCSController {
     	
         List<QnaCSVO> qnaList = dao.selectQnaByconsumerId(consumerId);
         
+        for (int i = 0; i < qnaList.size(); i++) {
+        	qnaList.get(i).setFarmName(sellerdao.selectFarmName(qnaList.get(i).getSellerId()));
+        }
+        
         model.addAttribute("consumerUserId", consumerUserId);
         model.addAttribute("consumerId",consumerId);
         model.addAttribute("qnaList", qnaList);
@@ -86,9 +90,9 @@ public class QnaCSController {
 	
 	@RequestMapping("/QnaCSLists")
 	public String selectQnaLists(Model model, HttpServletRequest request) {
-		int sellerId = (int) request.getSession().getAttribute("id");
-		int consumerId = (int) request.getSession().getAttribute("id");
-		
+			int consumerId = (int) request.getSession().getAttribute("id");
+			
+			int sellerId = (int) request.getSession().getAttribute("id");
 		SellerVO seller = sellerdao.selectSellerById(sellerId);
 		ConsumerVO consumer = consumerdao.selectConsumerById(consumerId);
 		
@@ -97,6 +101,9 @@ public class QnaCSController {
 		
 		List<QnaCSVO> qnaList = dao.selectQnaBysellerId(sellerId);
 		
+		for (int i = 0; i < qnaList.size(); i++) {
+			qnaList.get(i).setConsumerName(consumerdao.selectUserIdById(qnaList.get(i).getConsumerId()));
+		}
 		
 		log.info("QnaCMController - selectQnaLists() 실행");
 		
@@ -170,30 +177,35 @@ public class QnaCSController {
 	
     @RequestMapping("/QnaCSDetail")
     public String selectQnaByIdx(@RequestParam("id") int id, Model model, HttpServletRequest request) {
-		int sellerId = (int) request.getSession().getAttribute("id");
-		
-		SellerVO seller = sellerdao.selectSellerById(sellerId);
+    	int userType = (int) request.getSession().getAttribute("userType");
+    	if(userType == 1) {
+    		int consumerId = (int) request.getSession().getAttribute("id");
+    		String consumerName = consumerdao.selectUserIdById(consumerId);
+    		ConsumerVO consumerVO = consumerdao.selectById(consumerId);
+    		
+    		model.addAttribute("consumerName",consumerName);
+    		model.addAttribute("consumerId",consumerId);
+    		
+    		
+    	} else if (userType == 2) {
+    		int sellerId = (int) request.getSession().getAttribute("id");
+    		String sellerName = sellerdao.selectFarmName(sellerId);
+    		
+    		SellerVO sellerVO = sellerdao.selectSellerById(sellerId);
+    		
+    		model.addAttribute("sellerId",sellerId);
+    		model.addAttribute("sellerName",sellerName);
+    		
+    	}
 		
 		QnaCSVO qnaCSVO = dao.selectQnaByIdx(id);
 		
-		ConsumerVO consumerVO = consumerdao.selectConsumerById(qnaCSVO.getConsumerId());
-		SellerVO sellerVO = sellerdao.selectSellerById(qnaCSVO.getSellerId());
-		
-		String consumerUserId = consumerVO.getUserId();
-		String sellerUserId = sellerVO.getFarmName();
-		
-        
-
         List<QnaCSRepliesVO> replies = dao.selectRepliesByQnaIdx(id);
 
         log.info("QnaCSController의 selectQnaByIdx() 메소드 실행");
         
-        model.addAttribute("consumerUserId",consumerUserId);
-        model.addAttribute("sellerUserId",sellerUserId);
-        model.addAttribute("sellerId",sellerId);
         model.addAttribute("qnaCSVO", qnaCSVO);
         model.addAttribute("replies", replies);
-        
 
         return "/QnaCS/QnaCSDetail"; 
     }

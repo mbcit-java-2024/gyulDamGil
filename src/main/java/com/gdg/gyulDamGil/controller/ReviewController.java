@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.gdg.gyulDamGil.dao.ProductDAO;
 import com.gdg.gyulDamGil.dao.ReviewDAO;
+import com.gdg.gyulDamGil.vo.ProductVO;
 import com.gdg.gyulDamGil.vo.ReviewVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,8 @@ public class ReviewController {
 	@Autowired
 	private ReviewDAO dao;
 
+	@Autowired
+	private ProductDAO productdao;
 
 	@RequestMapping("/ReviewInsert")
 	public String insert(HttpSession session) {
@@ -61,10 +65,13 @@ public class ReviewController {
     @RequestMapping("/ReviewList")
     public String getProductReviews(@RequestParam("productId") int productId, Model model) {
         log.info("받은 productId: " + productId);
-                 
-
+        
+        ProductVO productVO = productdao.selectById(productId);
+        String productName = productVO.getTitle();
+        
         List<ReviewVO> reviews = (List<ReviewVO>) dao.selectReviewByProductId(productId);
-
+        
+        model.addAttribute("productName",productName);
         model.addAttribute("productId", productId);
         model.addAttribute("reviewList", reviews);
 

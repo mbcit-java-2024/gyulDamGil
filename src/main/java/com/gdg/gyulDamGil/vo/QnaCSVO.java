@@ -1,6 +1,5 @@
 package com.gdg.gyulDamGil.vo;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -15,5 +14,8 @@ public class QnaCSVO {
     private String comment;
     private Date createDate;
     private List<QnaCSRepliesVO> replies;
-
+    
+    private String farmName;
+    private String consumerName;
+    
 }

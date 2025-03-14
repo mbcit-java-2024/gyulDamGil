@@ -8,22 +8,49 @@
 <title>QnaCM</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <jsp:include page="../include/header.jsp"/>
-<head>
     <meta charset="UTF-8">
     <style>
         table {
-            width:100%;
+            width: 100%;
             border-collapse: collapse;
+            border-radius: 10px; /* 테이블 모서리 둥글게 */
+            overflow: hidden; /* 테이블의 모서리 둥글게 처리 */
         }
         th, td {
-            border: 1px solid black;
+            border: 1px solid #ff7f00; /* 귤색 테두리 */
             padding: 8px;
             text-align: center;
+            background-color: #ffffff; /* 흰색 배경 */
+        }
+        
+        th {
+            background-color: #ffcc99; /* 헤더 부분에 더 진한 귤색 */
         }
         
         a {
             text-decoration: none;
             color: black;
+        }
+
+        .qna-button {
+            background-color: #ffcc99; /* 귤색 배경 */
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .qna-button:hover {
+            background-color: #ff7f00; /* 버튼에 마우스를 올리면 더 진한 귤색 */
+        }
+
+        /* 버튼과 테이블 사이 간격을 주기 위한 스타일 */
+        .qna-button-container {
+            margin-top: 20px; /* 테이블과 버튼 사이의 간격을 설정 */
+            text-align: right;
         }
         
     </style>
@@ -95,17 +122,16 @@
 				                    	<c:if test="${not empty qna.replies}">
 				                    		답변 완료
 				                    	</c:if>
-				                    	
 				                    </td>
 				                </tr>
 				            </c:forEach>
-				            <div align="right">
-							    <button onclick="location.href='QnaCMInsert'">문의글 작성</button>
-							</div>
 				        </tbody>
-				        
 				    </table>
-			   	</c:if>	
+			   	</c:if>
+			   	<div class="qna-button-container">
+			        <button class="qna-button" onclick="location.href='QnaCMInsert'">문의글 작성</button>
+			    </div>
+			   		
 			</div>
 		</div>
 	</div>
