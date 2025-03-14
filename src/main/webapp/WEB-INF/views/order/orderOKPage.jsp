@@ -106,6 +106,7 @@
             <p>📌 <strong>구매자:</strong> ${Consumerinfo.name}</p>
             <p>📩 <strong>이메일:</strong> ${Consumerinfo.email}</p>
             <p>📍 <strong>배송지:</strong> ${Consumerinfo.address}</p>
+            <p>📍 <strong>상세 배송지:</strong> ${Consumerinfo.detailAddress}</p>
         </div>
 
         <div class="order-items">
