@@ -104,7 +104,7 @@
 				<input class="rounded-pill" 
 					style="background-color: #F66F0A; color: white; display: right; justify-content: right; 
 						font-size: 14px; padding-top: 5px; padding-bottom:5px; padding-left: 10px; padding-right: 10px" 
-					type="button" value="중복확인" onclick="confirmCheck(1)" required="required">
+					type="button" value="중복확인" onclick="confirmCheck(2)" required="required">
 				</td>
 			</tr>
 			<!-- 비밀번호 -->

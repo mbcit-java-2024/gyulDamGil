@@ -130,7 +130,7 @@ html, body {
 					</c:if>
 					<c:if test="${productList.currentPage != i }">
 						<button class="btn btn-outline-primary btn-sm" type="button"
-							onclick="location.href='/myOrder?currentPage=${i}'">${i}</button>
+							onclick="location.href='/sellerList?currentPage=${i}'">${i}</button>
 					</c:if>
 							&nbsp;&nbsp;
 						</c:forEach>
@@ -140,7 +140,7 @@ html, body {
 						title="다음 10페이지로 이동합니다."
 						onclick="location.href='/myOrder?currentPage=${productList.endPage + 1}'">다음</button>
 				</c:if>
-				<c:if test="${productList.endPage >= orderList.totalPage}">
+				<c:if test="${productList.endPage >= productList.totalPage}">
 					<button class="btn btn-danger btn-sm" type="button"
 						disabled="disabled" title="마지막 10페이지 입니다."
 						style="font-weight: bold; color: orange;">다음</button>

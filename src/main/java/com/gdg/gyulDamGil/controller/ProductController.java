@@ -429,7 +429,48 @@ public class ProductController {
 		}
 		return result;
 	}
-
+	
+	@RequestMapping("/sellerList")
+	public String sellerListPage(Model model, HttpServletRequest request) {
+		log.info("ProductController 클래스의 sellerListPage() 메소드 실행");
+		HttpSession session = request.getSession(false);
+		int pageSize = 10;
+		int sellerId =(int) session.getAttribute("id");
+		int currentPage;
+		
+		int totalCount = productDAO.selectCountBySellerId(sellerId); // 판매자의 판매 상품 총 개수
+		try {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			currentPage = (currentPage < 1) ? 1 : currentPage;
+			currentPage = (currentPage > totalCount) ? totalCount : currentPage;
+		} catch (NumberFormatException e) {
+			currentPage = 1;
+		}
+		
+		ProductList productList = new ProductList(pageSize, totalCount, currentPage);
+		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+		hmap.put("startNo", productList.getStartNo());
+		hmap.put("pageSize", productList.getPageSize());
+		hmap.put("sellerId", sellerId);
+		// 판매자가 등록한 상품을 페이지 개수만큼 역순으로 불러옴
+		productList.setProductListForOnePage((ArrayList<ProductVO>) productDAO.selectPageListBySellerId(hmap));
+		
+//		product 이미지 경로 변환
+		for (ProductVO pvo : productList.getProductListForOnePage()) {
+			File file = new File(pvo.getMainImageUrl());
+			String fileName = file.getName(); // 파일명만 추출
+			String relativePath = "/upload/" + fileName;
+			log.info("이미지 상대 경로: " + relativePath);
+			pvo.setMainImageUrl(relativePath);
+		}
+		
+		System.out.println(productList.getProductListForOnePage()); // 디비에 있는 주문 목록을 가져옴
+		model.addAttribute("productList", productList);
+		model.addAttribute("currentPage", currentPage);
+		
+		return "/product/sellerList_2";
+	}	
+	
 //	이미지 파일 경로 url로 변환하는 메소드: MultipartFile 객체를 인수로 받아 저장경로(String)을 리턴하는 메소드
 	public String imageToUrl(String uploadDir, MultipartFile file) throws IllegalStateException, IOException {
 		log.info("uploadDir: " + uploadDir);
